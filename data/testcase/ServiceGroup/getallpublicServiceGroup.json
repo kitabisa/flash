@@ -1,0 +1,5 @@
+{
+    "positive" : {
+        "Getall": "when user hit api get all public then user got response 200 and all data will be appears"
+    }
+}
