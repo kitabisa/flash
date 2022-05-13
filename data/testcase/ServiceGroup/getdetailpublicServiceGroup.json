@@ -1,0 +1,8 @@
+{
+    "positive" : {
+        "Getall": "when user hit api get detail public then user got response 200 and all data will be appears"
+    },
+    "negative" : {
+        "wrongid" : "when user hit api get detail public with wrong id then user got response error"
+    }
+}
