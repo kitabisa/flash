@@ -1,0 +1,9 @@
+{
+    "positive" : {
+        "valid_data": "when user input corect data then user got response 200"
+    },
+    "negative" :{
+        "existing_data" : "when user input existing data, then user got response error",
+        "same_datacode" : "when user input data using existing code data, then user got response error"
+    }
+}
