@@ -7,8 +7,8 @@ const SKIP_MESSAGE = "\x1b[43mSKIP\x1b[0m";
 class SlackReporter {
   constructor(runner, options) {
     
-    this.channel = options.reporterOptions.channel;
-    this.slack = new NodeSlack(options.reporterOptions.hook_url);
+    this.channel = "otp_kbsj";
+    this.slack = new NodeSlack("https://hooks.slack.com/services/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");
     this.passes = 0;
     this.failures = 0;
     this.skips = 0;
