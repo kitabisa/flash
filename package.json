@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha ./test"
+    "test": "mocha -R slack-reporter --reporter-options channel=#otp_kbsj,hook_url=https://hooks.slack.com/services/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 --timeout 180000"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "faker": "^5.5.3",
     "mocha": "^9.2.2",
     "mochawesome": "^7.1.3",
+    "node-slack": "^0.0.7",
     "supertest": "^6.2.2"
   }
 }
