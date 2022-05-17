@@ -14,9 +14,17 @@ const TC_getdetailPublic = require('../data/testcase/ServiceGroup/getdetailpubli
 const TC_getdetail = require('../data/testcase/ServiceGroup/getdetailServiceGroup.json')
 const TC_delete = require('../data/testcase/ServiceGroup/deleteServiceGroup.json')
 const datas = require('../data/var')
+const TC_create_EC = require('../data/testcase/ExtensionClause/createExtensionClause.json')
+const TC_Getall_EC = require('../data/testcase/ExtensionClause/getalldataExtensionClause.json')
+const TC_Getdetail_EC = require('../data/testcase/ExtensionClause/getdetailExtensionClause.json')
+const TC_Delete_EC = require('../data/testcase/ExtensionClause/deleteExtensionClause.json')
+const EC_create = require('../object/ExtensionClause/create_ExtensionClause')
+const EC_Getall = require('../object/ExtensionClause/getall_ExtensionClause')
+const EC_Getdetail = require('../object/ExtensionClause/getdetail_ExtensionClause')
+const EC_Delete = require('../object/ExtensionClause/delete_ExtensionClause')
 
 
-describe('API Product Service', () => {
+describe('API Service Group', () => {
     describe('Create Service Product', () => {
         it(`${TC_create.positive.valid_data}`, async() => {
             const res = await create.createServiceGroup(datas.service_Group.code, datas.service_Group.name, datas.service_Group.description)   
@@ -36,12 +44,12 @@ describe('API Product Service', () => {
         });
         it(`${TC_create.negative.existing_data}`, async() => {
             const res = await create.createServiceGroup('TEST66', 'Alda', 'this is triger from automation tools')
-            assert(res.status).to.equal(500)
+            assert(res.status).to.equal(400)
 
         });
         it(`${TC_create.negative.same_datacode}`, async() => {
             const res = await create.createServiceGroup('TEST66', datas.service_Group.name, datas.service_Group.description)
-            assert(res.status).to.equal(500)
+            assert(res.status).to.equal(400)
         });
     });
     describe('Get All Service Group', () => {
@@ -169,8 +177,8 @@ describe('API Product Service', () => {
             const res = await update.updateServiceGroup(global.ids, global.codes1, global.names1, global.desc1)   
             assert(res.status).to.equal(500)
         });
-        it(`${TC_update.positive.different_desc}`, async() => {
-            const res = await update.updateServiceGroup(global.ids, global.codes1, datas.service_Group.name, datas.service_Group.description)   
+        it(`${TC_update.negative.same_datacode}`, async() => {
+            const res = await update.updateServiceGroup(global.ids1, global.codes, datas.service_Group.name, datas.service_Group.description)   
             assert(res.status).to.equal(500)
             
         });
@@ -187,5 +195,64 @@ describe('API Product Service', () => {
             assert(res.status).to.equal(404)
         });
     });
+
 });
 
+describe('API Extension Clause', () => {
+    describe('Create ExtensionClause', () => {
+        it(`${TC_create_EC.positive.valid_data}`, async () => {
+            const res = await EC_create.createExtensionClause(datas.Extension_clause.code, datas.service_Group.name, datas.service_Group.description, global.codes)
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.ids)
+            assert(res.body.data[0]).to.have.property("service_group_code").to.equal(global.codes)
+            assert(res.body.data[0]).to.have.property("code")
+            assert(res.body.data[0]).to.have.property("name")
+            assert(res.body.data[0]).to.have.property("description")
+            assert(res.body.data[0]).to.have.property("is_active").to.equal(true)
+            global.ECids = res.body.data[0].id
+        });
+    });
+    describe('Get all data Extension Clause', () => {
+        it(`${TC_Getall_EC.positive.Getall}`, async () => {
+            const res = await EC_Getall.getallExtensionClause()
+            assert(res.status).to.equal(200)
+            assert(res.body.data[12]).to.have.property("id")
+            assert(res.body.data[12]).to.have.property("service_group_id")
+            assert(res.body.data[12]).to.have.property("service_group_code")
+            assert(res.body.data[12]).to.have.property("code")
+            assert(res.body.data[12]).to.have.property("name")
+            assert(res.body.data[12]).to.have.property("description")
+            assert(res.body.data[12]).to.have.property("is_active").to.equal(true)
+        });
+    });
+    describe('Delete data Extension Clause', () => {
+        it(`${TC_Delete_EC.positive.delete}`, async () => {
+            const res = await EC_Delete.deleteExtensionClause(global.ECids)
+            assert(res.status).to.equal(200)
+        });
+        it(`${TC_Delete_EC.negative.wrongid}`, async () => {
+            const res = await EC_Delete.deleteExtensionClause(datas.Extension_clause.wrongid)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc.id).to.equal('Product Extension Clause ID Tidak Ditemukan')
+        });
+    });  
+    describe('Get Detail Extension Clause', () => {
+        it(`${TC_Getdetail_EC.positive.Getall}`, async () => {
+            const res = await EC_Getdetail.getdetailExtensionClause(global.ECids)
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id").to.equal(global.ECids)
+            assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.ids)
+            assert(res.body.data[0]).to.have.property("service_group_code").to.equal(global.codes)
+            assert(res.body.data[0]).to.have.property("code")
+            assert(res.body.data[0]).to.have.property("name")
+            assert(res.body.data[0]).to.have.property("description")
+            assert(res.body.data[0]).to.have.property("is_active").to.equal(false)
+        });
+        it(`${TC_Getdetail_EC.negative.wrongid}`, async () => {
+            const res = await EC_Getdetail.getdetailExtensionClause(datas.Extension_clause.wrongid)
+            assert(res.status).to.equal(404)
+            assert(res.body.response_desc.id).to.equal('error data tidak ditemukan')
+        });
+    });  
+});
