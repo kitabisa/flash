@@ -1,0 +1,9 @@
+{
+    "positive" : {
+        "valid_token": "when user input valid token then user got response 200"
+    },
+    "negative" :{
+        "wrong_token" : "when user input wrong token, then user got response error",
+        "empty_token" : "when user input empty token, then user got response error"
+    }
+}

@@ -8,11 +8,7 @@ class SlackReporter {
   constructor(runner, options) {
     
     this.channel = "otp_kbsj";
-<<<<<<< HEAD
-    this.slack = new NodeSlack("https://hooks.slack.com/services/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");
-=======
-    this.slack = new NodeSlack("https://hooks.slack.com/services/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");
->>>>>>> 179e2592dab92f2ec41fa9c61eb38a72955a4719
+    this.slack = new NodeSlack("https://hooks.slack.com/services/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");
     this.passes = 0;
     this.failures = 0;
     this.skips = 0;
