@@ -18,10 +18,12 @@ const TC_create_EC = require('../data/testcase/ExtensionClause/createExtensionCl
 const TC_Getall_EC = require('../data/testcase/ExtensionClause/getalldataExtensionClause.json')
 const TC_Getdetail_EC = require('../data/testcase/ExtensionClause/getdetailExtensionClause.json')
 const TC_Delete_EC = require('../data/testcase/ExtensionClause/deleteExtensionClause.json')
+const TC_Update_EC = require('../data/testcase/ExtensionClause/updateExtensionClause.json')
 const EC_create = require('../object/ExtensionClause/create_ExtensionClause')
 const EC_Getall = require('../object/ExtensionClause/getall_ExtensionClause')
 const EC_Getdetail = require('../object/ExtensionClause/getdetail_ExtensionClause')
 const EC_Delete = require('../object/ExtensionClause/delete_ExtensionClause')
+const EC_Update = require('../object/ExtensionClause/update_ExtensionClause')
 
 
 describe('API Service Group', () => {
@@ -217,13 +219,17 @@ describe('API Extension Clause', () => {
         it(`${TC_Getall_EC.positive.Getall}`, async () => {
             const res = await EC_Getall.getallExtensionClause()
             assert(res.status).to.equal(200)
-            assert(res.body.data[12]).to.have.property("id")
-            assert(res.body.data[12]).to.have.property("service_group_id")
-            assert(res.body.data[12]).to.have.property("service_group_code")
-            assert(res.body.data[12]).to.have.property("code")
-            assert(res.body.data[12]).to.have.property("name")
-            assert(res.body.data[12]).to.have.property("description")
-            assert(res.body.data[12]).to.have.property("is_active").to.equal(true)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("service_group_code")
+            assert(res.body.data[0]).to.have.property("code")
+            assert(res.body.data[0]).to.have.property("name")
+            assert(res.body.data[0]).to.have.property("description")
+            assert(res.body.data[0]).to.have.property("is_active")
+            global.ECids1 = res.body.data[1].id
+            global.ECserviceCode1 = res.body.data[1].service_group_code
+            global.code1 = res.body.data[0].code
+            global.name1 = res.body.data[0].name
         });
     });
     describe('Delete data Extension Clause', () => {
@@ -255,4 +261,12 @@ describe('API Extension Clause', () => {
             assert(res.body.response_desc.id).to.equal('error data tidak ditemukan')
         });
     });  
+    describe('update data Extension Clause', () => {
+        it(`${TC_Update_EC.positive.valid_data}`, async () => {
+            const res =  await EC_Update.updateExtensionClause(global.ECids, global.code1, global.name1, datas.Extension_clause.description, global.ECserviceCode1)
+            assert(res.status).to.equal(200)
+        });
+        
+    });
+    
 });

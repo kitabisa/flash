@@ -1,0 +1,11 @@
+{
+    "positive" : {
+        "valid_data": "when user input corect data then user got response 200",
+        "different_name" : "when user input different name and same code then user got response 200",
+        "different_desc" : "when user input different description and same code and same name then user got response 200",
+        "different_code" : "when user input different code and same description and same name then user got response 200"
+    },
+    "negative" :{
+        "wrong_serviceGroup" : "when user input data using invalid service group, then user got response error"
+    }
+}
