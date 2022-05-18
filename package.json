@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "mocha ./test --recursive --reporter mochawesome --reporter-options reportDir=reports/mochawesome/ --timeout 180000",
-    "slack": "mocha --reporter slack-reporter --reporter-options hook_url=env.SLACK_WEBHOOK_URL --timeout 180000"
+    "slack": "mocha --reporter slack-reporter --timeout 180000"
   },
   "repository": {
     "type": "git",
