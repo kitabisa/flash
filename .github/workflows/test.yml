@@ -6,7 +6,8 @@ name: Run Manual
       - opened
       - synchronize
       - reopened
-
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 jobs:
   test:
     name: 'Node.js v${{ matrix.node }}'
@@ -33,5 +34,5 @@ jobs:
         run: npm install
       - name: Run All Node.js Tests
         run: npm run test
-      - name: Run slack  report
-        run: npm run slack
+      - name: Run slack  report 
+        run: npm run mocha --reporter slack-reporter --reporter-options hook_url=SLACK_WEBHOOK_URL --timeout 180000
