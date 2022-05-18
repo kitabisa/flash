@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "mocha ./test --recursive --reporter mochawesome --reporter-options reportDir=reports/mochawesome/ --timeout 180000",
-    "slack": "mocha --reporter slack-reporter --reporter-options channel=#otp_kbsj,hook_url=https:https://hooks.slack.com/services/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 --timeout 180000"
+    "slack": "mocha --reporter slack-reporter --reporter-options hook_url=https:https://hooks.slack.com/services/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 --timeout 180000"
   },
   "repository": {
     "type": "git",
