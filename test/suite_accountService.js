@@ -1,18 +1,16 @@
 const assert = require('chai').expect;
 const exchange_token = require('../object/Account/exchangetoken_Account');
-const kulonuwun = require('../object/Account/kulonuwun_Account');
+const wong = require('../object/Account/wong_Account');
 const ACC_ExchangeToken = require('../data/testcase/Account/exchangeTokenAccount')
 
 describe('Exchange Token API', () => {
     before(async function pre_request() {
-        await kulonuwun.kulonuwunAccount()
-        .then(function(res) {
-            console.log('Status Code:', res.status);
+        rd = await wong.wongAccount()
+        console.log('Status Code:', rd.status);
 
-            const rd = res.data;
+        res = rd.body.data[0]
 
-            global.ktbs_token = rd.data[0].access_token
-        });
+        global.ktbs_token = res.token
     });
 
     it(`${ACC_ExchangeToken.positive.valid_token}`, async ()  => {
