@@ -34,4 +34,6 @@ jobs:
       - name: Run All Node.js Tests
         run: npm run test
       - name: Run slack  report
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         run: npm run slack
