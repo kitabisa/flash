@@ -34,4 +34,4 @@ jobs:
       - name: Run All Node.js Tests
         run: npm run test
       - name: Run slack  report
-        run: chmod +x npm run slack
+        run: npm run slack
