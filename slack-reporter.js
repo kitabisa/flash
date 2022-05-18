@@ -8,7 +8,7 @@ class SlackReporter {
   constructor(runner, options) {
     
     this.channel = "#otp_kbsj";
-    this.slack = new NodeSlack(options.reporterOptions.hook_url);
+    this.slack = new NodeSlack(env.SLACK_WEBHOOK_URL);
     this.passes = 0;
     this.failures = 0;
     this.skips = 0;
