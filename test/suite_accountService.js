@@ -2,13 +2,12 @@ const assert = require('chai').expect;
 const exchange_token = require('../object/Account/exchangetoken_Account');
 const wong = require('../object/Account/wong_Account');
 const ACC_ExchangeToken = require('../data/testcase/Account/exchangeTokenAccount')
-
 describe('Exchange Token API', () => {
     before(async function pre_request() {
-        rd = await wong.wongAccount()
+        const rd = await wong.wongAccount()
         console.log('Status Code:', rd.status);
 
-        res = rd.body.data[0]
+        const res = rd.body.data[0]
 
         global.ktbs_token = res.token
     });

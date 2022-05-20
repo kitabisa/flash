@@ -31,7 +31,7 @@ describe('API Service Group', () => {
         it(`${TC_create.positive.valid_data}`, async() => {
             const res = await create.createServiceGroup(datas.service_Group.code, datas.service_Group.name, datas.service_Group.description)   
             if(res.status !==200){
-                console.log("create data : "+res.status+"||" +res.body.text)
+                console.log("create data : "+res.status+"||" +res.text)
             }         
             assert(res.status).to.equal(200)
             global.ids = res.body.data[0].id
