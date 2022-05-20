@@ -85,6 +85,10 @@ class SlackReporter {
                   "value": this.skips,
                   "short": true
                 },
+                {
+                  "value": "This is detail reports : https://kitabisa.github.io/flash/reports/mochawesome/mochawesome.html",
+                  "short": false
+                } 
               ]
             }
           ]
