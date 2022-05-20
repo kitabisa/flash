@@ -3,7 +3,7 @@ const env = require('dotenv').config();
 
 const request = supertest(process.env.productSevice_URL)
 
-const getallExtensionClause = ()  => request.get('/product/extension-clause')
+const getallExtensionClause = ()  => request.get('/extension-clause')
 .set('Content-Type', 'application/json')
 
 
