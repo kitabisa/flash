@@ -35,7 +35,7 @@ jobs:
         with:
           commit_message: Apply Reports Mocha
       - uses: actions/checkout@v2
-          with:
+        with:
           token: ${{ secrets.PERSONAL_TOKEN }}
       - name: Run slack  report
         env:
