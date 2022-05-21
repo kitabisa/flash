@@ -372,7 +372,7 @@
                   "title": "when user input different description and same code and same name then user got response 200",
                   "fullTitle": "API Service Group Update Service Product when user input different description and same code and same name then user got response 200",
                   "timedOut": false,
-                  "duration": 718,
+                  "duration": 750,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
