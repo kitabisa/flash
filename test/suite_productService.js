@@ -19,11 +19,13 @@ const TC_Getall_EC = require('../data/testcase/ExtensionClause/getalldataExtensi
 const TC_Getdetail_EC = require('../data/testcase/ExtensionClause/getdetailExtensionClause.json')
 const TC_Delete_EC = require('../data/testcase/ExtensionClause/deleteExtensionClause.json')
 const TC_Update_EC = require('../data/testcase/ExtensionClause/updateExtensionClause.json')
+const TC_Search_EC = require('../data/testcase/ExtensionClause/searchExtensionClause.json')
 const EC_create = require('../object/ExtensionClause/create_ExtensionClause')
 const EC_Getall = require('../object/ExtensionClause/getall_ExtensionClause')
 const EC_Getdetail = require('../object/ExtensionClause/getdetail_ExtensionClause')
 const EC_Delete = require('../object/ExtensionClause/delete_ExtensionClause')
 const EC_Update = require('../object/ExtensionClause/update_ExtensionClause')
+const EC_Search = require('../object/ExtensionClause/search_ExtensionClause')
 
 
 describe('API Service Group', () => {
@@ -228,8 +230,10 @@ describe('API Extension Clause', () => {
             assert(res.body.data[0]).to.have.property("is_active")
             global.ECids1 = res.body.data[1].id
             global.ECserviceCode1 = res.body.data[1].service_group_code
-            global.code1 = res.body.data[0].code
-            global.name1 = res.body.data[0].name
+            global.code1 = res.body.data[1].code
+            global.name1 = res.body.data[1].name
+            global.code2 = res.body.data[0].code
+            global.name2 = res.body.data[0].name
         });
     });
     describe('Delete data Extension Clause', () => {
@@ -267,6 +271,38 @@ describe('API Extension Clause', () => {
             assert(res.status).to.equal(200)
         });
         
+    });
+
+    describe('Search data Extension Clause', () => {
+        it(`${TC_Search_EC.positive.valid_data}`, async () => {
+            const res =  await EC_Search.searchExtensionClause(global.ECserviceCode1, global.code1, global.name1)
+            if(res.status !== 200){
+                console.log("error search EC" +res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("service_group_code")
+            assert(res.body.data[0]).to.have.property("code")
+            assert(res.body.data[0]).to.have.property("name")
+            assert(res.body.data[0]).to.have.property("description")
+            assert(res.body.data[0]).to.have.property("is_active")
+        });
+        it(`${TC_Search_EC.negative.wrong_serviceGroup}`, async () => {
+            const res =  await EC_Search.searchExtensionClause(datas.Extension_clause.invalid_service_group_code, global.code1, global.name1)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc).to.have.property('id').to.equal('Product Search Extension Clause Data Tidak Ditemukan')
+        });
+        it(`${TC_Search_EC.negative.different_code}`, async () => {
+            const res =  await EC_Search.searchExtensionClause(global.ECserviceCode1, global.code2, global.name1)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc).to.have.property('id').to.equal('Product Search Extension Clause Data Tidak Ditemukan')
+        });
+        it(`${TC_Search_EC.negative.different_name}`, async () => {
+            const res =  await EC_Search.searchExtensionClause(global.ECserviceCode1, global.code1, global.name2)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc).to.have.property('id').to.equal('Product Search Extension Clause Data Tidak Ditemukan')
+        });
     });
     
 });
