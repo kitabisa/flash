@@ -17,7 +17,8 @@ module.exports = {
         "code" : final_Codes,
         "name" : firstName,
         "description" : "this is triger from automation tools",
-        "wrongid" : "9afe872e-9bb2-4ae1-9f11-e078e21c94a1"
+        "wrongid" : "9afe872e-9bb2-4ae1-9f11-e078e21c94a1",
+        "invalid_service_group_code" : "TEST6220"
     }
 
 }
