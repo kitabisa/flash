@@ -34,9 +34,6 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Apply Reports Mocha
-      - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.PERSONAL_TOKEN }}
       - name: Run slack  report
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
