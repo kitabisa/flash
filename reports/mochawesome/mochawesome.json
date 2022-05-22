@@ -551,6 +551,7 @@
               "failures": [],
               "pending": [],
               "skipped": [],
+
               "duration": 711,
               "root": false,
               "rootEmpty": false,
