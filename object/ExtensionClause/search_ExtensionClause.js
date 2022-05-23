@@ -4,7 +4,7 @@ const env = require('dotenv').config();
 const request = supertest(process.env.productSevice_URL)
 
 
-const searchExtensionClause = (serviceCode, code, name)  => request.post('/extension-clause/search')
+const searchExtensionClause = (serviceCode, code, name)  => request.post('/internal/v1/extension-clause/search')
 .set('Content-Type', 'application/json')
 .send(
     {
