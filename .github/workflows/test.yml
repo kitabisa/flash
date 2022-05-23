@@ -19,6 +19,8 @@ jobs:
         with:
           node-version: '${{ matrix.node }}'
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PERSONAL-TOKEN }}
       - name: 'Cache node_modules'
         uses: actions/cache@v2
         with:
@@ -30,9 +32,11 @@ jobs:
         run: npm install
       - name: Run All Node.js Tests
         run: npm run test
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Apply Reports Mocha
+      - name: Commit report
+        run : |
+          git add -A
+          git commit -am "Update Report Mochawesome"
+          git push
       - name: Run slack  report
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}

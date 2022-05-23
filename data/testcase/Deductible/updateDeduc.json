@@ -1,0 +1,10 @@
+{
+    "positive" : {
+        "valid_data": "when user input corect data then user got response 200"
+    },
+    "negative" :{
+        "wrong_deducID" : "when user input data using invalid Deduction id, then user got response error",
+        "wrong_calcuMethod" : "when user input calcu Method then user got response 200",
+        "wrong_calcuvale" : "when user input calcu value with string, then user got response 200"
+    }
+}

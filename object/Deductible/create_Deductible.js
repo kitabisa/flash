@@ -4,7 +4,7 @@ const env = require('dotenv').config();
 const request = supertest(process.env.productSevice_URL)
 
 
-const createDeductible = (code, name, desc, serviceCode, calcu_method, calcu_value)  => request.post('/deductible')
+const createDeductible = (code, name, desc, serviceCode, calcu_method, calcu_value)  => request.post('/internal/v1//deductible')
 .set('Content-Type', 'application/json')
 .send(
     {

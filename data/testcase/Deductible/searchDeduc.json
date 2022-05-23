@@ -1,0 +1,10 @@
+{
+    "positive" : {
+        "valid_data": "when user input corect data then user got response 200"
+    },
+    "negative" :{
+        "wrong_serviceGroup" : "when user input data using invalid service group, then user got response error",
+        "wrong_calcuMethod" : "when user input data with wrong calcu method, then user got response error",
+        "wrong_calcuValue" : "when user input data with wrong calcu value, then user got response error"
+    }
+}
