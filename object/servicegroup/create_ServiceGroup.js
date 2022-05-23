@@ -3,7 +3,7 @@ const env = require('dotenv').config();
 
 const request = supertest(process.env.productSevice_URL)
 
-const createServiceGroup = (code, name, desc)  => request.post('/service-group')
+const createServiceGroup = (code, name, desc)  => request.post('/internal/v1/service-group')
 .set('Content-Type', 'application/json')
 .send(
     {

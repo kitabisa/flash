@@ -3,7 +3,7 @@ const env = require('dotenv').config();
 
 const request = supertest(process.env.productSevice_URL)
 
-const getdetailServiceGroup = (id)  => request.get('/service-group/'+id)
+const getdetailServiceGroup = (id)  => request.get('/internal/v1/service-group/'+id)
 .set('Content-Type', 'application/json')
 
 
