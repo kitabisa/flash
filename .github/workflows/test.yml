@@ -4,8 +4,7 @@ name: Run Manual
     branches:
       - master
   schedule:
-    - cron: '*/59 * * * *'
-
+    - cron: '59 23 * * *'
 jobs:
   test:
     name: 'Node.js v${{ matrix.node }}'
@@ -30,10 +29,8 @@ jobs:
             ${{ runner.os }}-node-v${{ matrix.node }}-
       - name: Install Dependencies
         run: npm install
-      - name: Run slack  report
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-        run: npm run slack
+      - name: Run All Node.js Tests
+        run: npm run test
       - name: Commit report
         run : |
           git config --global user.email "ario.triguna@kitabisa.com"
@@ -41,3 +38,7 @@ jobs:
           git add -A
           git commit -am "Update Report Mochawesome"
           git push
+      - name: Run slack  report
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        run: npm run slack
