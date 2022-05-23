@@ -15,7 +15,7 @@ describe('Exchange Token API', () => {
     it(`${ACC_ExchangeToken.positive.valid_token}`, async ()  => {
         const res = await exchange_token.exchangeTokenAccount(global.ktbs_token);
         if(res.status !== 200){
-            console.log("exchange_token: " + res.status + "||" + res.body.response_desc.id)
+            console.log("exchange_token: " + res.status + "||" + res.text)
         }
         assert(res.status).to.equal(200);
         assert(res.body.data[0]).to.have.property('access_token')
