@@ -20,12 +20,25 @@ const TC_Getdetail_EC = require('../data/testcase/ExtensionClause/getdetailExten
 const TC_Delete_EC = require('../data/testcase/ExtensionClause/deleteExtensionClause.json')
 const TC_Update_EC = require('../data/testcase/ExtensionClause/updateExtensionClause.json')
 const TC_Search_EC = require('../data/testcase/ExtensionClause/searchExtensionClause.json')
+const TC_create_DC = require('../data/testcase/Deductible/createDeduc.json')
+const TC_Getall_DC = require('../data/testcase/Deductible/getalldataDeduc.json')
+const TC_Getdetail_DC = require('../data/testcase/Deductible/getdetailDeduc.json')
+const TC_Delete_DC = require('../data/testcase/Deductible/deleteDeduc.json')
+const TC_Update_DC = require('../data/testcase/Deductible/updateDeduc.json')
+const TC_Search_DC = require('../data/testcase/Deductible/searchDeduc.json')
 const EC_create = require('../object/ExtensionClause/create_ExtensionClause')
 const EC_Getall = require('../object/ExtensionClause/getall_ExtensionClause')
 const EC_Getdetail = require('../object/ExtensionClause/getdetail_ExtensionClause')
 const EC_Delete = require('../object/ExtensionClause/delete_ExtensionClause')
 const EC_Update = require('../object/ExtensionClause/update_ExtensionClause')
 const EC_Search = require('../object/ExtensionClause/search_ExtensionClause')
+const DC_create = require('../object/Deductible/create_Deductible')
+const DC_Getall = require('../object/Deductible/getall_Deductible')
+const DC_Getdetail = require('../object/Deductible/getdetail_Deductible')
+const DC_Delete = require('../object/Deductible/delete_Deductible')
+const DC_Update = require('../object/Deductible/update_Deductible')
+const DC_Search = require('../object/Deductible/search_Deductible')
+
 
 
 describe('API Service Group', () => {
@@ -234,6 +247,8 @@ describe('API Extension Clause', () => {
             global.name1 = res.body.data[1].name
             global.code2 = res.body.data[0].code
             global.name2 = res.body.data[0].name
+            global.ECserviceCode2 = res.body.data[0].service_group_code
+            global.desc2 = res.body.data[0].description
         });
     });
     describe('Delete data Extension Clause', () => {
@@ -304,5 +319,141 @@ describe('API Extension Clause', () => {
             assert(res.body.response_desc).to.have.property('id').to.equal('Product Search Extension Clause Data Tidak Ditemukan')
         });
     });
-    
+    describe('Create Deductible API', () => {
+        it(`${TC_create_DC.positive.valid_data}`, async() => {
+            const res = await DC_create.createDeductible(global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.calcu_value)
+            if(res.status !== 200){
+                console.log("failed :"+ res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("service_group_code").to.equal(global.ECserviceCode2)
+            assert(res.body.data[0]).to.have.property("code").to.equal(global.code2)
+            assert(res.body.data[0]).to.have.property("name").to.equal(global.name2)
+            assert(res.body.data[0]).to.have.property("calculation_method").to.equal("percentage")
+            assert(res.body.data[0]).to.have.property("calculation_value").to.equal("400000.00")
+            assert(res.body.data[0]).to.have.property("is_active")
+            global.ids = res.body.data[0].id
+        });
+        it(`${TC_create_DC.negative.wrong_service_group}`, async () => {
+            const res = await DC_create.createDeductible(global.code2, global.name2, global.desc2, datas.Deductible.service_code, datas.Deductible.calcu_method, datas.Deductible.calcu_value)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc).to.have.property("id").to.equal("Product Service Group Code Tidak Ditemukan")
+        });
+        it(`${TC_create_DC.negative.wrong_Calculate_Method}`, async () => {
+            const res = await DC_create.createDeductible(global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.wrong_calcu_method, datas.Deductible.calcu_value)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc).to.have.property("id").to.equal("Calculation Method Salah")
+        });
+        it(`${TC_create_DC.negative.invalid_deduction_Value}`, async () => {
+            const res = await DC_create.createDeductible(global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.invalid_calcu_value)
+            assert(res.body.response_desc).to.have.property("id").to.equal("payload tidak valid")
+        });
+    });
+    describe('Get all Deduction', () => {
+        it(`${TC_Getall_DC.positive.Getall}`, async () => {
+            const res = await DC_Getall.getDeductible()
+            if(res.status !== 200){
+                console.log("failed :"+ res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("service_group_code")
+            assert(res.body.data[0]).to.have.property("code")
+            assert(res.body.data[0]).to.have.property("name")
+            assert(res.body.data[0]).to.have.property("calculation_method")
+            assert(res.body.data[0]).to.have.property("calculation_value")
+            assert(res.body.data[0]).to.have.property("is_active")
+        });
+    });
+    describe('Get Detail Deduction', () => {
+        it(`${TC_Getdetail_DC.positive.Getall}`, async () => {
+            const res = await DC_Getdetail.getdetailDeductible(global.ids)
+            if(res.status !== 200){
+                console.log("failed :"+ res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("service_group_code")
+            assert(res.body.data[0]).to.have.property("code")
+            assert(res.body.data[0]).to.have.property("name")
+            assert(res.body.data[0]).to.have.property("calculation_method")
+            assert(res.body.data[0]).to.have.property("calculation_value")
+            assert(res.body.data[0]).to.have.property("is_active")
+        });
+        it(`${TC_Getdetail_DC.negative.wrongid}`, async () => {
+            const res = await DC_Getdetail.getdetailDeductible(datas.Deductible.wrong_idDeduc)
+            assert(res.status).to.equal(404)
+            assert(res.body.response_desc).to.have.property("id").to.equal("error data tidak ditemukan")
+        });
+    });
+    describe('Update Deduction Api', () => {
+        it(`${TC_Update_DC.positive.valid_data}`, async () => {
+            const res = await DC_Update.updateDeductible(global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method1, datas.Deductible.calcu_value)
+            if(res.status !== 200){
+                console.log("failed :"+res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("service_group_code")
+            assert(res.body.data[0]).to.have.property("code")
+            assert(res.body.data[0]).to.have.property("name")
+            assert(res.body.data[0]).to.have.property("calculation_method")
+            assert(res.body.data[0]).to.have.property("calculation_value")
+            assert(res.body.data[0]).to.have.property("is_active")
+        });
+        it(`${TC_Update_DC.negative.wrong_deducID}`, async () => {
+            const res = await DC_Update.updateDeductible(datas.Deductible.wrong_idDeduc, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.calcu_value)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc).to.have.property("id").to.equal("Product Deductible ID Tidak Ditemukan")
+
+        });
+        it(`${TC_Update_DC.negative.wrong_calcuMethod}`, async () => {
+            const res = await DC_Update.updateDeductible(global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.wrong_calcu_method, datas.Deductible.calcu_value)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc).to.have.property("id").to.equal("Calculation Method Salah")
+
+        });
+        it(`${TC_Update_DC.negative.wrong_calcuvale}`, async () => {
+            const res = await DC_Update.updateDeductible(global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.invalid_calcu_value)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc).to.have.property("id").to.equal("payload tidak valid")
+
+        });
+    });
+    describe('Search Deduction Api', () => {
+        it(`${TC_Search_DC.positive.valid_data}`, async () => {
+            const res = await DC_Search.searchDeductible(global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.calcu_value)
+            if(res.status !== 200){
+                console.log("failed :"+ res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("service_group_code").to.equal(global.ECserviceCode2)
+            assert(res.body.data[0]).to.have.property("code").to.equal(global.code2)
+            assert(res.body.data[0]).to.have.property("name").to.equal(global.name2)
+            assert(res.body.data[0]).to.have.property("calculation_method").to.equal("percentage")
+            assert(res.body.data[0]).to.have.property("calculation_value").to.equal("400000.00")
+            assert(res.body.data[0]).to.have.property("is_active")
+        });
+    });
+
+    describe('Deleted Deduction APi', () => {
+        it(`${TC_Delete_DC.positive.delete}`, async () => {
+            const res = await DC_Delete.deleteDeductible(global.ids)
+            if(res.status !== 200){
+                console.log("failed :"+ res.text);
+            }
+            assert(res.status).to.equal(200)
+        });
+        it(`${TC_Delete_DC.negative.wrongid}`, async () => {
+            const res = await DC_Delete.deleteDeductible(datas.Deductible.wrong_idDeduc)
+            assert(res.status).to.equal(400)
+        });
+    });
 });

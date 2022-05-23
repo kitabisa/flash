@@ -26,8 +26,13 @@ module.exports = {
         "code" : final_Codes1,
         "name" : firstName,
         "description" : "this is triger from automation tools",
-        "calcu_method" : "Deducpay",
-        "calcu_value" : "automation tools"
+        "calcu_method" : "Percentage",
+        "calcu_method1" : "Fix",
+        "calcu_value" : 400000,
+        "service_code" : "TEST6220",
+        "wrong_calcu_method" : "Percentag",
+        "invalid_calcu_value" : "400000",
+        "wrong_idDeduc" : "f4276c49-556b-40ae-9e25-286747cc9430"
     }
 
 }

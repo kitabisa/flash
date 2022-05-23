@@ -1,0 +1,8 @@
+{
+    "positive" : {
+        "delete": "when user hit api delete with correct id then user got response 200 and data will be deleted"
+    },
+    "negative" : {
+        "wrongid" : "when user hit api delete with wrong id then user got response error"
+    }
+}
