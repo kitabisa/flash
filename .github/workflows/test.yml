@@ -20,7 +20,7 @@ jobs:
           node-version: '${{ matrix.node }}'
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.PERSONAL-TOKEN }}
+          token: ${{ secrets.PERSONAL_TOKEN }}
       - name: 'Cache node_modules'
         uses: actions/cache@v2
         with:
