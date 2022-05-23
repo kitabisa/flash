@@ -34,6 +34,8 @@ jobs:
         run: npm run test
       - name: Commit report
         run : |
+          git config --global user.email "ario.triguna@kitabisa.com"
+          git config --global user.name "ariotriguna05"
           git add -A
           git commit -am "Update Report Mochawesome"
           git push
