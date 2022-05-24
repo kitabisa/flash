@@ -64,7 +64,7 @@ class SlackReporter {
     let years = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(dates);
     let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(dates);
     let days = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(dates);
-    let full = `${days}-${mo}-${years}`
+    let full = `${mo}-${days}-${years}`
     const icon = this.failures == 0?":white_check_mark:":":boom:";
     const message = {
         channel: this.channel,
