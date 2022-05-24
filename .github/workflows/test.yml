@@ -4,7 +4,7 @@ name: Run Manual
     branches:
       - master
   schedule:
-    - cron: '59 23 * * *'
+    - cron: '0 0 * * *'
 jobs:
   test:
     name: 'Node.js v${{ matrix.node }}'
