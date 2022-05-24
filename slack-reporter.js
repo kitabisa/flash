@@ -60,7 +60,11 @@ class SlackReporter {
 
     //console.log(`\n[FINISHED]\n`);
     //console.log(`Passed: ${this.passes} Failed: ${this.failures} Skiped: ${this.skips}`);
-
+    let dates = new Date();
+    let years = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(dates);
+    let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(dates);
+    let days = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(dates);
+    let full = `${days}-${mo}-${years}`
     const icon = this.failures == 0?":white_check_mark:":":boom:";
     const message = {
         channel: this.channel,
@@ -86,7 +90,7 @@ class SlackReporter {
                   "short": true
                 },
                 {
-                  "value": "This is detail reports : https://kitabisa.github.io/flash/reports/mochawesome/mochawesome.html",
+                  "value": `This is detail reports : https://kitabisa.github.io/flash/reports/mochawesome/test-${full}.html`,
                   "short": false
                 } 
               ]
