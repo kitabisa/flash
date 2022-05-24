@@ -4,7 +4,7 @@ name: Run Manual
     branches:
       - master
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '55 23 * * *'
 jobs:
   test:
     name: 'Node.js v${{ matrix.node }}'
@@ -18,8 +18,6 @@ jobs:
         with:
           node-version: '${{ matrix.node }}'
       - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.PERSONAL_TOKEN }}
       - name: 'Cache node_modules'
         uses: actions/cache@v2
         with:
@@ -31,13 +29,9 @@ jobs:
         run: npm install
       - name: Run All Node.js Tests
         run: npm run test
-      - name: Commit report
-        run : |
-          git config --global user.email "ario.triguna@kitabisa.com"
-          git config --global user.name "ariotriguna05"
-          git add -A
-          git commit -am "Update Report Mochawesome"
-          git push
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply Reports Mocha
       - name: Run slack  report
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
