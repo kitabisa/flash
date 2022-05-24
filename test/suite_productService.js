@@ -73,7 +73,7 @@ describe('API Service Group', () => {
         it(`${TC_getall.positive.Getall}`, async() => {
             const res = await getAll.getallServiceGroup()
             if(res.status !==200){
-                console.log("getall data : "+res.status+"||" +res.body.text)
+                console.log("getall data : "+res.status+"||" +res.text)
             }
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id")
@@ -91,7 +91,7 @@ describe('API Service Group', () => {
         it(`${TC_getallPublic.positive.Getall}`, async() => {
             const res = await getAllpublic.getallpublicServiceGroup()
             if(res.status !==200){
-                console.log("getall data : "+res.status+"||" +res.body.text)
+                console.log("getall data : "+res.status+"||" +res.text)
             }
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id")
