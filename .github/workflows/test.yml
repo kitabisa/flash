@@ -14,6 +14,9 @@ jobs:
         node:
           - 14
     steps:
+      - uses: szenius/set-timezone@v1.0
+        with:
+          timezoneMacos: "Asia/Jakarta"
       - uses: actions/setup-node@v1
         with:
           node-version: '${{ matrix.node }}'
