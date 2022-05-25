@@ -5,7 +5,7 @@ const ACC_ExchangeToken = require('../data/testcase/Account/exchangeTokenAccount
 describe('Exchange Token API', () => {
     before(async function pre_request() {
         const rd = await wong.wongAccount()
-        console.log('Status Code:', rd.status);
+        console.log('Status Code wong :', rd.status);
 
         const res = rd.body.data[0]
 
@@ -21,6 +21,7 @@ describe('Exchange Token API', () => {
         assert(res.body.data[0]).to.have.property('access_token')
         assert(res.body.data[0]).to.have.property('refresh_token')
         assert(res.body.data[0]).to.have.property('expires_in')
+        global.access_Tokens = res.body.data[0].access_token
     });
 
     it(`${ACC_ExchangeToken.negative.wrong_token}`, async() => {

@@ -4,7 +4,7 @@ const env = require('dotenv').config();
 const request = supertest(process.env.paymentService_URL)
 
 
-const createPaymentProvider = (callback, code, name, desc)  => request.post('/internal/v1/payment-provider/create')
+const createPaymentProvider = (callback, code, desc, name)  => request.post('/internal/v1/payment-provider/create')
 .set('Content-Type', 'application/json')
 .send(
     {
