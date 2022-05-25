@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "NOW=$(date +'%m-%d-%Y') && mocha './test' --reporter mochawesome --timeout 20000 --reporter-options reportFilename=test-${NOW}",
-    "slack": "mocha --reporter slack-reporter --timeout 180000"
+    "slack": "mocha --reporter slack-reporter --timeout 180000",
+    "testing": "mocha ./test/suite3_paymentService.js"
   },
   "repository": {
     "type": "git",

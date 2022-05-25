@@ -5,6 +5,7 @@ let code = Math.floor(Math.random() * 10000);
 let final_Code = "SG" +code
 let final_Codes = "EC" +code
 let final_Codes1 = "Deduc" +code
+let final_Codes2 = "PP" +code
 module.exports = {
     "service_Group":
     {
@@ -33,6 +34,14 @@ module.exports = {
         "wrong_calcu_method" : "Percentag",
         "invalid_calcu_value" : "400000",
         "wrong_idDeduc" : "f4276c49-556b-40ae-9e25-286747cc9430"
+    },
+    "paymentProvider" : {
+        "callback_url" : "https://kitabisa.github.io/flash/",
+        "code" : final_Codes2,
+        "name" : firstName,
+        "wrongID" : "47125462-2e9f-4a01-ae19-3074cd935ffw",
+        "wrongCode" : "PP029291"
+
     }
 
 }

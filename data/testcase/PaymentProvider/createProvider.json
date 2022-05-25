@@ -1,0 +1,11 @@
+{
+    "positive" : {
+        "valid_data": "when user input correct data then user got response 200"
+    },
+    "negative" :{
+        "wrong_service_group" : "when user input wrong service group, then user got response error",
+        "wrong_Calculate_Method" : "when user input wrong calculate method, then user got response error",
+        "invalid_deduction_Value" : "when user input deduction value with string, then user got response error"
+
+    }
+}

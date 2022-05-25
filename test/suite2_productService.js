@@ -105,7 +105,7 @@ describe('API Service Group', () => {
         it(`${TC_getdetailPublic.positive.Getall}`, async() => {
             const res = await getdetailpublic.getdetailpublicServiceGroup(global.ids)
             if(res.status !==200){
-                console.log("getdetailpublic data : "+res.status+"||" +res.body.text)
+                console.log("getdetailpublic data : "+res.status+"||" +res.text)
             }
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id")
@@ -125,7 +125,7 @@ describe('API Service Group', () => {
         it(`${TC_getdetail.positive.Getall}`, async() => {
             const res = await getdetail.getdetailServiceGroup(global.ids)
             if(res.status !==200){
-                console.log("getdetail data : "+res.status+"||" +res.body.text)
+                console.log("getdetail data : "+res.status+"||" +res.text)
             }
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id")
@@ -145,7 +145,7 @@ describe('API Service Group', () => {
         it(`${TC_update.positive.valid_data}`, async() => {
             const res = await update.updateServiceGroup(global.ids, datas.service_Group.code, datas.service_Group.name, datas.service_Group.description)   
             if(res.status !==200){
-                console.log("update data : "+res.status+"||" +res.body.text)
+                console.log("update data : "+res.status+"||" +res.text)
             }
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id")
@@ -157,7 +157,7 @@ describe('API Service Group', () => {
         it(`${TC_update.positive.different_code}`, async() => {
             const res = await update.updateServiceGroup(global.ids, datas.service_Group.code, global.names, global.desc)   
             if(res.status !==200){
-                console.log("update data : "+res.status+"||" +res.body.text)
+                console.log("update data : "+res.status+"||" +res.text)
             }
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id")
@@ -169,7 +169,7 @@ describe('API Service Group', () => {
         it(`${TC_update.positive.different_name}`, async() => {
             const res = await update.updateServiceGroup(global.ids, global.codes, datas.service_Group.name, global.desc)   
             if(res.status !==200){
-                console.log("update data : "+res.status+"||" +res.body.text)
+                console.log("update data : "+res.status+"||" +res.text)
             }
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id")
@@ -181,7 +181,7 @@ describe('API Service Group', () => {
         it(`${TC_update.positive.different_desc}`, async() => {
             const res = await update.updateServiceGroup(global.ids, global.codes, global.names, datas.service_Group.description)   
             if(res.status !==200){
-                console.log("update data : "+res.status+"||" +res.body.text)
+                console.log("update data : "+res.status+"||" +res.text)
             }
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id")

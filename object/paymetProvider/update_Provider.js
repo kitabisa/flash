@@ -3,7 +3,7 @@ const env = require('dotenv').config();
 
 const request = supertest(process.env.paymentService_URL)
 
-const updatePaymentProvider = (callback, code, name, desc)  => request.patch('/internal/v1/payment-provider/update/'+id)
+const updatePaymentProvider = (id, callback, code, desc, name)  => request.patch('/internal/v1/payment-provider/update/'+id)
 .set('Content-Type', 'application/json')
 .send(
     {
