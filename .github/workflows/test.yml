@@ -4,7 +4,7 @@ name: Run Manual
     branches:
       - master
   schedule:
-    - cron: '55 23 * * *'
+    - cron: '1 0 * * *'
 jobs:
   test:
     name: 'Node.js v${{ matrix.node }}'
@@ -14,9 +14,6 @@ jobs:
         node:
           - 14
     steps:
-      - uses: szenius/set-timezone@v1.0
-        with:
-          timezoneMacos: "Asia/Jakarta"
       - uses: actions/setup-node@v1
         with:
           node-version: '${{ matrix.node }}'
