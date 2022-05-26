@@ -44,7 +44,7 @@ const DC_Search = require('../object/Deductible/search_Deductible')
 describe('API Service Group', () => {
     describe('Create Service Product', () => {
         it(`${TC_create.positive.valid_data}`, async() => {
-            const res = await create.createServiceGroup(datas.service_Group.code, datas.service_Group.name, datas.service_Group.description)   
+            const res = await create.createServiceGroup(global.access_Tokens, datas.service_Group.code, datas.service_Group.name, datas.service_Group.description)   
             if(res.status !==200){
                 console.log("create data : "+res.status+"||" +res.text)
             }         
@@ -60,18 +60,18 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_create.negative.existing_data}`, async() => {
-            const res = await create.createServiceGroup('TEST66', 'Alda', 'this is triger from automation tools')
+            const res = await create.createServiceGroup(global.access_Tokens, 'TEST66', 'Alda', 'this is triger from automation tools')
             assert(res.status).to.equal(400)
 
         });
         it(`${TC_create.negative.same_datacode}`, async() => {
-            const res = await create.createServiceGroup('TEST66', datas.service_Group.name, datas.service_Group.description)
+            const res = await create.createServiceGroup(global.access_Tokens, 'TEST66', datas.service_Group.name, datas.service_Group.description)
             assert(res.status).to.equal(400)
         });
     });
     describe('Get All Service Group', () => {
         it(`${TC_getall.positive.Getall}`, async() => {
-            const res = await getAll.getallServiceGroup()
+            const res = await getAll.getallServiceGroup(global.access_Tokens)
             if(res.status !==200){
                 console.log("getall data : "+res.status+"||" +res.text)
             }
@@ -89,7 +89,7 @@ describe('API Service Group', () => {
     }); 
     describe('Get All Public Service Group ', () => {
         it(`${TC_getallPublic.positive.Getall}`, async() => {
-            const res = await getAllpublic.getallpublicServiceGroup()
+            const res = await getAllpublic.getallpublicServiceGroup(global.access_Tokens)
             if(res.status !==200){
                 console.log("getall data : "+res.status+"||" +res.text)
             }
@@ -103,7 +103,7 @@ describe('API Service Group', () => {
     });   
     describe('Get Detail Public Service Group', () => {
         it(`${TC_getdetailPublic.positive.Getall}`, async() => {
-            const res = await getdetailpublic.getdetailpublicServiceGroup(global.ids)
+            const res = await getdetailpublic.getdetailpublicServiceGroup(global.access_Tokens, global.ids)
             if(res.status !==200){
                 console.log("getdetailpublic data : "+res.status+"||" +res.text)
             }
@@ -115,7 +115,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_getdetailPublic.negative.wrongid}`, async () => {
-            const res = await getdetailpublic.getdetailpublicServiceGroup(datas.service_Group.wrongid)
+            const res = await getdetailpublic.getdetailpublicServiceGroup(global.access_Tokens, datas.service_Group.wrongid)
             assert(res.status).to.equal(404)
             assert(res.body.response_desc).to.have.property("id").to.equal("error data tidak ditemukan")
             assert(res.body.response_desc).to.have.property("en")
@@ -123,7 +123,7 @@ describe('API Service Group', () => {
     });
     describe('Get Detail Service Group', () => {
         it(`${TC_getdetail.positive.Getall}`, async() => {
-            const res = await getdetail.getdetailServiceGroup(global.ids)
+            const res = await getdetail.getdetailServiceGroup(global.access_Tokens, global.ids)
             if(res.status !==200){
                 console.log("getdetail data : "+res.status+"||" +res.text)
             }
@@ -135,7 +135,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_getdetail.negative.wrongid}`, async () => {
-            const res = await getdetail.getdetailServiceGroup(datas.service_Group.wrongid)
+            const res = await getdetail.getdetailServiceGroup(global.access_Tokens, datas.service_Group.wrongid)
             assert(res.status).to.equal(404)
             assert(res.body.response_desc).to.have.property("id").to.equal("error data tidak ditemukan")
             assert(res.body.response_desc).to.have.property("en")
@@ -143,7 +143,7 @@ describe('API Service Group', () => {
     });
     describe('Update Service Product', () => {
         it(`${TC_update.positive.valid_data}`, async() => {
-            const res = await update.updateServiceGroup(global.ids, datas.service_Group.code, datas.service_Group.name, datas.service_Group.description)   
+            const res = await update.updateServiceGroup(global.access_Tokens, global.ids, datas.service_Group.code, datas.service_Group.name, datas.service_Group.description)   
             if(res.status !==200){
                 console.log("update data : "+res.status+"||" +res.text)
             }
@@ -155,7 +155,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_update.positive.different_code}`, async() => {
-            const res = await update.updateServiceGroup(global.ids, datas.service_Group.code, global.names, global.desc)   
+            const res = await update.updateServiceGroup(global.access_Tokens, global.ids, datas.service_Group.code, global.names, global.desc)   
             if(res.status !==200){
                 console.log("update data : "+res.status+"||" +res.text)
             }
@@ -167,7 +167,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_update.positive.different_name}`, async() => {
-            const res = await update.updateServiceGroup(global.ids, global.codes, datas.service_Group.name, global.desc)   
+            const res = await update.updateServiceGroup(global.access_Tokens, global.ids, global.codes, datas.service_Group.name, global.desc)   
             if(res.status !==200){
                 console.log("update data : "+res.status+"||" +res.text)
             }
@@ -179,7 +179,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_update.positive.different_desc}`, async() => {
-            const res = await update.updateServiceGroup(global.ids, global.codes, global.names, datas.service_Group.description)   
+            const res = await update.updateServiceGroup(global.access_Tokens, global.ids, global.codes, global.names, datas.service_Group.description)   
             if(res.status !==200){
                 console.log("update data : "+res.status+"||" +res.text)
             }
@@ -191,11 +191,11 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_update.negative.same_data}`, async() => {
-            const res = await update.updateServiceGroup(global.ids, global.codes1, global.names1, global.desc1)   
+            const res = await update.updateServiceGroup(global.access_Tokens, global.ids, global.codes1, global.names1, global.desc1)   
             assert(res.status).to.equal(500)
         });
         it(`${TC_update.negative.same_datacode}`, async() => {
-            const res = await update.updateServiceGroup(global.ids1, global.codes, datas.service_Group.name, datas.service_Group.description)   
+            const res = await update.updateServiceGroup(global.access_Tokens, global.ids1, global.codes, datas.service_Group.name, datas.service_Group.description)   
             assert(res.status).to.equal(500)
             
         });
@@ -204,11 +204,11 @@ describe('API Service Group', () => {
 
     describe('Delete data Service Group', () => {
         it(`${TC_delete.positive.delete}`, async () => {
-            const res = await deleted.deleteServiceGroup(global.ids)
+            const res = await deleted.deleteServiceGroup(global.access_Tokens, global.ids)
             assert(res.status).to.equal(200)
         });
         it(`${TC_delete.negative.wrongid}`, async () => {
-            const res = await deleted.deleteServiceGroup(datas.service_Group.wrongid)
+            const res = await deleted.deleteServiceGroup(global.access_Tokens, datas.service_Group.wrongid)
             assert(res.status).to.equal(404)
         });
     });
@@ -218,7 +218,7 @@ describe('API Service Group', () => {
 describe('API Extension Clause', () => {
     describe('Create ExtensionClause', () => {
         it(`${TC_create_EC.positive.valid_data}`, async () => {
-            const res = await EC_create.createExtensionClause(datas.Extension_clause.code, datas.service_Group.name, datas.service_Group.description, global.codes)
+            const res = await EC_create.createExtensionClause(global.access_Tokens, datas.Extension_clause.code, datas.service_Group.name, datas.service_Group.description, global.codes)
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id")
             assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.ids)
@@ -232,7 +232,7 @@ describe('API Extension Clause', () => {
     });
     describe('Get all data Extension Clause', () => {
         it(`${TC_Getall_EC.positive.Getall}`, async () => {
-            const res = await EC_Getall.getallExtensionClause()
+            const res = await EC_Getall.getallExtensionClause(global.access_Tokens)
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id")
             assert(res.body.data[0]).to.have.property("service_group_id")
@@ -253,18 +253,18 @@ describe('API Extension Clause', () => {
     });
     describe('Delete data Extension Clause', () => {
         it(`${TC_Delete_EC.positive.delete}`, async () => {
-            const res = await EC_Delete.deleteExtensionClause(global.ECids)
+            const res = await EC_Delete.deleteExtensionClause(global.access_Tokens, global.ECids)
             assert(res.status).to.equal(200)
         });
         it(`${TC_Delete_EC.negative.wrongid}`, async () => {
-            const res = await EC_Delete.deleteExtensionClause(datas.Extension_clause.wrongid)
+            const res = await EC_Delete.deleteExtensionClause(global.access_Tokens, datas.Extension_clause.wrongid)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc.id).to.equal('Product Extension Clause ID Tidak Ditemukan')
         });
     });  
     describe('Get Detail Extension Clause', () => {
         it(`${TC_Getdetail_EC.positive.Getall}`, async () => {
-            const res = await EC_Getdetail.getdetailExtensionClause(global.ECids)
+            const res = await EC_Getdetail.getdetailExtensionClause(global.access_Tokens, global.ECids)
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id").to.equal(global.ECids)
             assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.ids)
@@ -275,14 +275,14 @@ describe('API Extension Clause', () => {
             assert(res.body.data[0]).to.have.property("is_active").to.equal(false)
         });
         it(`${TC_Getdetail_EC.negative.wrongid}`, async () => {
-            const res = await EC_Getdetail.getdetailExtensionClause(datas.Extension_clause.wrongid)
+            const res = await EC_Getdetail.getdetailExtensionClause(global.access_Tokens, datas.Extension_clause.wrongid)
             assert(res.status).to.equal(404)
             assert(res.body.response_desc.id).to.equal('error data tidak ditemukan')
         });
     });  
     describe('update data Extension Clause', () => {
         it(`${TC_Update_EC.positive.valid_data}`, async () => {
-            const res =  await EC_Update.updateExtensionClause(global.ECids, global.code1, global.name1, datas.Extension_clause.description, global.ECserviceCode1)
+            const res =  await EC_Update.updateExtensionClause(global.access_Tokens, global.ECids, global.code1, global.name1, datas.Extension_clause.description, global.ECserviceCode1)
             assert(res.status).to.equal(200)
         });
         
@@ -290,7 +290,7 @@ describe('API Extension Clause', () => {
 
     describe('Search data Extension Clause', () => {
         it(`${TC_Search_EC.positive.valid_data}`, async () => {
-            const res =  await EC_Search.searchExtensionClause(global.ECserviceCode1, global.code1, global.name1)
+            const res =  await EC_Search.searchExtensionClause(global.access_Tokens, global.ECserviceCode1, global.code1, global.name1)
             if(res.status !== 200){
                 console.log("error search EC" +res.text);
             }
@@ -304,24 +304,24 @@ describe('API Extension Clause', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_Search_EC.negative.wrong_serviceGroup}`, async () => {
-            const res =  await EC_Search.searchExtensionClause(datas.Extension_clause.invalid_service_group_code, global.code1, global.name1)
+            const res =  await EC_Search.searchExtensionClause(global.access_Tokens, datas.Extension_clause.invalid_service_group_code, global.code1, global.name1)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property('id').to.equal('Product Search Extension Clause Data Tidak Ditemukan')
         });
         it(`${TC_Search_EC.negative.different_code}`, async () => {
-            const res =  await EC_Search.searchExtensionClause(global.ECserviceCode1, global.code2, global.name1)
+            const res =  await EC_Search.searchExtensionClause(global.access_Tokens, global.ECserviceCode1, global.code2, global.name1)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property('id').to.equal('Product Search Extension Clause Data Tidak Ditemukan')
         });
         it(`${TC_Search_EC.negative.different_name}`, async () => {
-            const res =  await EC_Search.searchExtensionClause(global.ECserviceCode1, global.code1, global.name2)
+            const res =  await EC_Search.searchExtensionClause(global.access_Tokens, global.ECserviceCode1, global.code1, global.name2)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property('id').to.equal('Product Search Extension Clause Data Tidak Ditemukan')
         });
     });
     describe('Create Deductible API', () => {
         it(`${TC_create_DC.positive.valid_data}`, async() => {
-            const res = await DC_create.createDeductible(global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.calcu_value)
+            const res = await DC_create.createDeductible(global.access_Tokens, global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.calcu_value)
             if(res.status !== 200){
                 console.log("failed :"+ res.text);
             }
@@ -337,23 +337,23 @@ describe('API Extension Clause', () => {
             global.ids = res.body.data[0].id
         });
         it(`${TC_create_DC.negative.wrong_service_group}`, async () => {
-            const res = await DC_create.createDeductible(global.code2, global.name2, global.desc2, datas.Deductible.service_code, datas.Deductible.calcu_method, datas.Deductible.calcu_value)
+            const res = await DC_create.createDeductible(global.access_Tokens, global.code2, global.name2, global.desc2, datas.Deductible.service_code, datas.Deductible.calcu_method, datas.Deductible.calcu_value)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("Product Service Group Code Tidak Ditemukan")
         });
         it(`${TC_create_DC.negative.wrong_Calculate_Method}`, async () => {
-            const res = await DC_create.createDeductible(global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.wrong_calcu_method, datas.Deductible.calcu_value)
+            const res = await DC_create.createDeductible(global.access_Tokens, global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.wrong_calcu_method, datas.Deductible.calcu_value)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("Calculation Method Salah")
         });
         it(`${TC_create_DC.negative.invalid_deduction_Value}`, async () => {
-            const res = await DC_create.createDeductible(global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.invalid_calcu_value)
+            const res = await DC_create.createDeductible(global.access_Tokens, global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.invalid_calcu_value)
             assert(res.body.response_desc).to.have.property("id").to.equal("payload tidak valid")
         });
     });
     describe('Get all Deduction', () => {
         it(`${TC_Getall_DC.positive.Getall}`, async () => {
-            const res = await DC_Getall.getDeductible()
+            const res = await DC_Getall.getDeductible(global.access_Tokens)
             if(res.status !== 200){
                 console.log("failed :"+ res.text);
             }
@@ -370,7 +370,7 @@ describe('API Extension Clause', () => {
     });
     describe('Get Detail Deduction', () => {
         it(`${TC_Getdetail_DC.positive.Getall}`, async () => {
-            const res = await DC_Getdetail.getdetailDeductible(global.ids)
+            const res = await DC_Getdetail.getdetailDeductible(global.ids, global.access_Tokens)
             if(res.status !== 200){
                 console.log("failed :"+ res.text);
             }
@@ -385,14 +385,14 @@ describe('API Extension Clause', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_Getdetail_DC.negative.wrongid}`, async () => {
-            const res = await DC_Getdetail.getdetailDeductible(datas.Deductible.wrong_idDeduc)
+            const res = await DC_Getdetail.getdetailDeductible(datas.Deductible.wrong_idDeduc, global.access_Tokens)
             assert(res.status).to.equal(404)
             assert(res.body.response_desc).to.have.property("id").to.equal("error data tidak ditemukan")
         });
     });
     describe('Update Deduction Api', () => {
         it(`${TC_Update_DC.positive.valid_data}`, async () => {
-            const res = await DC_Update.updateDeductible(global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method1, datas.Deductible.calcu_value)
+            const res = await DC_Update.updateDeductible(global.access_Tokens, global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method1, datas.Deductible.calcu_value)
             if(res.status !== 200){
                 console.log("failed :"+res.text);
             }
@@ -407,19 +407,19 @@ describe('API Extension Clause', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_Update_DC.negative.wrong_deducID}`, async () => {
-            const res = await DC_Update.updateDeductible(datas.Deductible.wrong_idDeduc, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.calcu_value)
+            const res = await DC_Update.updateDeductible(global.access_Tokens, datas.Deductible.wrong_idDeduc, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.calcu_value)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("Product Deductible ID Tidak Ditemukan")
 
         });
         it(`${TC_Update_DC.negative.wrong_calcuMethod}`, async () => {
-            const res = await DC_Update.updateDeductible(global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.wrong_calcu_method, datas.Deductible.calcu_value)
+            const res = await DC_Update.updateDeductible(global.access_Tokens, global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.wrong_calcu_method, datas.Deductible.calcu_value)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("Calculation Method Salah")
 
         });
         it(`${TC_Update_DC.negative.wrong_calcuvale}`, async () => {
-            const res = await DC_Update.updateDeductible(global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.invalid_calcu_value)
+            const res = await DC_Update.updateDeductible(global.access_Tokens, global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.invalid_calcu_value)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("payload tidak valid")
 
@@ -427,7 +427,7 @@ describe('API Extension Clause', () => {
     });
     describe('Search Deduction Api', () => {
         it(`${TC_Search_DC.positive.valid_data}`, async () => {
-            const res = await DC_Search.searchDeductible(global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.calcu_value)
+            const res = await DC_Search.searchDeductible(global.access_Tokens, global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.calcu_value)
             if(res.status !== 200){
                 console.log("failed :"+ res.text);
             }
@@ -445,14 +445,14 @@ describe('API Extension Clause', () => {
 
     describe('Deleted Deduction APi', () => {
         it(`${TC_Delete_DC.positive.delete}`, async () => {
-            const res = await DC_Delete.deleteDeductible(global.ids)
+            const res = await DC_Delete.deleteDeductible(global.ids, global.access_Tokens)
             if(res.status !== 200){
                 console.log("failed :"+ res.text);
             }
             assert(res.status).to.equal(200)
         });
         it(`${TC_Delete_DC.negative.wrongid}`, async () => {
-            const res = await DC_Delete.deleteDeductible(datas.Deductible.wrong_idDeduc)
+            const res = await DC_Delete.deleteDeductible(datas.Deductible.wrong_idDeduc, global.access_Tokens)
             assert(res.status).to.equal(400)
         });
     });

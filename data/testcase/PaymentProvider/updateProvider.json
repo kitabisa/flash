@@ -3,8 +3,7 @@
         "valid_data": "when user input corect data then user got response 200"
     },
     "negative" :{
-        "wrong_deducID" : "when user input data using invalid Deduction id, then user got response error",
-        "wrong_calcuMethod" : "when user input calcu Method then user got response 200",
-        "wrong_calcuvale" : "when user input calcu value with string, then user got response 200"
+        "wrong_PPID" : "when user input data using invalid payment provider id, then user got response error",
+        "existing_code" : "when user input data using existing code, then user got response error"
     }
 }

@@ -6,6 +6,8 @@ let final_Code = "SG" +code
 let final_Codes = "EC" +code
 let final_Codes1 = "Deduc" +code
 let final_Codes2 = "PP" +code
+let final_Codes3 = "PPr" +code
+let wrongCode = "ppw" +code
 module.exports = {
     "service_Group":
     {
@@ -38,9 +40,10 @@ module.exports = {
     "paymentProvider" : {
         "callback_url" : "https://kitabisa.github.io/flash/",
         "code" : final_Codes2,
+        "code1" :final_Codes3,
         "name" : firstName,
         "wrongID" : "47125462-2e9f-4a01-ae19-3074cd935ffw",
-        "wrongCode" : "PP029291"
+        "wrongCode" : wrongCode
 
     }
 

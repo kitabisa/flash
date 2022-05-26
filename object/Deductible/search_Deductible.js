@@ -4,8 +4,9 @@ const env = require('dotenv').config();
 const request = supertest(process.env.productSevice_URL)
 
 
-const searchDeductible = (code, name, desc, serviceCode, calcu_method, calcu_value)  => request.post('/internal/v1/deductible')
+const searchDeductible = (access_Tokens, code, name, desc, serviceCode, calcu_method, calcu_value)  => request.post('/internal/v1/deductible')
 .set('Content-Type', 'application/json')
+.set('Authorization', `Bearer ${access_Tokens}`)
 .send(
     {
         "code" : code,
