@@ -1,0 +1,1780 @@
+{
+  "stats": {
+    "suites": 27,
+    "tests": 51,
+    "passes": 3,
+    "pending": 0,
+    "failures": 48,
+    "start": "2022-05-26T00:21:41.278Z",
+    "end": "2022-05-26T00:22:18.539Z",
+    "duration": 37261,
+    "testsRegistered": 51,
+    "passPercent": 5.88235294117647,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "f604b01b-402c-417c-ab19-e410ec5f2700",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "35f16648-400c-46f9-9ccc-9750cb501bbe",
+          "title": "Exchange Token API",
+          "fullFile": "/home/runner/work/flash/flash/test/suite1_accountService.js",
+          "file": "/test/suite1_accountService.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook: pre_request in \"Exchange Token API\"",
+              "fullTitle": "Exchange Token API \"before all\" hook: pre_request in \"Exchange Token API\"",
+              "timedOut": false,
+              "duration": 1206,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const rd = await wong.wongAccount()\nconsole.log('Status Code wong :', rd.status);\nconst res = rd.body.data[0]\nglobal.ktbs_token = res.token",
+              "err": {},
+              "uuid": "9d6fb978-16aa-45c5-8a5d-bbca8ab61f40",
+              "parentUUID": "35f16648-400c-46f9-9ccc-9750cb501bbe",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "when user input valid token then user got response 200",
+              "fullTitle": "Exchange Token API when user input valid token then user got response 200",
+              "timedOut": false,
+              "duration": 911,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const res = await exchange_token.exchangeTokenAccount(global.ktbs_token);\nif(res.status !== 200){\n    console.log(\"exchange_token: \" + res.status + \"||\" + res.text)\n}\nassert(res.status).to.equal(200);\nassert(res.body.data[0]).to.have.property('access_token')\nassert(res.body.data[0]).to.have.property('refresh_token')\nassert(res.body.data[0]).to.have.property('expires_in')\nglobal.access_Tokens = res.body.data[0].access_token",
+              "err": {},
+              "uuid": "88e9d32f-1220-43c7-a973-2cef722f0fea",
+              "parentUUID": "35f16648-400c-46f9-9ccc-9750cb501bbe",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "when user input wrong token, then user got response error",
+              "fullTitle": "Exchange Token API when user input wrong token, then user got response error",
+              "timedOut": false,
+              "duration": 1080,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const res = await exchange_token.exchangeTokenAccount('eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ1bXhfUFZiQ3lTV2o5SG5MRHJ0bEJ3X1BLTnlFcVJtWTNpQ3BSMTBlMFpvIn0.eyJleHAiOjE2NTI4OTEwNTEsImlhdCI6MTY1Mjg1NTA1MSwianRpIjoiYmMwMzhiZWUtYzNhNi00YjYxLTlkZjMtYmQ3NjExZWQwMTI0IiwiaXNzIjoiaHR0cDovL2tleWNsb2FrLnN0Zy5rdC5qZy9hdXRoL3JlYWxtcy9raXRhamFnYSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIwNTY5ZjM5NS1iZWUxLTQxMzItOWYzZS1lZDM3ODAyMzY2ODMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJrb25nIiwic2Vzc2lvbl9zdGF0ZSI6ImYwZWU1YzI3LTliODYtNDg1Mi1iYmE2LTI1M2ZkN2RlZDFkMCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1raXRhamFnYSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJmMGVlNWMyNy05Yjg2LTQ4NTItYmJhNi0yNTNmZDdkZWQxZDAiLCJraXRhYmlzYV91c2VyX2lkIjoiNSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiS2l0YWphZ2EgVGVzdCBBamEiLCJraXRhYmlzYV9zZWNvbmRhcnlfaWQiOiI1NDk0ZTg3ODQ2MTJjMWY1ZDNhODI4ZjAyYWNkNzRmNSIsInBob25lX251bWJlciI6IjYyODEyMzQ1Njc4OTAiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJraXRhamFnYS10ZXN0QGtpdGFqYWdhLmlkIiwiZ2l2ZW5fbmFtZSI6IktpdGFqYWdhIiwiZmFtaWx5X')\nassert(res.status).to.equal(502)",
+              "err": {},
+              "uuid": "d953f686-d5fa-46d1-b5e3-4669b87f7404",
+              "parentUUID": "35f16648-400c-46f9-9ccc-9750cb501bbe",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "when user input empty token, then user got response error",
+              "fullTitle": "Exchange Token API when user input empty token, then user got response error",
+              "timedOut": false,
+              "duration": 732,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const res = await exchange_token.exchangeTokenAccount('')\nassert(res.status).to.equal(401)",
+              "err": {},
+              "uuid": "fa4af035-02a3-4823-b945-4b7c2161c8e9",
+              "parentUUID": "35f16648-400c-46f9-9ccc-9750cb501bbe",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "88e9d32f-1220-43c7-a973-2cef722f0fea",
+            "d953f686-d5fa-46d1-b5e3-4669b87f7404",
+            "fa4af035-02a3-4823-b945-4b7c2161c8e9"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2723,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 20000
+        },
+        {
+          "uuid": "ffa25479-ddb6-44bf-9858-a63e329ebb22",
+          "title": "API Service Group",
+          "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+          "file": "/test/suite2_productService.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "54a79b5c-10f9-43bf-a404-27491f4710c0",
+              "title": "Create Service Product",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user input corect data then user got response 200",
+                  "fullTitle": "API Service Group Create Service Product when user input corect data then user got response 200",
+                  "timedOut": false,
+                  "duration": 785,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await create.createServiceGroup(datas.service_Group.code, datas.service_Group.name, datas.service_Group.description)   \nif(res.status !==200){\n    console.log(\"create data : \"+res.status+\"||\" +res.text)\n}         \nassert(res.status).to.equal(200)\nglobal.ids = res.body.data[0].id\nglobal.names = res.body.data[0].name\nglobal.desc = res.body.data[0].description\nglobal.codes = res.body.data[0].code\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"is_active\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:51:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "2c4761ea-1dad-4290-8200-5ae2089f749c",
+                  "parentUUID": "54a79b5c-10f9-43bf-a404-27491f4710c0",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input existing data, then user got response error",
+                  "fullTitle": "API Service Group Create Service Product when user input existing data, then user got response error",
+                  "timedOut": false,
+                  "duration": 752,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await create.createServiceGroup('TEST66', 'Alda', 'this is triger from automation tools')\nassert(res.status).to.equal(400)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 400",
+                    "estack": "AssertionError: expected 401 to equal 400\n    at Context.<anonymous> (test/suite2_productService.js:64:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 400\n"
+                  },
+                  "uuid": "34a2636d-7541-43c4-9cf7-62da3d04e158",
+                  "parentUUID": "54a79b5c-10f9-43bf-a404-27491f4710c0",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input data using existing code data, then user got response error",
+                  "fullTitle": "API Service Group Create Service Product when user input data using existing code data, then user got response error",
+                  "timedOut": false,
+                  "duration": 731,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await create.createServiceGroup('TEST66', datas.service_Group.name, datas.service_Group.description)\nassert(res.status).to.equal(400)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 400",
+                    "estack": "AssertionError: expected 401 to equal 400\n    at Context.<anonymous> (test/suite2_productService.js:69:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 400\n"
+                  },
+                  "uuid": "9ecd3b6e-f881-48f9-ba9c-2693436fd108",
+                  "parentUUID": "54a79b5c-10f9-43bf-a404-27491f4710c0",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "2c4761ea-1dad-4290-8200-5ae2089f749c",
+                "34a2636d-7541-43c4-9cf7-62da3d04e158",
+                "9ecd3b6e-f881-48f9-ba9c-2693436fd108"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 2268,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "b8b88c17-17f0-4da9-91ef-735143073995",
+              "title": "Get All Service Group",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user hit api get all then user got response 200 and all data will be appears",
+                  "fullTitle": "API Service Group Get All Service Group when user hit api get all then user got response 200 and all data will be appears",
+                  "timedOut": false,
+                  "duration": 719,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await getAll.getallServiceGroup()\nif(res.status !==200){\n    console.log(\"getall data : \"+res.status+\"||\" +res.text)\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"is_active\")\nglobal.ids1 = res.body.data[1].id\nglobal.names1 = res.body.data[1].name\nglobal.desc1 = res.body.data[1].description\nglobal.codes1 = res.body.data[1].code",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:78:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "db8c2e3e-b9ef-414f-adc5-075c9275d859",
+                  "parentUUID": "b8b88c17-17f0-4da9-91ef-735143073995",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "db8c2e3e-b9ef-414f-adc5-075c9275d859"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 719,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "98b0eef8-42dd-4469-8a62-772f011b456c",
+              "title": "Get All Public Service Group ",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user hit api get all public then user got response 200 and all data will be appears",
+                  "fullTitle": "API Service Group Get All Public Service Group  when user hit api get all public then user got response 200 and all data will be appears",
+                  "timedOut": false,
+                  "duration": 756,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await getAllpublic.getallpublicServiceGroup()\nif(res.status !==200){\n    console.log(\"getall data : \"+res.status+\"||\" +res.text)\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"is_active\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:96:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "642c8a4d-be0e-439d-945d-49a0309fd9d2",
+                  "parentUUID": "98b0eef8-42dd-4469-8a62-772f011b456c",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "642c8a4d-be0e-439d-945d-49a0309fd9d2"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 756,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "74ff5af3-931c-4896-9bad-46ba6216098b",
+              "title": "Get Detail Public Service Group",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user hit api get detail public then user got response 200 and all data will be appears",
+                  "fullTitle": "API Service Group Get Detail Public Service Group when user hit api get detail public then user got response 200 and all data will be appears",
+                  "timedOut": false,
+                  "duration": 747,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await getdetailpublic.getdetailpublicServiceGroup(global.ids)\nif(res.status !==200){\n    console.log(\"getdetailpublic data : \"+res.status+\"||\" +res.text)\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"is_active\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:110:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "b68aae2a-cd90-4afc-9ab8-c739792eb50c",
+                  "parentUUID": "74ff5af3-931c-4896-9bad-46ba6216098b",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user hit api get detail public with wrong id then user got response error",
+                  "fullTitle": "API Service Group Get Detail Public Service Group when user hit api get detail public with wrong id then user got response error",
+                  "timedOut": false,
+                  "duration": 703,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await getdetailpublic.getdetailpublicServiceGroup(datas.service_Group.wrongid)\nassert(res.status).to.equal(404)\nassert(res.body.response_desc).to.have.property(\"id\").to.equal(\"error data tidak ditemukan\")\nassert(res.body.response_desc).to.have.property(\"en\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 404",
+                    "estack": "AssertionError: expected 401 to equal 404\n    at Context.<anonymous> (test/suite2_productService.js:119:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 404\n"
+                  },
+                  "uuid": "062e8369-f7b1-492b-a1b2-ae373f03b9d2",
+                  "parentUUID": "74ff5af3-931c-4896-9bad-46ba6216098b",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "b68aae2a-cd90-4afc-9ab8-c739792eb50c",
+                "062e8369-f7b1-492b-a1b2-ae373f03b9d2"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 1450,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "e6287079-de7e-409a-ad93-6249790b9b21",
+              "title": "Get Detail Service Group",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user hit api get detail then user got response 200 and all data will be appears",
+                  "fullTitle": "API Service Group Get Detail Service Group when user hit api get detail then user got response 200 and all data will be appears",
+                  "timedOut": false,
+                  "duration": 709,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await getdetail.getdetailServiceGroup(global.ids)\nif(res.status !==200){\n    console.log(\"getdetail data : \"+res.status+\"||\" +res.text)\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"is_active\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:130:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "24feba24-3a29-4922-ba88-b1f945717fb6",
+                  "parentUUID": "e6287079-de7e-409a-ad93-6249790b9b21",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user hit api get detail with wrong id then user got response error",
+                  "fullTitle": "API Service Group Get Detail Service Group when user hit api get detail with wrong id then user got response error",
+                  "timedOut": false,
+                  "duration": 722,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await getdetail.getdetailServiceGroup(datas.service_Group.wrongid)\nassert(res.status).to.equal(404)\nassert(res.body.response_desc).to.have.property(\"id\").to.equal(\"error data tidak ditemukan\")\nassert(res.body.response_desc).to.have.property(\"en\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 404",
+                    "estack": "AssertionError: expected 401 to equal 404\n    at Context.<anonymous> (test/suite2_productService.js:139:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 404\n"
+                  },
+                  "uuid": "75ae40eb-7c79-490d-b51b-3c57117ecc74",
+                  "parentUUID": "e6287079-de7e-409a-ad93-6249790b9b21",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "24feba24-3a29-4922-ba88-b1f945717fb6",
+                "75ae40eb-7c79-490d-b51b-3c57117ecc74"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 1431,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "963173a7-4b15-4dff-acd1-3b85401ba446",
+              "title": "Update Service Product",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user input corect data then user got response 200",
+                  "fullTitle": "API Service Group Update Service Product when user input corect data then user got response 200",
+                  "timedOut": false,
+                  "duration": 720,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await update.updateServiceGroup(global.ids, datas.service_Group.code, datas.service_Group.name, datas.service_Group.description)   \nif(res.status !==200){\n    console.log(\"update data : \"+res.status+\"||\" +res.text)\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"is_active\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:150:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "49b516bd-ccd5-433c-b2cf-f70df6ce7594",
+                  "parentUUID": "963173a7-4b15-4dff-acd1-3b85401ba446",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input different code and same description and same name then user got response 200",
+                  "fullTitle": "API Service Group Update Service Product when user input different code and same description and same name then user got response 200",
+                  "timedOut": false,
+                  "duration": 705,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await update.updateServiceGroup(global.ids, datas.service_Group.code, global.names, global.desc)   \nif(res.status !==200){\n    console.log(\"update data : \"+res.status+\"||\" +res.text)\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"is_active\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:162:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "20cce90e-3b07-460a-8f88-242e7f2b7c5f",
+                  "parentUUID": "963173a7-4b15-4dff-acd1-3b85401ba446",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input different name and same code then user got response 200",
+                  "fullTitle": "API Service Group Update Service Product when user input different name and same code then user got response 200",
+                  "timedOut": false,
+                  "duration": 736,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await update.updateServiceGroup(global.ids, global.codes, datas.service_Group.name, global.desc)   \nif(res.status !==200){\n    console.log(\"update data : \"+res.status+\"||\" +res.text)\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"is_active\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:174:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "331281b5-4a58-4739-b5ba-e9ee784b4b7f",
+                  "parentUUID": "963173a7-4b15-4dff-acd1-3b85401ba446",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input different description and same code and same name then user got response 200",
+                  "fullTitle": "API Service Group Update Service Product when user input different description and same code and same name then user got response 200",
+                  "timedOut": false,
+                  "duration": 719,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await update.updateServiceGroup(global.ids, global.codes, global.names, datas.service_Group.description)   \nif(res.status !==200){\n    console.log(\"update data : \"+res.status+\"||\" +res.text)\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"is_active\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:186:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "f767d346-79be-4696-b2ea-acb3b7524df0",
+                  "parentUUID": "963173a7-4b15-4dff-acd1-3b85401ba446",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input same data, then user got response error",
+                  "fullTitle": "API Service Group Update Service Product when user input same data, then user got response error",
+                  "timedOut": false,
+                  "duration": 726,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await update.updateServiceGroup(global.ids, global.codes1, global.names1, global.desc1)   \nassert(res.status).to.equal(500)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 500",
+                    "estack": "AssertionError: expected 401 to equal 500\n    at Context.<anonymous> (test/suite2_productService.js:195:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 500\n"
+                  },
+                  "uuid": "a716c73f-17db-485f-bf3f-19ff3e2f2f08",
+                  "parentUUID": "963173a7-4b15-4dff-acd1-3b85401ba446",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input data using existing code data, then user got response error",
+                  "fullTitle": "API Service Group Update Service Product when user input data using existing code data, then user got response error",
+                  "timedOut": false,
+                  "duration": 714,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await update.updateServiceGroup(global.ids1, global.codes, datas.service_Group.name, datas.service_Group.description)   \nassert(res.status).to.equal(500)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 500",
+                    "estack": "AssertionError: expected 401 to equal 500\n    at Context.<anonymous> (test/suite2_productService.js:199:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 500\n"
+                  },
+                  "uuid": "b301d105-ccf9-4a0b-833b-bfaa766089e5",
+                  "parentUUID": "963173a7-4b15-4dff-acd1-3b85401ba446",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "49b516bd-ccd5-433c-b2cf-f70df6ce7594",
+                "20cce90e-3b07-460a-8f88-242e7f2b7c5f",
+                "331281b5-4a58-4739-b5ba-e9ee784b4b7f",
+                "f767d346-79be-4696-b2ea-acb3b7524df0",
+                "a716c73f-17db-485f-bf3f-19ff3e2f2f08",
+                "b301d105-ccf9-4a0b-833b-bfaa766089e5"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 4320,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "0ddd2821-927d-47fc-ad64-b861f5672373",
+              "title": "Delete data Service Group",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user hit api delete with correct id then user got response 200 and data will be deleted",
+                  "fullTitle": "API Service Group Delete data Service Group when user hit api delete with correct id then user got response 200 and data will be deleted",
+                  "timedOut": false,
+                  "duration": 739,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await deleted.deleteServiceGroup(global.ids)\nassert(res.status).to.equal(200)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:208:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "c2ba8b72-a0f8-472d-8631-4bdf8e64fe75",
+                  "parentUUID": "0ddd2821-927d-47fc-ad64-b861f5672373",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user hit api delete with wrong id then user got response error",
+                  "fullTitle": "API Service Group Delete data Service Group when user hit api delete with wrong id then user got response error",
+                  "timedOut": false,
+                  "duration": 707,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await deleted.deleteServiceGroup(datas.service_Group.wrongid)\nassert(res.status).to.equal(404)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 404",
+                    "estack": "AssertionError: expected 401 to equal 404\n    at Context.<anonymous> (test/suite2_productService.js:212:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 404\n"
+                  },
+                  "uuid": "1d4b985b-59ba-4396-afee-c3cb12b9444c",
+                  "parentUUID": "0ddd2821-927d-47fc-ad64-b861f5672373",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "c2ba8b72-a0f8-472d-8631-4bdf8e64fe75",
+                "1d4b985b-59ba-4396-afee-c3cb12b9444c"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 1446,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 20000
+        },
+        {
+          "uuid": "38c44a62-549b-4f51-88cd-6d720e0cadf6",
+          "title": "API Extension Clause",
+          "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+          "file": "/test/suite2_productService.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "abe1e582-d028-4a47-acd6-669c570d5858",
+              "title": "Create ExtensionClause",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user input corect data then user got response 200",
+                  "fullTitle": "API Extension Clause Create ExtensionClause when user input corect data then user got response 200",
+                  "timedOut": false,
+                  "duration": 707,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await EC_create.createExtensionClause(datas.Extension_clause.code, datas.service_Group.name, datas.service_Group.description, global.codes)\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"service_group_id\").to.equal(global.ids)\nassert(res.body.data[0]).to.have.property(\"service_group_code\").to.equal(global.codes)\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"is_active\").to.equal(true)\nglobal.ECids = res.body.data[0].id",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:222:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "7ccfebe2-6b22-470f-9656-0b335b4fec35",
+                  "parentUUID": "abe1e582-d028-4a47-acd6-669c570d5858",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "7ccfebe2-6b22-470f-9656-0b335b4fec35"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 707,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "8da48894-6b1c-4729-bd80-efe426e6909b",
+              "title": "Get all data Extension Clause",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user hit api get all then user got response 200 and all data will be appears",
+                  "fullTitle": "API Extension Clause Get all data Extension Clause when user hit api get all then user got response 200 and all data will be appears",
+                  "timedOut": false,
+                  "duration": 720,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await EC_Getall.getallExtensionClause()\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"service_group_id\")\nassert(res.body.data[0]).to.have.property(\"service_group_code\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"is_active\")\nglobal.ECids1 = res.body.data[1].id\nglobal.ECserviceCode1 = res.body.data[1].service_group_code\nglobal.code1 = res.body.data[1].code\nglobal.name1 = res.body.data[1].name\nglobal.code2 = res.body.data[0].code\nglobal.name2 = res.body.data[0].name\nglobal.ECserviceCode2 = res.body.data[0].service_group_code\nglobal.desc2 = res.body.data[0].description",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:236:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "27f91299-4f12-4c66-a2cf-5148da3f0b1f",
+                  "parentUUID": "8da48894-6b1c-4729-bd80-efe426e6909b",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "27f91299-4f12-4c66-a2cf-5148da3f0b1f"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 720,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "7bb7efea-4a62-4d1d-95f9-c79fde90cad7",
+              "title": "Delete data Extension Clause",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user hit api delete with correct id then user got response 200 and data will be deleted",
+                  "fullTitle": "API Extension Clause Delete data Extension Clause when user hit api delete with correct id then user got response 200 and data will be deleted",
+                  "timedOut": false,
+                  "duration": 703,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await EC_Delete.deleteExtensionClause(global.ECids)\nassert(res.status).to.equal(200)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:257:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "35db0f77-741a-4691-b47c-a80b278f43a5",
+                  "parentUUID": "7bb7efea-4a62-4d1d-95f9-c79fde90cad7",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user hit api delete with wrong id then user got response error",
+                  "fullTitle": "API Extension Clause Delete data Extension Clause when user hit api delete with wrong id then user got response error",
+                  "timedOut": false,
+                  "duration": 717,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await EC_Delete.deleteExtensionClause(datas.Extension_clause.wrongid)\nassert(res.status).to.equal(400)\nassert(res.body.response_desc.id).to.equal('Product Extension Clause ID Tidak Ditemukan')",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 400",
+                    "estack": "AssertionError: expected 401 to equal 400\n    at Context.<anonymous> (test/suite2_productService.js:261:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 400\n"
+                  },
+                  "uuid": "54daeab1-bf1d-4082-aa68-5675ae50884d",
+                  "parentUUID": "7bb7efea-4a62-4d1d-95f9-c79fde90cad7",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "35db0f77-741a-4691-b47c-a80b278f43a5",
+                "54daeab1-bf1d-4082-aa68-5675ae50884d"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 1420,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "54b777fb-0db3-40b1-9ac8-e1a9013b3b09",
+              "title": "Get Detail Extension Clause",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user hit api get detail then user got response 200 and all data will be appears",
+                  "fullTitle": "API Extension Clause Get Detail Extension Clause when user hit api get detail then user got response 200 and all data will be appears",
+                  "timedOut": false,
+                  "duration": 750,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await EC_Getdetail.getdetailExtensionClause(global.ECids)\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\").to.equal(global.ECids)\nassert(res.body.data[0]).to.have.property(\"service_group_id\").to.equal(global.ids)\nassert(res.body.data[0]).to.have.property(\"service_group_code\").to.equal(global.codes)\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"is_active\").to.equal(false)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:268:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "fc147e74-7e9a-4279-b990-d983214d8d69",
+                  "parentUUID": "54b777fb-0db3-40b1-9ac8-e1a9013b3b09",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user hit api get detail with wrong id then user got response error",
+                  "fullTitle": "API Extension Clause Get Detail Extension Clause when user hit api get detail with wrong id then user got response error",
+                  "timedOut": false,
+                  "duration": 726,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await EC_Getdetail.getdetailExtensionClause(datas.Extension_clause.wrongid)\nassert(res.status).to.equal(404)\nassert(res.body.response_desc.id).to.equal('error data tidak ditemukan')",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 404",
+                    "estack": "AssertionError: expected 401 to equal 404\n    at Context.<anonymous> (test/suite2_productService.js:279:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 404\n"
+                  },
+                  "uuid": "dbe0ef0f-3daf-412a-b1f2-425a4c80c291",
+                  "parentUUID": "54b777fb-0db3-40b1-9ac8-e1a9013b3b09",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "fc147e74-7e9a-4279-b990-d983214d8d69",
+                "dbe0ef0f-3daf-412a-b1f2-425a4c80c291"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 1476,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "bed4d6a4-771d-417e-8ad9-a0028a88b0c6",
+              "title": "update data Extension Clause",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user input corect data then user got response 200",
+                  "fullTitle": "API Extension Clause update data Extension Clause when user input corect data then user got response 200",
+                  "timedOut": false,
+                  "duration": 719,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res =  await EC_Update.updateExtensionClause(global.ECids, global.code1, global.name1, datas.Extension_clause.description, global.ECserviceCode1)\nassert(res.status).to.equal(200)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:286:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "25f5999a-70c1-418b-9bea-7c6f3db528d2",
+                  "parentUUID": "bed4d6a4-771d-417e-8ad9-a0028a88b0c6",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "25f5999a-70c1-418b-9bea-7c6f3db528d2"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 719,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "0e7000b7-227b-4c37-ac02-9895805e164e",
+              "title": "Search data Extension Clause",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user input corect data then user got response 200",
+                  "fullTitle": "API Extension Clause Search data Extension Clause when user input corect data then user got response 200",
+                  "timedOut": false,
+                  "duration": 718,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res =  await EC_Search.searchExtensionClause(global.ECserviceCode1, global.code1, global.name1)\nif(res.status !== 200){\n    console.log(\"error search EC\" +res.text);\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"service_group_id\")\nassert(res.body.data[0]).to.have.property(\"service_group_code\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"is_active\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:297:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "916cef63-f6f0-4800-b9db-81a3f969fc09",
+                  "parentUUID": "0e7000b7-227b-4c37-ac02-9895805e164e",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input data using invalid service group, then user got response error",
+                  "fullTitle": "API Extension Clause Search data Extension Clause when user input data using invalid service group, then user got response error",
+                  "timedOut": false,
+                  "duration": 724,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res =  await EC_Search.searchExtensionClause(datas.Extension_clause.invalid_service_group_code, global.code1, global.name1)\nassert(res.status).to.equal(400)\nassert(res.body.response_desc).to.have.property('id').to.equal('Product Search Extension Clause Data Tidak Ditemukan')",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 400",
+                    "estack": "AssertionError: expected 401 to equal 400\n    at Context.<anonymous> (test/suite2_productService.js:308:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 400\n"
+                  },
+                  "uuid": "8f4f6dc7-73b6-4c5f-9d06-3652ea317701",
+                  "parentUUID": "0e7000b7-227b-4c37-ac02-9895805e164e",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input data using different_code and with same service group and same name, then user got response error",
+                  "fullTitle": "API Extension Clause Search data Extension Clause when user input data using different_code and with same service group and same name, then user got response error",
+                  "timedOut": false,
+                  "duration": 702,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res =  await EC_Search.searchExtensionClause(global.ECserviceCode1, global.code2, global.name1)\nassert(res.status).to.equal(400)\nassert(res.body.response_desc).to.have.property('id').to.equal('Product Search Extension Clause Data Tidak Ditemukan')",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 400",
+                    "estack": "AssertionError: expected 401 to equal 400\n    at Context.<anonymous> (test/suite2_productService.js:313:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 400\n"
+                  },
+                  "uuid": "f63e87b0-aad2-4fda-8dc3-6bc2ac562e00",
+                  "parentUUID": "0e7000b7-227b-4c37-ac02-9895805e164e",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input data using different_name and with same service group and same code, then user got response error",
+                  "fullTitle": "API Extension Clause Search data Extension Clause when user input data using different_name and with same service group and same code, then user got response error",
+                  "timedOut": false,
+                  "duration": 715,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res =  await EC_Search.searchExtensionClause(global.ECserviceCode1, global.code1, global.name2)\nassert(res.status).to.equal(400)\nassert(res.body.response_desc).to.have.property('id').to.equal('Product Search Extension Clause Data Tidak Ditemukan')",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 400",
+                    "estack": "AssertionError: expected 401 to equal 400\n    at Context.<anonymous> (test/suite2_productService.js:318:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 400\n"
+                  },
+                  "uuid": "e9de82cc-6a5d-4ed4-82b1-b681919f371d",
+                  "parentUUID": "0e7000b7-227b-4c37-ac02-9895805e164e",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "916cef63-f6f0-4800-b9db-81a3f969fc09",
+                "8f4f6dc7-73b6-4c5f-9d06-3652ea317701",
+                "f63e87b0-aad2-4fda-8dc3-6bc2ac562e00",
+                "e9de82cc-6a5d-4ed4-82b1-b681919f371d"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 2859,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "ec9cfa1d-27ab-44c9-8c23-8e52cc8e8ba6",
+              "title": "Create Deductible API",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user input correct data then user got response 200",
+                  "fullTitle": "API Extension Clause Create Deductible API when user input correct data then user got response 200",
+                  "timedOut": false,
+                  "duration": 719,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_create.createDeductible(global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.calcu_value)\nif(res.status !== 200){\n    console.log(\"failed :\"+ res.text);\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"service_group_id\")\nassert(res.body.data[0]).to.have.property(\"service_group_code\").to.equal(global.ECserviceCode2)\nassert(res.body.data[0]).to.have.property(\"code\").to.equal(global.code2)\nassert(res.body.data[0]).to.have.property(\"name\").to.equal(global.name2)\nassert(res.body.data[0]).to.have.property(\"calculation_method\").to.equal(\"percentage\")\nassert(res.body.data[0]).to.have.property(\"calculation_value\").to.equal(\"400000.00\")\nassert(res.body.data[0]).to.have.property(\"is_active\")\nglobal.ids = res.body.data[0].id",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:328:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "7c3554af-4f8c-4ea8-8258-1a04cecee19b",
+                  "parentUUID": "ec9cfa1d-27ab-44c9-8c23-8e52cc8e8ba6",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input wrong service group, then user got response error",
+                  "fullTitle": "API Extension Clause Create Deductible API when user input wrong service group, then user got response error",
+                  "timedOut": false,
+                  "duration": 699,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_create.createDeductible(global.code2, global.name2, global.desc2, datas.Deductible.service_code, datas.Deductible.calcu_method, datas.Deductible.calcu_value)\nassert(res.status).to.equal(400)\nassert(res.body.response_desc).to.have.property(\"id\").to.equal(\"Product Service Group Code Tidak Ditemukan\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 400",
+                    "estack": "AssertionError: expected 401 to equal 400\n    at Context.<anonymous> (test/suite2_productService.js:341:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 400\n"
+                  },
+                  "uuid": "018b3cd3-0681-4461-a6ec-6c7d6634967f",
+                  "parentUUID": "ec9cfa1d-27ab-44c9-8c23-8e52cc8e8ba6",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input wrong calculate method, then user got response error",
+                  "fullTitle": "API Extension Clause Create Deductible API when user input wrong calculate method, then user got response error",
+                  "timedOut": false,
+                  "duration": 718,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_create.createDeductible(global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.wrong_calcu_method, datas.Deductible.calcu_value)\nassert(res.status).to.equal(400)\nassert(res.body.response_desc).to.have.property(\"id\").to.equal(\"Calculation Method Salah\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 400",
+                    "estack": "AssertionError: expected 401 to equal 400\n    at Context.<anonymous> (test/suite2_productService.js:346:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 400\n"
+                  },
+                  "uuid": "79b70ce0-2fbd-4a4f-9c70-5a91500c7688",
+                  "parentUUID": "ec9cfa1d-27ab-44c9-8c23-8e52cc8e8ba6",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input deduction value with string, then user got response error",
+                  "fullTitle": "API Extension Clause Create Deductible API when user input deduction value with string, then user got response error",
+                  "timedOut": false,
+                  "duration": 721,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_create.createDeductible(global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.invalid_calcu_value)\nassert(res.body.response_desc).to.have.property(\"id\").to.equal(\"payload tidak valid\")",
+                  "err": {
+                    "message": "AssertionError: Target cannot be null or undefined.",
+                    "estack": "AssertionError: Target cannot be null or undefined.\n    at Context.<anonymous> (test/suite2_productService.js:351:52)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": null
+                  },
+                  "uuid": "84125313-0765-44d4-945d-d76445befb53",
+                  "parentUUID": "ec9cfa1d-27ab-44c9-8c23-8e52cc8e8ba6",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "7c3554af-4f8c-4ea8-8258-1a04cecee19b",
+                "018b3cd3-0681-4461-a6ec-6c7d6634967f",
+                "79b70ce0-2fbd-4a4f-9c70-5a91500c7688",
+                "84125313-0765-44d4-945d-d76445befb53"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 2857,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "76bfec82-3462-405a-8490-2e3adb057611",
+              "title": "Get all Deduction",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user hit api get all then user got response 200 and all data will be appears",
+                  "fullTitle": "API Extension Clause Get all Deduction when user hit api get all then user got response 200 and all data will be appears",
+                  "timedOut": false,
+                  "duration": 724,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_Getall.getDeductible()\nif(res.status !== 200){\n    console.log(\"failed :\"+ res.text);\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"service_group_id\")\nassert(res.body.data[0]).to.have.property(\"service_group_code\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"calculation_method\")\nassert(res.body.data[0]).to.have.property(\"calculation_value\")\nassert(res.body.data[0]).to.have.property(\"is_active\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:360:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "6adba01c-bad1-46f4-8ba4-12574cf53935",
+                  "parentUUID": "76bfec82-3462-405a-8490-2e3adb057611",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "6adba01c-bad1-46f4-8ba4-12574cf53935"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 724,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "96313513-0e1d-45bc-a943-13bc7f889916",
+              "title": "Get Detail Deduction",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user hit api get detail then user got response 200 and all data will be appears",
+                  "fullTitle": "API Extension Clause Get Detail Deduction when user hit api get detail then user got response 200 and all data will be appears",
+                  "timedOut": false,
+                  "duration": 729,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_Getdetail.getdetailDeductible(global.ids)\nif(res.status !== 200){\n    console.log(\"failed :\"+ res.text);\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"service_group_id\")\nassert(res.body.data[0]).to.have.property(\"service_group_code\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"calculation_method\")\nassert(res.body.data[0]).to.have.property(\"calculation_value\")\nassert(res.body.data[0]).to.have.property(\"is_active\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:377:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "523bb496-3513-46b5-a491-8d2b090c2d20",
+                  "parentUUID": "96313513-0e1d-45bc-a943-13bc7f889916",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user hit api get detail with wrong id then user got response error",
+                  "fullTitle": "API Extension Clause Get Detail Deduction when user hit api get detail with wrong id then user got response error",
+                  "timedOut": false,
+                  "duration": 724,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_Getdetail.getdetailDeductible(datas.Deductible.wrong_idDeduc)\nassert(res.status).to.equal(404)\nassert(res.body.response_desc).to.have.property(\"id\").to.equal(\"error data tidak ditemukan\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 404",
+                    "estack": "AssertionError: expected 401 to equal 404\n    at Context.<anonymous> (test/suite2_productService.js:389:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 404\n"
+                  },
+                  "uuid": "10083d86-6b58-4a5e-9ab8-4e7fc56213cd",
+                  "parentUUID": "96313513-0e1d-45bc-a943-13bc7f889916",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "523bb496-3513-46b5-a491-8d2b090c2d20",
+                "10083d86-6b58-4a5e-9ab8-4e7fc56213cd"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 1453,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "6e03cc92-cd2b-443e-9f18-f063cee8102c",
+              "title": "Update Deduction Api",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user input corect data then user got response 200",
+                  "fullTitle": "API Extension Clause Update Deduction Api when user input corect data then user got response 200",
+                  "timedOut": false,
+                  "duration": 714,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_Update.updateDeductible(global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method1, datas.Deductible.calcu_value)\nif(res.status !== 200){\n    console.log(\"failed :\"+res.text);\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"service_group_id\")\nassert(res.body.data[0]).to.have.property(\"service_group_code\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"calculation_method\")\nassert(res.body.data[0]).to.have.property(\"calculation_value\")\nassert(res.body.data[0]).to.have.property(\"is_active\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:399:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "26eabb50-a7b6-42a3-8b96-b9076f6bf0d2",
+                  "parentUUID": "6e03cc92-cd2b-443e-9f18-f063cee8102c",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input data using invalid Deduction id, then user got response error",
+                  "fullTitle": "API Extension Clause Update Deduction Api when user input data using invalid Deduction id, then user got response error",
+                  "timedOut": false,
+                  "duration": 712,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_Update.updateDeductible(datas.Deductible.wrong_idDeduc, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.calcu_value)\nassert(res.status).to.equal(400)\nassert(res.body.response_desc).to.have.property(\"id\").to.equal(\"Product Deductible ID Tidak Ditemukan\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 400",
+                    "estack": "AssertionError: expected 401 to equal 400\n    at Context.<anonymous> (test/suite2_productService.js:411:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 400\n"
+                  },
+                  "uuid": "67401bb9-a224-43d0-9b2c-65bad4bf4f71",
+                  "parentUUID": "6e03cc92-cd2b-443e-9f18-f063cee8102c",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input calcu Method then user got response 200",
+                  "fullTitle": "API Extension Clause Update Deduction Api when user input calcu Method then user got response 200",
+                  "timedOut": false,
+                  "duration": 705,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_Update.updateDeductible(global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.wrong_calcu_method, datas.Deductible.calcu_value)\nassert(res.status).to.equal(400)\nassert(res.body.response_desc).to.have.property(\"id\").to.equal(\"Calculation Method Salah\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 400",
+                    "estack": "AssertionError: expected 401 to equal 400\n    at Context.<anonymous> (test/suite2_productService.js:417:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 400\n"
+                  },
+                  "uuid": "588a0a30-c605-48c1-96eb-eb895f5e9259",
+                  "parentUUID": "6e03cc92-cd2b-443e-9f18-f063cee8102c",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input calcu value with string, then user got response 200",
+                  "fullTitle": "API Extension Clause Update Deduction Api when user input calcu value with string, then user got response 200",
+                  "timedOut": false,
+                  "duration": 706,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_Update.updateDeductible(global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.invalid_calcu_value)\nassert(res.status).to.equal(400)\nassert(res.body.response_desc).to.have.property(\"id\").to.equal(\"payload tidak valid\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 400",
+                    "estack": "AssertionError: expected 401 to equal 400\n    at Context.<anonymous> (test/suite2_productService.js:423:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 400\n"
+                  },
+                  "uuid": "22d1e78a-a8d2-4fe4-a13b-178bc36fdca3",
+                  "parentUUID": "6e03cc92-cd2b-443e-9f18-f063cee8102c",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "26eabb50-a7b6-42a3-8b96-b9076f6bf0d2",
+                "67401bb9-a224-43d0-9b2c-65bad4bf4f71",
+                "588a0a30-c605-48c1-96eb-eb895f5e9259",
+                "22d1e78a-a8d2-4fe4-a13b-178bc36fdca3"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 2837,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "187c9dea-eb63-4cd2-92bf-9e2210bf0569",
+              "title": "Search Deduction Api",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user input corect data then user got response 200",
+                  "fullTitle": "API Extension Clause Search Deduction Api when user input corect data then user got response 200",
+                  "timedOut": false,
+                  "duration": 717,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_Search.searchDeductible(global.code2, global.name2, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.calcu_value)\nif(res.status !== 200){\n    console.log(\"failed :\"+ res.text);\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"service_group_id\")\nassert(res.body.data[0]).to.have.property(\"service_group_code\").to.equal(global.ECserviceCode2)\nassert(res.body.data[0]).to.have.property(\"code\").to.equal(global.code2)\nassert(res.body.data[0]).to.have.property(\"name\").to.equal(global.name2)\nassert(res.body.data[0]).to.have.property(\"calculation_method\").to.equal(\"percentage\")\nassert(res.body.data[0]).to.have.property(\"calculation_value\").to.equal(\"400000.00\")\nassert(res.body.data[0]).to.have.property(\"is_active\")",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:434:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "a8fb1cbe-fb78-464e-b22f-dca9e7dabe08",
+                  "parentUUID": "187c9dea-eb63-4cd2-92bf-9e2210bf0569",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "a8fb1cbe-fb78-464e-b22f-dca9e7dabe08"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 717,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "cb4c693a-5164-4263-9474-9793cbfe725c",
+              "title": "Deleted Deduction APi",
+              "fullFile": "/home/runner/work/flash/flash/test/suite2_productService.js",
+              "file": "/test/suite2_productService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user hit api delete with correct id then user got response 200 and data will be deleted",
+                  "fullTitle": "API Extension Clause Deleted Deduction APi when user hit api delete with correct id then user got response 200 and data will be deleted",
+                  "timedOut": false,
+                  "duration": 740,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_Delete.deleteDeductible(global.ids)\nif(res.status !== 200){\n    console.log(\"failed :\"+ res.text);\n}\nassert(res.status).to.equal(200)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite2_productService.js:452:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "0ae92d33-4858-44ba-8b3e-4d7f648d00b6",
+                  "parentUUID": "cb4c693a-5164-4263-9474-9793cbfe725c",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user hit api delete with wrong id then user got response error",
+                  "fullTitle": "API Extension Clause Deleted Deduction APi when user hit api delete with wrong id then user got response error",
+                  "timedOut": false,
+                  "duration": 711,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await DC_Delete.deleteDeductible(datas.Deductible.wrong_idDeduc)\nassert(res.status).to.equal(400)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 400",
+                    "estack": "AssertionError: expected 401 to equal 400\n    at Context.<anonymous> (test/suite2_productService.js:456:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 400\n"
+                  },
+                  "uuid": "e146ebed-1521-4be2-81a4-7c834fdf7e44",
+                  "parentUUID": "cb4c693a-5164-4263-9474-9793cbfe725c",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "0ae92d33-4858-44ba-8b3e-4d7f648d00b6",
+                "e146ebed-1521-4be2-81a4-7c834fdf7e44"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 1451,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 20000
+        },
+        {
+          "uuid": "e4a57866-1b8a-46c3-b127-fbc69f5a53c3",
+          "title": "Payment Api Service",
+          "fullFile": "/home/runner/work/flash/flash/test/suite3_paymentService.js",
+          "file": "/test/suite3_paymentService.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "1b60d116-0b21-4c5a-81e8-3ac5fcbd5c34",
+              "title": "Create Payment Provider",
+              "fullFile": "/home/runner/work/flash/flash/test/suite3_paymentService.js",
+              "file": "/test/suite3_paymentService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user input correct data then user got response 200",
+                  "fullTitle": "Payment Api Service Create Payment Provider when user input correct data then user got response 200",
+                  "timedOut": false,
+                  "duration": 761,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await create_Provider.createPaymentProvider(datas.paymentProvider.callback_url, datas.paymentProvider.code, datas.service_Group.description, datas.paymentProvider.name)\nif(res.status !==200){\n    console.log(\"failed :\"+res.text);\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"callback_url\").to.equal(datas.paymentProvider.callback_url)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite3_paymentService.js:21:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "280427bd-c5ce-4bab-bdb3-48d292fa93bd",
+                  "parentUUID": "1b60d116-0b21-4c5a-81e8-3ac5fcbd5c34",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "280427bd-c5ce-4bab-bdb3-48d292fa93bd"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 761,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "2cec0023-c66d-4e9b-b571-8b569e8d975b",
+              "title": "Get all Payment Provider",
+              "fullFile": "/home/runner/work/flash/flash/test/suite3_paymentService.js",
+              "file": "/test/suite3_paymentService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user hit api get all then user got response 200 and all data will be appears",
+                  "fullTitle": "Payment Api Service Get all Payment Provider when user hit api get all then user got response 200 and all data will be appears",
+                  "timedOut": false,
+                  "duration": 730,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await getAll_Provider.getPaymentProvider()\nif(res.status !==200){\n    console.log(\"failed :\"+res.text);\n}\nassert(res.status).to.equal(200)\nassert(res.body.data[0]).to.have.property(\"id\")\nassert(res.body.data[0]).to.have.property(\"code\")\nassert(res.body.data[0]).to.have.property(\"name\")\nassert(res.body.data[0]).to.have.property(\"description\")\nassert(res.body.data[0]).to.have.property(\"callback_url\")\nids = res.body.data[0].id\nconsole.log(ids);",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 200",
+                    "estack": "AssertionError: expected 401 to equal 200\n    at Context.<anonymous> (test/suite3_paymentService.js:35:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 200\n"
+                  },
+                  "uuid": "a897dfdb-d053-4fcc-89dc-e563ba0a785e",
+                  "parentUUID": "2cec0023-c66d-4e9b-b571-8b569e8d975b",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "a897dfdb-d053-4fcc-89dc-e563ba0a785e"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 730,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "42bfbd48-b6c8-4d8b-881b-98022f70ddf6",
+              "title": "Get detail payment provider",
+              "fullFile": "/home/runner/work/flash/flash/test/suite3_paymentService.js",
+              "file": "/test/suite3_paymentService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user hit api get detail then user got response 200 and all data will be appears",
+                  "fullTitle": "Payment Api Service Get detail payment provider when user hit api get detail then user got response 200 and all data will be appears",
+                  "timedOut": false,
+                  "duration": 1,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await getDetail_Provider.getdetailPaymentProvider(ids)\nif(res.status !==200){\n    console.log(\"failed :\"+res.text);\n}\nassert(res.status).to.equal(200)",
+                  "err": {
+                    "message": "ReferenceError: ids is not defined",
+                    "estack": "ReferenceError: ids is not defined\n    at Context.<anonymous> (test/suite3_paymentService.js:47:75)\n    at processImmediate (internal/timers.js:464:21)",
+                    "diff": null
+                  },
+                  "uuid": "0ece5dd1-dce6-4d7a-bc72-e2af84094138",
+                  "parentUUID": "42bfbd48-b6c8-4d8b-881b-98022f70ddf6",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user hit api get detail with wrong id then user got response error",
+                  "fullTitle": "Payment Api Service Get detail payment provider when user hit api get detail with wrong id then user got response error",
+                  "timedOut": false,
+                  "duration": 726,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await getDetail_Provider.getdetailPaymentProvider(datas.paymentProvider.wrongID)\nassert(res.status).to.equal(500)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 500",
+                    "estack": "AssertionError: expected 401 to equal 500\n    at Context.<anonymous> (test/suite3_paymentService.js:55:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 500\n"
+                  },
+                  "uuid": "35e33bd3-0682-4f8c-8e33-3f79bf65fc68",
+                  "parentUUID": "42bfbd48-b6c8-4d8b-881b-98022f70ddf6",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "0ece5dd1-dce6-4d7a-bc72-e2af84094138",
+                "35e33bd3-0682-4f8c-8e33-3f79bf65fc68"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 727,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            },
+            {
+              "uuid": "686eb688-8233-4954-ab6c-5030aab18bd2",
+              "title": "Update Payment Provider",
+              "fullFile": "/home/runner/work/flash/flash/test/suite3_paymentService.js",
+              "file": "/test/suite3_paymentService.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "when user input corect data then user got response 200",
+                  "fullTitle": "Payment Api Service Update Payment Provider when user input corect data then user got response 200",
+                  "timedOut": false,
+                  "duration": 0,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await update_Provider.updatePaymentProvider(ids, datas.paymentProvider.callback_url, datas.paymentProvider.code, datas.service_Group.description, datas.paymentProvider.name)\nif(res.status !==200){\n    console.log(\"Failed :\"+res.text);\n}\nassert(res.status).to.equal(200)",
+                  "err": {
+                    "message": "ReferenceError: ids is not defined",
+                    "estack": "ReferenceError: ids is not defined\n    at Context.<anonymous> (test/suite3_paymentService.js:60:69)\n    at processImmediate (internal/timers.js:464:21)",
+                    "diff": null
+                  },
+                  "uuid": "6994fda7-0d2f-4f94-9e26-2d344aa6a0f2",
+                  "parentUUID": "686eb688-8233-4954-ab6c-5030aab18bd2",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "when user input data using invalid Deduction id, then user got response error",
+                  "fullTitle": "Payment Api Service Update Payment Provider when user input data using invalid Deduction id, then user got response error",
+                  "timedOut": false,
+                  "duration": 719,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const res = await update_Provider.updatePaymentProvider(datas.paymentProvider.wrongID, datas.paymentProvider.callback_url, datas.paymentProvider.wrongCode, datas.service_Group.description, datas.paymentProvider.name)\nif(res.status !==200){\n    console.log(\"Failed :\"+res.text);\n}\nassert(res.status).to.equal(404)",
+                  "err": {
+                    "message": "AssertionError: expected 401 to equal 404",
+                    "estack": "AssertionError: expected 401 to equal 404\n    at Context.<anonymous> (test/suite3_paymentService.js:71:35)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)",
+                    "diff": "- 401\n+ 404\n"
+                  },
+                  "uuid": "bd831ed3-7f97-42c7-b3e2-f8971b29d8b1",
+                  "parentUUID": "686eb688-8233-4954-ab6c-5030aab18bd2",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "6994fda7-0d2f-4f94-9e26-2d344aa6a0f2",
+                "bd831ed3-7f97-42c7-b3e2-f8971b29d8b1"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 719,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 20000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 20000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 20000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "9.2.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "test-05-26-2022",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportFilename": "test-05-26-2022"
+      },
+      "version": "6.2.0"
+    }
+  }
+}
