@@ -1,0 +1,12 @@
+{
+    "positive" : {
+        "valid_data": "when user input correct data then user got response 200"
+    },
+    "negative" :{
+        "wrong_category" : "when user input wrong category, then user got response error",
+        "invalid_providerid" : "when user input provider id with invalid id, then user got response error",
+        "invalid_persenfee" : "when user input persen fee with string, then user got response error",
+        "invalid_fixfee" : "when user input fix fee with string, then user got response error"
+
+    }
+}

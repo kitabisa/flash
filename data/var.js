@@ -1,13 +1,14 @@
 const faker = require('faker');
 
 let firstName = faker.name.firstName();
-let code = Math.floor(Math.random() * 10000);
+let code = Math.floor(Math.random() * 90000);
 let final_Code = "SG" +code
 let final_Codes = "EC" +code
 let final_Codes1 = "Deduc" +code
 let final_Codes2 = "PP" +code
 let final_Codes3 = "PPr" +code
 let wrongCode = "ppw" +code
+let final_Codes4 = "PO" +code
 module.exports = {
     "service_Group":
     {
@@ -49,6 +50,17 @@ module.exports = {
         "type_hard" : "hard_delete",
         "type_invalid" : "soft_deleted"
 
+    },
+    "paymentOption" : {
+        "fixfee" : 1000,
+        "persenfee" : 20,
+        "name" : firstName,
+        "wrong_category" : "kartukredit",
+        "wrongfixfee" : "1000",
+        "wrongpersenfee" : "20",
+        "wrongID" : "3a42f04f-5a89-4509-aa49-3e537dcb2131"
+
     }
+
 
 }
