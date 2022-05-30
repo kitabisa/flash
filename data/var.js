@@ -60,6 +60,15 @@ module.exports = {
         "wrongpersenfee" : "20",
         "wrongID" : "3a42f04f-5a89-4509-aa49-3e537dcb2131"
 
+    },
+    "productpaymentOption" : {
+        "displayNme" : "testing cuys",
+        "isactive" : {
+            "true" : true,
+            "false" : false
+        },
+        "oder_opt" : 2,
+        "wrongID" : "af7898ef-f2ca-4c86-ad4b-7c5e0bf45c8p"
     }
 
 

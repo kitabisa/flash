@@ -82,6 +82,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("description")
             assert(res.body.data[0]).to.have.property("is_active")
             global.ids1 = res.body.data[1].id
+            global.idsgforppo = res.body.data[3].id
             global.names1 = res.body.data[1].name
             global.desc1 = res.body.data[1].description
             global.codes1 = res.body.data[1].code

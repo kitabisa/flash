@@ -1,0 +1,10 @@
+{
+    "positive" : {
+        "valid_data": "when user input correct data then user got response 200"
+    },
+    "negative" :{
+        "invalid_SGid" : "when user input service group id with invalid id, then user got response error",
+        "invalid_poID" : "when user input invalid payment option id, then user got response error"
+
+    }
+}

@@ -9,6 +9,12 @@ const getAll_Option = require('../object/paymentOption/getall_Option')
 const getDetail_Option = require('../object/paymentOption/getdetail_Option')
 const update_Option = require('../object/paymentOption/update_Option')
 const delete_Option = require('../object/paymentOption/delete_Option')
+const create_PPO = require('../object/productPaymentOption/create_PO')
+const getAll_PPO = require('../object/productPaymentOption/getall_PO')
+const getAll_PPOsgid = require('../object/productPaymentOption/getall_POsgid')
+const getDetail_PPO = require('../object/productPaymentOption/getdetail_PO')
+const update_PPO = require('../object/productPaymentOption/update_PO')
+const delete_PPO = require('../object/productPaymentOption/delete_PO')
 const TC_create_provider = require ('../data/testcase/PaymentProvider/createProvider.json')
 const TC_getall_provider = require('../data/testcase/PaymentProvider/getalldataProvider.json')
 const TC_getdetail_provider = require('../data/testcase/PaymentProvider/getdetailProvider.json')
@@ -19,6 +25,12 @@ const TC_getall_option = require('../data/testcase/PaymentOption/getalldataOptio
 const TC_getdetail_option = require('../data/testcase/PaymentOption/getdetailOption.json')
 const TC_update_option = require('../data/testcase/PaymentOption/updateOption.json')
 const TC_delete_option = require('../data/testcase/PaymentOption/deleteOption.json')
+const TC_create_ppo = require ('../data/testcase/ProductPaymentOption/createPPO.json')
+const TC_getall_ppo = require('../data/testcase/ProductPaymentOption/getalldataPPO.json')
+const TC_getall_pposgid = require('../data/testcase/ProductPaymentOption/getalldataPPOsgid.json')
+const TC_getdetail_ppo = require('../data/testcase/ProductPaymentOption/getdetailPPO.json')
+const TC_update_ppo = require('../data/testcase/ProductPaymentOption/updatePPO.json')
+const TC_delete_ppo = require('../data/testcase/ProductPaymentOption/deletePPO.json')
 const datas = require('../data/var')
 
 describe('Payment Api Service', () => {
@@ -158,6 +170,7 @@ describe('Payment Api Service', () => {
             idpo = res.body.data[0].id
             idpo1 = res.body.data[1].id
             idpo2 = res.body.data[2].id
+            idpo3 = res.body.data[3].id
         });
     });
     describe('Get Detail payment option', () => {
@@ -207,12 +220,10 @@ describe('Payment Api Service', () => {
         it(`${TC_delete_option.positive.soft_delete}`, async () => {
             const res = await delete_Option.deletePaymentOption(global.access_Tokens, idpo, "soft_delete")
             assert(res.status).to.equal(200)
-            console.log(res.text);
         });
         it(`${TC_delete_option.positive.hard_delete}`, async () => {
             const res = await delete_Option.deletePaymentOption(global.access_Tokens, idpo1, "hard_delete")
             assert(res.status).to.equal(200)
-            console.log("ini hard"+res.text);
         });
         it(`${TC_delete_option.negative.wrongid}`, async () => {
             const res = await delete_Option.deletePaymentOption(global.access_Tokens, datas.paymentOption.wrongID, "hard_delete")
@@ -223,5 +234,81 @@ describe('Payment Api Service', () => {
             assert(res.status).to.equal(400)
 
         });
+    });
+    describe('Create Product Payment Option', () => {
+        it(`${TC_create_ppo.positive.valid_data}`, async () => {
+            const res = await create_PPO.createProductPaymentOption(global.access_Tokens, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.productpaymentOption.oder_opt, idpo3, global.idsgforppo)
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("display_name")
+            assert(res.body.data[0]).to.have.property("description")
+            assert(res.body.data[0]).to.have.property("is_active")
+            assert(res.body.data[0]).to.have.property("ord_position")
+            assert(res.body.data[0]).to.have.property("payment_option_id")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+        });
+        it.skip(`${TC_create_ppo.negative.invalid_SGid}`, async () => {
+            const res = await create_PPO.createProductPaymentOption(global.access_Tokens, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.productpaymentOption.oder_opt, idpo3, datas.service_Group.wrongid)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc).to.have.property("id")
+            
+        });
+        it.skip(`${TC_create_ppo.negative.invalid_poID}`, async () => {
+            const res = await create_PPO.createProductPaymentOption(global.access_Tokens, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.productpaymentOption.oder_opt, datas.paymentOption.wrongID, global.idsgforppo)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc).to.have.property("id")
+            
+        });
+    });
+    describe('Get all Product Payment Option', () => {
+        it(`${TC_getall_ppo.positive.Getall}`, async () => {
+            const res = await getAll_PPO.getProductPaymentOption(global.access_Tokens)
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("display_name")
+            assert(res.body.data[0]).to.have.property("description")
+            assert(res.body.data[0]).to.have.property("is_active")
+            assert(res.body.data[0]).to.have.property("ord_position")
+            assert(res.body.data[0]).to.have.property("payment_option_id")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+
+        });
+    });
+    describe('Get all Product Payment Option with Service Group Id', () => {
+        it(`${TC_getall_pposgid.positive.Getall}`, async () => {
+            const res = await getAll_PPOsgid.getProductPaymentOptionsgid(global.access_Tokens, global.idsgforppo)
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("display_name")
+            assert(res.body.data[0]).to.have.property("description")
+            assert(res.body.data[0]).to.have.property("is_active")
+            assert(res.body.data[0]).to.have.property("ord_position")
+            assert(res.body.data[0]).to.have.property("payment_option_id")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+            idppo = res.body.data[0].id
+            console.log(idppo);
+        });
+        it.skip(`${TC_getall_pposgid.negative.invalid_sgid}`, async () => {
+            const res = await getAll_PPOsgid.getProductPaymentOptionsgid(global.access_Tokens, datas.service_Group.wrongid)
+            assert(res.status).to.equal(400)
+        });    
+    });
+    describe('Get detail Product Payment Option', () => {
+        it(`${TC_getdetail_ppo.positive.Getall}`, async () => {
+            const res = await getDetail_PPO.getdetailProductPaymentOption(global.access_Tokens, idppo)
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("display_name")
+            assert(res.body.data[0]).to.have.property("description")
+            assert(res.body.data[0]).to.have.property("is_active")
+            assert(res.body.data[0]).to.have.property("ord_position")
+            assert(res.body.data[0]).to.have.property("payment_option_id")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+        });
+        it.skip(`${TC_getdetail_ppo.negative.wrongid}`, async () => {
+            const res = await getDetail_PPO.getdetailProductPaymentOption(global.access_Tokens, datas.productpaymentOption.wrongID)
+            assert(res.status).to.equal(400)
+            
+        })
     });
 });
