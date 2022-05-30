@@ -4,6 +4,7 @@
     },
     "negative" :{
         "wrong_PPID" : "when user input data using invalid payment provider id, then user got response error",
-        "existing_code" : "when user input data using existing code, then user got response error"
+        "existing_code" : "when user input data using existing code, then user got response error",
+        "invalid_auth" : "when user input data using invalid authorization, then user got response error"
     }
 }

@@ -43,7 +43,11 @@ module.exports = {
         "code1" :final_Codes3,
         "name" : firstName,
         "wrongID" : "47125462-2e9f-4a01-ae19-3074cd935ffw",
-        "wrongCode" : wrongCode
+        "wrongCode" : wrongCode,
+        "invalid_auth" : "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ1bXhfUFZiQ3lTV2o5SG5MRHJ0bEJ3X1BLTnlFcVJtWTNpQ3BSMTBlMFpvIn0.eyJleHAiOjE2NTM2MTYwMjUsImlhdCI6MTY1MzU4MDAyNSwianRpIjoiMDFjNTY3ZjItOTY1OS00ODY1LThhMGMtMGEwMDQ2OTgxMjVkIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrLnN0Zy5rdC5qZy9hdXRoL3JlYWxtcy9raXRhamFnYSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIzZjRkNzg4Zi0zMjZjLTRmYmItYmMwNy1hZTM0ZmRiOTZjMjAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJrb25nIiwic2Vzc2lvbl9zdGF0ZSI6IjVkOWViZjk3LTJkMjMtNDNlZS1iYjllLTY2ZDg1M2Y3YTlkMyIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1raXRhamFnYSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI1ZDllYmY5Ny0yZDIzLTQzZWUtYmI5ZS02NmQ4NTNmN2E5ZDMiLCJraXRhYmlzYV91c2VyX2lkIjoiMjIxMDIyMSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJraXRhYmlzYV9zZWNvbmRhcnlfaWQiOiIxMGU2NTY4MjU5Y2ZjNDIzYWE0NWExMThmYTYwZjllYyIsInByZWZlcnJlZF91c2VybmFtZSI6ImFyaW8xNkBnbWFpbC5jb20iLCJlbWFpbCI6ImFyaW8xNkBnbWFpbC5jb20ifQ.bn_1w41SzsvV3iDpvV0mUmX4zaU9McDuYWlN9t_Kb8QkXXVgHcv3Han9VgYkgjShZs0qRp1TzDXW6W4XiXraSzUG4pfO5q0eQKXO21KEPDDZtmtHv3d6qpEF-BjKADFJ0h1HO9K2KcvaaftfKDvqGIatJExlODSPGC_MUbJWiCVo-Et9Rkv_NAmCFlsBXsaoAcaDyxzEhUxBxC1AJDKPXT7sSpS2Hd4B9qgZLkpNFP7jaBhVX73rc18hS4lIocbtK9sN3Tr3MP9htnfW3aHDrmWtSR5yDhR9DCx3-F6K7uKoKNSLcXCju6y6QXS9Tw4cT1EDHGv-JKYus5vuF-4kXw",
+        "type_soft" : "soft_delete",
+        "type_hard" : "hard_delete",
+        "type_invalid" : "soft_deleted"
 
     }
 

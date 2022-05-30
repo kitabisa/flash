@@ -72,5 +72,29 @@ describe('Payment Api Service', () => {
             const res = await update_Provider.updatePaymentProvider(global.access_Tokens, id1, datas.paymentProvider.callback_url, datas.paymentProvider.code1, datas.service_Group.description, datas.paymentProvider.name)
             assert(res.status).to.equal(400)
         });
+        it(`${TC_update_provider.negative.invalid_auth}`, async () => {
+            const res = await update_Provider.updatePaymentProvider(datas.paymentProvider.invalid_auth, id1, datas.paymentProvider.callback_url, datas.paymentProvider.code1, datas.service_Group.description, datas.paymentProvider.name)
+            assert(res.status).to.equal(401)
+        });
+    });
+    describe('Delete payment service API', () => {
+        it(`${TC_delete_provider.positive.delete}`, async () => {
+            const res = await delete_Provider.deletePaymentProvider(global.access_Tokens, ids, datas.paymentProvider.type_soft)
+            if(res.status !== 200){
+                console.log("failed : "+res.text);
+            }
+            console.log(ids);
+            assert(res.status).to.equal(200)            
+        });
+        it(`${TC_delete_provider.negative.wrongid}`, async () => {
+            const res = await delete_Provider.deletePaymentProvider(global.access_Tokens, datas.paymentProvider.wrongID)
+            assert(res.status).to.equal(400)
+            //console.log(global.access_Tokens);
+        });
+        it(`${TC_delete_provider.negative.invalid_type}`, async () => {
+            const res = await delete_Provider.deletePaymentProvider(global.access_Tokens, ids, datas.paymentProvider.type_invalid)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc).to.have.property("id").to.equal("payload tidak valid")
+        });
     });
 });
