@@ -3,9 +3,8 @@
         "valid_data": "when user input corect data then user got response 200"
     },
     "negative" :{
-        "wrong_PPID" : "when user input data using invalid payment provider id, then user got response error",
-        "wrong_persenFee" : "when user input persen fee using string, then user got response error",
-        "wrong_fixFee" : "when user input fix fee using string, then user got response error",
-        "wrong_POid" : "when user input data using invalid payment option id, then user got response error"
+        "wrong_PPOID" : "when user input data using invalid PPO id, then user got response error",
+        "wrong_SGid" : "when user input data using invalid SG id, then user got response error",
+        "wrong_POid" : "when user input data using invalid PO id, then user got response error"
     }
 }

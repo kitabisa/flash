@@ -1,27 +1,59 @@
 const assert = require('chai').expect;
 const exchange_token = require('../object/Account/exchangetoken_Account');
+const user_Info = require('../object/Account/mapSJuser');
 const wong = require('../object/Account/wong_Account');
 const ACC_ExchangeToken = require('../data/testcase/Account/exchangeTokenAccount')
 describe('Exchange Token API', () => {
     before(async function pre_request() {
-        const rd = await wong.wongAccount()
-        console.log('Status Code wong :', rd.status);
-
-        const res = rd.body.data[0]
-
-        global.ktbs_token = res.token
+        username = ['ario16@gmail.com', 'ario10@gmail.com']
+        token1 = []
+        token2 = []
+        for (const user in username) {
+            const rd = await wong.wongAccount(username[user])
+            console.log(username[user]);
+            console.log('Status Code wong :', rd.status);
+            if (username[user] == `ario16@gmail.com`) {
+                const res = rd.body.data[0].token
+                token1.push(res)
+                global.token1 = token1
+            } else {
+                const res = rd.body.data[0].token
+                token2.push(res)
+                global.token2 = token2
+            }
+            
+            
+            /*
+            const res = rd.body.data[0]
+            const res1 = rd.body.data[0]
+            global.ktbs_token = res.token
+            global.ktbs_token = res1.token
+            */
+        }
     });
 
     it(`${ACC_ExchangeToken.positive.valid_token}`, async ()  => {
-        const res = await exchange_token.exchangeTokenAccount(global.ktbs_token);
-        if(res.status !== 200){
-            console.log("exchange_token: " + res.status + "||" + res.text)
+        tokens = [global.token1, global.token2]
+        tokens1 = []
+        tokens2 = []
+        for (const x in tokens) {
+            const res = await exchange_token.exchangeTokenAccount(tokens[x]);
+            if (tokens[x] == global.token1) {
+                const res1 = res.body.data[0].access_token
+                tokens1.push(res1)
+                global.access_Tokens1 = tokens1
+            } else {
+                const res2 = res.body.data[0].access_token
+                tokens2.push(res2)
+                global.access_Tokens2 = tokens2
+            }
+            assert(res.status).to.equal(200);
+            assert(res.body.data[0]).to.have.property('access_token')
+            assert(res.body.data[0]).to.have.property('refresh_token')
+            assert(res.body.data[0]).to.have.property('expires_in')
+            
         }
-        assert(res.status).to.equal(200);
-        assert(res.body.data[0]).to.have.property('access_token')
-        assert(res.body.data[0]).to.have.property('refresh_token')
-        assert(res.body.data[0]).to.have.property('expires_in')
-        global.access_Tokens = res.body.data[0].access_token
+        
     });
 
     it(`${ACC_ExchangeToken.negative.wrong_token}`, async() => {
@@ -35,3 +67,16 @@ describe('Exchange Token API', () => {
         assert(res.status).to.equal(401)
     });
 })
+describe('Get user info', () => {
+    it('Get Data User Info', async () => {
+        const res = await user_Info.userInfo(global.access_Tokens1)
+        if(res.status !== 200){
+            console.log("failed : "+res.text);
+        }
+        assert(res.status).to.equal(200)
+    });
+    it('Get Data User Info', async () => {
+        const res = await user_Info.userInfo(global.access_Tokens2)
+        assert(res.status).to.equal(404)
+    });
+});

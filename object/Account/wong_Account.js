@@ -3,7 +3,7 @@ const env = require('dotenv').config();
 
 const request = supertest(process.env.wongService_URL)
 
-const wongAccount = () => request.post('/wong/login')
+const wongAccount = (usernames) => request.post('/wong/login')
     .set('Content-Type', 'application/json')
     .set('Version', '3.0.0')
     .set('X-Ktbs-Request-ID', 'e81be048-fa0b-4a91-9a37-f1d535794440')
@@ -14,8 +14,9 @@ const wongAccount = () => request.post('/wong/login')
     .set('X-Ktbs-Time', '1652424027749')
     .set('X-Ktbs-Signature', 'ed7a82c0e4d0ed5cfb9a9af19286be59226f4b9fe2a75d0e8509a8e181ffe279')
     .send({
-            username: 'ario16@gmail.com',
+            username: usernames,
             password: 'qwerqwer'
     })
+    
 
 module.exports = {wongAccount}
