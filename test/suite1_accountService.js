@@ -10,7 +10,6 @@ describe('Exchange Token API', () => {
         token2 = []
         for (const user in username) {
             const rd = await wong.wongAccount(username[user])
-            console.log(username[user]);
             console.log('Status Code wong :', rd.status);
             if (username[user] == `ario16@gmail.com`) {
                 const res = rd.body.data[0].token
@@ -21,14 +20,6 @@ describe('Exchange Token API', () => {
                 token2.push(res)
                 global.token2 = token2
             }
-            
-            
-            /*
-            const res = rd.body.data[0]
-            const res1 = rd.body.data[0]
-            global.ktbs_token = res.token
-            global.ktbs_token = res1.token
-            */
         }
     });
 

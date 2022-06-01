@@ -26,6 +26,11 @@ const TC_Getdetail_DC = require('../data/testcase/Deductible/getdetailDeduc.json
 const TC_Delete_DC = require('../data/testcase/Deductible/deleteDeduc.json')
 const TC_Update_DC = require('../data/testcase/Deductible/updateDeduc.json')
 const TC_Search_DC = require('../data/testcase/Deductible/searchDeduc.json')
+const TC_create_contri = require('../data/testcase/ProductContribution/createContribution.json')
+const TC_Getall_contri = require('../data/testcase/ProductContribution/getalldataContribution.json')
+const TC_Getdetail_contri = require('../data/testcase/ProductContribution/getdetailContribution.json')
+const TC_Delete_contri = require('../data/testcase/ProductContribution/deleteContribution.json')
+const TC_Update_contri = require('../data/testcase/ProductContribution/updateContribution.json')
 const EC_create = require('../object/ExtensionClause/create_ExtensionClause')
 const EC_Getall = require('../object/ExtensionClause/getall_ExtensionClause')
 const EC_Getdetail = require('../object/ExtensionClause/getdetail_ExtensionClause')
@@ -38,6 +43,11 @@ const DC_Getdetail = require('../object/Deductible/getdetail_Deductible')
 const DC_Delete = require('../object/Deductible/delete_Deductible')
 const DC_Update = require('../object/Deductible/update_Deductible')
 const DC_Search = require('../object/Deductible/search_Deductible')
+const contri_create = require('../object/productContribution/create_Contribution')
+const contri_Getall = require('../object/productContribution/getall_Contribution')
+const contri_Getdetail = require('../object/productContribution/getdetail_Contribution')
+const contri_Delete = require('../object/productContribution/delete_Contribution')
+const contri_Update = require('../object/productContribution/update_Contribution')
 
 
 
@@ -82,6 +92,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("description")
             assert(res.body.data[0]).to.have.property("is_active")
             global.ids1 = res.body.data[1].id
+            ids2 = res.body.data[2].id
             global.idsgforppo = res.body.data[3].id
             global.names1 = res.body.data[1].name
             global.desc1 = res.body.data[1].description
@@ -455,6 +466,126 @@ describe('API Extension Clause', () => {
         it(`${TC_Delete_DC.negative.wrongid}`, async () => {
             const res = await DC_Delete.deleteDeductible(datas.Deductible.wrong_idDeduc, global.access_Tokens1)
             assert(res.status).to.equal(400)
+            
         });
+    });
+
+    describe('Create Product Contribution', () => {
+        it(`${TC_create_contri.positive.valid_data}`, async () => {
+            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, datas.contribution.strikeFee)
+            if(res.status !== 200){
+                console.log("failed : "+res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("contribution_fee")
+            assert(res.body.data[0]).to.have.property("contribution_month")
+            assert(res.body.data[0]).to.have.property("display_name")
+            assert(res.body.data[0]).to.have.property("is_active")
+            assert(res.body.data[0]).to.have.property("is_popular")
+            assert(res.body.data[0]).to.have.property("name")
+            assert(res.body.data[0]).to.have.property("ord_position")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("strikethrough_contribution_fee")
+        });
+        it(`${TC_create_contri.negative.wrong_contriFee}}`, async () => {
+            const res = await contri_create.createContribution(global.access_Tokens1, 'seratus', datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, datas.contribution.strikeFee)
+            assert(res.status).to.equal(400)
+        });
+        it(`${TC_create_contri.negative.wrong_contriMonth}}`, async () => {
+            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, 'datas.contribution.contriMonth', datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, datas.contribution.strikeFee)
+            assert(res.status).to.equal(400)
+        });
+        it(`${TC_create_contri.negative.invalid_strikeFee}}`, async () => {
+            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, 'datas.contribution.strikeFee')
+            assert(res.status).to.equal(400)
+        });
+    });
+    describe('Get all data Product Contribution', () => {
+        it(`${TC_Getall_contri.positive.Getall}`, async () => {
+            const res = await contri_Getall.getContribution(global.access_Tokens1)
+            if(res.status !== 200){
+                console.log("failed : "+res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("contribution_fee")
+            assert(res.body.data[0]).to.have.property("contribution_month")
+            assert(res.body.data[0]).to.have.property("display_name")
+            assert(res.body.data[0]).to.have.property("is_active")
+            assert(res.body.data[0]).to.have.property("is_popular")
+            assert(res.body.data[0]).to.have.property("name")
+            assert(res.body.data[0]).to.have.property("ord_position")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("strikethrough_contribution_fee")
+            contriId = res.body.data[0].id
+        });
+    });
+    describe('Get detail Product Contribution', () => {
+        it(`${TC_Getdetail_contri.positive.Getall}`, async () => {
+            const res = await contri_Getdetail.getdetailContribution(global.access_Tokens1, ids2)
+            if(res.status !== 200){
+                console.log("failed : "+res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("contribution_fee")
+            assert(res.body.data[0]).to.have.property("contribution_month")
+            assert(res.body.data[0]).to.have.property("display_name")
+            assert(res.body.data[0]).to.have.property("is_active")
+            assert(res.body.data[0]).to.have.property("is_popular")
+            assert(res.body.data[0]).to.have.property("name")
+            assert(res.body.data[0]).to.have.property("ord_position")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("strikethrough_contribution_fee")
+        });
+        it(`${TC_Getdetail_contri.negative.wrongid}`, async () => {
+            const res = await contri_Getdetail.getdetailContribution(global.access_Tokens1, datas.service_Group.wrongid)
+            assert(res.status).to.equal(404)
+            assert(res.body.response_desc).to.have.property("id").to.equal("error data tidak ditemukan")
+        });
+    });
+    describe('Update data Product Contribution', () => {
+        it(`${TC_Update_contri.positive.valid_data}`, async () => {
+            const res = await contri_Update.updateContribution(global.access_Tokens1, datas.contribution.contriFee, datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.false, datas.contribution.isPopular.false, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, datas.contribution.strikeFee, contriId)
+            if(res.status !== 200){
+                console.log("failed : "+res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("contribution_fee")
+            assert(res.body.data[0]).to.have.property("contribution_month")
+            assert(res.body.data[0]).to.have.property("display_name")
+            assert(res.body.data[0]).to.have.property("is_active")
+            assert(res.body.data[0]).to.have.property("is_popular")
+            assert(res.body.data[0]).to.have.property("name")
+            assert(res.body.data[0]).to.have.property("ord_position")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("strikethrough_contribution_fee")
+            console.log(global.access_Tokens1);
+        });
+        it(`${TC_Update_contri.negative.wrong_contriFee}}`, async () => {
+            const res = await contri_create.createContribution(global.access_Tokens1, 'seratus', datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, datas.contribution.strikeFee)
+            assert(res.status).to.equal(400)
+        });
+        it(`${TC_Update_contri.negative.wrong_contriMonth}}`, async () => {
+            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, 'datas.contribution.contriMonth', datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, datas.contribution.strikeFee)
+            assert(res.status).to.equal(400)
+        });
+        it(`${TC_Update_contri.negative.invalid_strikeFee}}`, async () => {
+            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, 'datas.contribution.strikeFee')
+            assert(res.status).to.equal(400)
+        });
+    });
+    describe('Delete Product Contribution', () => {
+        it(`${TC_Delete_contri.positive.delete}`, async () => {
+            const res = await contri_Delete.deleteContribution(global.access_Tokens1, contriId)
+            assert(res.status).to.equal(200)
+        });
+        it(`${TC_Delete_contri.negative.wrongid}`, async () => {
+            const res = await contri_Delete.deleteContribution(global.access_Tokens1, datas.productpaymentOption.wrongID)
+            assert(res.status).to.equal(400)
+        });
+
     });
 });

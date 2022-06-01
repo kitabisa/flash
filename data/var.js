@@ -68,7 +68,16 @@ module.exports = {
             "false" : false
         },
         "oder_opt" : 2,
-        "wrongID" : "af7898ef-f2ca-4c86-ad4b-7c5e0bf45c8p"
+        "wrongID" : "7bf354e6-66ae-4acf-b52b-ab5ac6a14be1"
+    },
+    "contribution" : {
+            "contriFee" : 1000,
+            "contriMonth" : 2500,
+            "isPopular" : {
+                "true" : true,
+                "false" : false
+            },
+            "strikeFee" : 500
     }
 
 

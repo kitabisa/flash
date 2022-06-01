@@ -9,7 +9,7 @@
   "scripts": {
     "test": "NOW=$(date +'%m-%d-%Y') && mocha './test' --reporter mochawesome --timeout 20000 --reporter-options reportFilename=test-${NOW}",
     "slack": "mocha --reporter slack-reporter --timeout 180000",
-    "testing": "mocha ./test"
+    "testing": "mocha ./test --timeout 180000"
   },
   "repository": {
     "type": "git",

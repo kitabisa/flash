@@ -1,0 +1,10 @@
+{
+    "positive" : {
+        "valid_data": "when user input corect data then user got response 200"
+    },
+    "negative" :{
+        "wrong_contriFee" : "when user input contri fee with string, then user got response error",
+        "wrong_contriMonth" : "when user input contri month with string, then user got response error",
+        "invalid_strikeFee" : "when user input strike fee with string, then user got response error"
+    }
+}
