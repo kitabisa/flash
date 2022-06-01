@@ -562,7 +562,7 @@ describe('API Extension Clause', () => {
             assert(res.body.data[0]).to.have.property("ord_position")
             assert(res.body.data[0]).to.have.property("service_group_id")
             assert(res.body.data[0]).to.have.property("strikethrough_contribution_fee")
-            console.log(global.access_Tokens1);
+            
         });
         it(`${TC_Update_contri.negative.wrong_contriFee}}`, async () => {
             const res = await contri_create.createContribution(global.access_Tokens1, 'seratus', datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, datas.contribution.strikeFee)
