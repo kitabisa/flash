@@ -33,7 +33,8 @@
     "mocha": "^9.2.2",
     "mochawesome": "^7.1.3",
     "node-slack": "^0.0.7",
-    "supertest": "^6.2.2"
+    "supertest": "^6.2.2",
+    "uuid": "^8.3.2"
   },
   "dependencies": {
     "axios": "^0.27.2",

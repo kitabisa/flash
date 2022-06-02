@@ -94,6 +94,7 @@ describe('API Service Group', () => {
             global.ids1 = res.body.data[1].id
             ids2 = res.body.data[2].id
             global.idsgforppo = res.body.data[3].id
+            global.idsgpuchase = res.body.data[4].id
             global.names1 = res.body.data[1].name
             global.desc1 = res.body.data[1].description
             global.codes1 = res.body.data[1].code
@@ -519,6 +520,7 @@ describe('API Extension Clause', () => {
             assert(res.body.data[0]).to.have.property("service_group_id")
             assert(res.body.data[0]).to.have.property("strikethrough_contribution_fee")
             contriId = res.body.data[0].id
+            global.contripurchase = res.body.data[1].id
         });
     });
     describe('Get detail Product Contribution', () => {

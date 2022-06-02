@@ -28,7 +28,7 @@ describe('Exchange Token API', () => {
         tokens1 = []
         tokens2 = []
         for (const x in tokens) {
-            const res = await exchange_token.exchangeTokenAccount(tokens[x]);
+            res = await exchange_token.exchangeTokenAccount(tokens[x]);
             if (tokens[x] == global.token1) {
                 const res1 = res.body.data[0].access_token
                 tokens1.push(res1)
@@ -43,8 +43,9 @@ describe('Exchange Token API', () => {
             assert(res.body.data[0]).to.have.property('refresh_token')
             assert(res.body.data[0]).to.have.property('expires_in')
             
+            
         }
-        
+        //console.log(res.body);
     });
 
     it(`${ACC_ExchangeToken.negative.wrong_token}`, async() => {

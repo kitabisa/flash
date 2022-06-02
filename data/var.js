@@ -1,6 +1,6 @@
 const faker = require('faker');
-
 let firstName = faker.name.firstName();
+let uuids = faker.datatype.uuid();
 let code = Math.floor(Math.random() * 90000);
 let final_Code = "SG" +code
 let final_Codes = "EC" +code
@@ -9,6 +9,7 @@ let final_Codes2 = "PP" +code
 let final_Codes3 = "PPr" +code
 let wrongCode = "ppw" +code
 let final_Codes4 = "PO" +code
+
 module.exports = {
     "service_Group":
     {
@@ -78,7 +79,39 @@ module.exports = {
                 "false" : false
             },
             "strikeFee" : 500
+    },
+    "purchase" : {
+        "uuids" : uuids,
+        "age" : {
+            "true" : true,
+            "false" : false
+        },
+        "job" : {
+            "true" : true,
+            "false" : false
+        },
+        "medical" : {
+            "true" : true,
+            "false" : false
+        },
+        "type" : "FIRST_TIME"
+
+    },
+    "KYC" : {
+        "dob" : "1989-09-21",
+        "ktp" : "3223121807750090",
+        "phone" : "081283712812",
+        "fullname" : "qa testing api automation"
+
+    },
+    "benef" : {
+        "relation" : "PASANGAN",
+        "inform" : {
+            "true" : true,
+            "false" : false
+         }
     }
+
 
 
 }
