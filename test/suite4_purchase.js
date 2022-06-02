@@ -22,12 +22,24 @@ describe('Purchase Service API', () => {
         });
     }); 
     describe('Create KYC', () => {
-        it('', async () => {
+        it('Valid Dob', async () => {
             const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, datas.purchase.uuids, idpurcahse)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
             assert(res.status).to.equal(200)
+            console.log(res.text);
+        });
+        it('min DOB', async () => {
+            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.min_dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, datas.purchase.uuids, idpurcahse)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc).to.have.property("id").to.equal("Kamu harus berusia 18 - 55 tahun untuk jadi anggota")
+        });
+        it('max DOB', async () => {
+            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.max_dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, datas.purchase.uuids, idpurcahse)
+            assert(res.status).to.equal(400)
+            assert(res.body.response_desc).to.have.property("id").to.equal("Kamu harus berusia 18 - 55 tahun untuk jadi anggota")
+
         });
     }); 
     describe('Create Beneficiary', () => {
@@ -46,14 +58,10 @@ describe('Purchase Service API', () => {
                 console.log("failed : "+res.text);
             }
             assert(res.status).to.equal(200)
+            console.log(global.access_Tokens1);
         });
     }); 
     describe('Get Data Summary', () => {
-        before(function (done) {
-            this.timeout(180000);
-            done();
-           });
-        
         it('', async () => {
             const res = await getSummary.getSummary(global.access_Tokens1, idpurcahse)
             if(res.status !== 200){

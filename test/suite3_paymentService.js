@@ -41,10 +41,10 @@ describe('Payment Api Service', () => {
             console.log("failed :"+res.text);
             }
             assert(res.status).to.equal(200)
-            assert(res.body.data[0]).to.have.property("id")
-            assert(res.body.data[0]).to.have.property("code")
-            assert(res.body.data[0]).to.have.property("name")
-            assert(res.body.data[0]).to.have.property("description")
+            assert(res.body.data[0]).to.have.property("id").exist
+            assert(res.body.data[0]).to.have.property("code").exist
+            assert(res.body.data[0]).to.have.property("name").exist
+            assert(res.body.data[0]).to.have.property("description").exist
             assert(res.body.data[0]).to.have.property("callback_url").to.equal(datas.paymentProvider.callback_url)
         });
     });
@@ -55,11 +55,11 @@ describe('Payment Api Service', () => {
             console.log("failed :"+res.text);
             }
             assert(res.status).to.equal(200)
-            assert(res.body.data[0]).to.have.property("id")
-            assert(res.body.data[0]).to.have.property("code")
-            assert(res.body.data[0]).to.have.property("name")
-            assert(res.body.data[0]).to.have.property("description")
-            assert(res.body.data[0]).to.have.property("callback_url")
+            assert(res.body.data[0]).to.have.property("id").exist
+            assert(res.body.data[0]).to.have.property("code").exist
+            assert(res.body.data[0]).to.have.property("name").exist
+            assert(res.body.data[0]).to.have.property("description").exist
+            assert(res.body.data[0]).to.have.property("callback_url").exist
             ids = res.body.data[0].id
             id1 = res.body.data[1].id
             console.log(ids);
@@ -126,12 +126,12 @@ describe('Payment Api Service', () => {
             for (let x in category) {
             const res = await create_Option.createPaymentOption(global.access_Tokens1, category[x], datas.Deductible.description, datas.paymentOption.fixfee, datas.paymentOption.name ,datas.paymentOption.persenfee, id1)
             assert(res.status).to.equal(200)
-            assert(res.body.data[0]).to.have.property("id")
-            assert(res.body.data[0]).to.have.property("name")
-            assert(res.body.data[0]).to.have.property("description")
-            assert(res.body.data[0]).to.have.property("provider_id")
-            assert(res.body.data[0]).to.have.property("percentage_fee")
-            assert(res.body.data[0]).to.have.property("fixed_fee")
+            assert(res.body.data[0]).to.have.property("id").exist
+            assert(res.body.data[0]).to.have.property("name").exist
+            assert(res.body.data[0]).to.have.property("description").exist
+            assert(res.body.data[0]).to.have.property("provider_id").exist
+            assert(res.body.data[0]).to.have.property("percentage_fee").exist
+            assert(res.body.data[0]).to.have.property("fixed_fee").exist
             assert(res.body.data[0]).to.have.property("category").to.equal(category[x])         
             }
         });
@@ -160,13 +160,13 @@ describe('Payment Api Service', () => {
         it(`${TC_getall_option.positive.Getall}`, async () => {
             const res = await getAll_Option.getPaymentOption(global.access_Tokens1)
             assert(res.status).to.equal(200)
-            assert(res.body.data[0]).to.have.property("id")
-            assert(res.body.data[0]).to.have.property("name")
-            assert(res.body.data[0]).to.have.property("description")
-            assert(res.body.data[0]).to.have.property("provider_id")
-            assert(res.body.data[0]).to.have.property("percentage_fee")
-            assert(res.body.data[0]).to.have.property("fixed_fee")
-            assert(res.body.data[0]).to.have.property("category")
+            assert(res.body.data[0]).to.have.property("id").exist
+            assert(res.body.data[0]).to.have.property("name").exist
+            assert(res.body.data[0]).to.have.property("description").exist
+            assert(res.body.data[0]).to.have.property("provider_id").exist
+            assert(res.body.data[0]).to.have.property("percentage_fee").exist
+            assert(res.body.data[0]).to.have.property("fixed_fee").exist
+            assert(res.body.data[0]).to.have.property("category").exist
             idpo = res.body.data[0].id
             idpo1 = res.body.data[1].id
             idpo2 = res.body.data[2].id
@@ -177,13 +177,13 @@ describe('Payment Api Service', () => {
         it(`${TC_getdetail_option.positive.Getall}`, async () => {
             const res = await getDetail_Option.getdetailPaymentOption(global.access_Tokens1, idpo)
             assert(res.status).to.equal(200)
-            assert(res.body.data[0]).to.have.property("id")
-            assert(res.body.data[0]).to.have.property("name")
-            assert(res.body.data[0]).to.have.property("description")
-            assert(res.body.data[0]).to.have.property("provider_id")
-            assert(res.body.data[0]).to.have.property("percentage_fee")
-            assert(res.body.data[0]).to.have.property("fixed_fee")
-            assert(res.body.data[0]).to.have.property("category")
+            assert(res.body.data[0]).to.have.property("id").exist
+            assert(res.body.data[0]).to.have.property("name").exist
+            assert(res.body.data[0]).to.have.property("description").exist
+            assert(res.body.data[0]).to.have.property("provider_id").exist
+            assert(res.body.data[0]).to.have.property("percentage_fee").exist
+            assert(res.body.data[0]).to.have.property("fixed_fee").exist
+            assert(res.body.data[0]).to.have.property("category").exist
         });
         it(`${TC_getdetail_option.negative.wrongid}`, async () => {
             const res = await getDetail_Option.getdetailPaymentOption(global.access_Tokens1, datas.paymentOption.wrongID)
@@ -239,13 +239,13 @@ describe('Payment Api Service', () => {
         it(`${TC_create_ppo.positive.valid_data}`, async () => {
             const res = await create_PPO.createProductPaymentOption(global.access_Tokens1, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.productpaymentOption.oder_opt, idpo3, global.idsgforppo)
             assert(res.status).to.equal(200)
-            assert(res.body.data[0]).to.have.property("id")
-            assert(res.body.data[0]).to.have.property("display_name")
-            assert(res.body.data[0]).to.have.property("description")
-            assert(res.body.data[0]).to.have.property("is_active")
-            assert(res.body.data[0]).to.have.property("ord_position")
-            assert(res.body.data[0]).to.have.property("payment_option_id")
-            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("id").exist
+            assert(res.body.data[0]).to.have.property("display_name").exist
+            assert(res.body.data[0]).to.have.property("description").exist
+            assert(res.body.data[0]).to.have.property("is_active").exist
+            assert(res.body.data[0]).to.have.property("ord_position").exist
+            assert(res.body.data[0]).to.have.property("payment_option_id").exist
+            assert(res.body.data[0]).to.have.property("service_group_id").exist
             console.log(idpo3);
         });
         //cos backend cant cross validation, so not any validation for service group
@@ -265,13 +265,13 @@ describe('Payment Api Service', () => {
         it(`${TC_getall_ppo.positive.Getall}`, async () => {
             const res = await getAll_PPO.getProductPaymentOption(global.access_Tokens1)
             assert(res.status).to.equal(200)
-            assert(res.body.data[0]).to.have.property("id")
-            assert(res.body.data[0]).to.have.property("display_name")
-            assert(res.body.data[0]).to.have.property("description")
-            assert(res.body.data[0]).to.have.property("is_active")
-            assert(res.body.data[0]).to.have.property("ord_position")
-            assert(res.body.data[0]).to.have.property("payment_option_id")
-            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("id").exist
+            assert(res.body.data[0]).to.have.property("display_name").exist
+            assert(res.body.data[0]).to.have.property("description").exist
+            assert(res.body.data[0]).to.have.property("is_active").exist
+            assert(res.body.data[0]).to.have.property("ord_position").exist
+            assert(res.body.data[0]).to.have.property("payment_option_id").exist
+            assert(res.body.data[0]).to.have.property("service_group_id").exist
 
         });
     });
@@ -279,15 +279,15 @@ describe('Payment Api Service', () => {
         it(`${TC_getall_pposgid.positive.Getall}`, async () => {
             const res = await getAll_PPOsgid.getProductPaymentOptionsgid(global.access_Tokens1, global.idsgforppo)
             assert(res.status).to.equal(200)
-            assert(res.body.data[0]).to.have.property("id")
-            assert(res.body.data[0]).to.have.property("display_name")
-            assert(res.body.data[0]).to.have.property("description")
-            assert(res.body.data[0]).to.have.property("is_active")
-            assert(res.body.data[0]).to.have.property("ord_position")
-            assert(res.body.data[0]).to.have.property("payment_option_id")
-            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("id").exist
+            assert(res.body.data[0]).to.have.property("display_name").exist
+            assert(res.body.data[0]).to.have.property("description").exist
+            assert(res.body.data[0]).to.have.property("is_active").exist
+            assert(res.body.data[0]).to.have.property("ord_position").exist
+            assert(res.body.data[0]).to.have.property("payment_option_id").exist
+            assert(res.body.data[0]).to.have.property("service_group_id").exist
             idppo = res.body.data[0].id
-            console.log(idppo);
+            //console.log(idppo);
         });
         it(`${TC_getall_pposgid.negative.invalid_sgid}`, async () => {
             const res = await getAll_PPOsgid.getProductPaymentOptionsgid(global.access_Tokens1, datas.productpaymentOption.wrongID)
@@ -298,13 +298,13 @@ describe('Payment Api Service', () => {
         it(`${TC_getdetail_ppo.positive.Getall}`, async () => {
             const res = await getDetail_PPO.getdetailProductPaymentOption(global.access_Tokens1, idppo)
             assert(res.status).to.equal(200)
-            assert(res.body.data[0]).to.have.property("id")
-            assert(res.body.data[0]).to.have.property("display_name")
-            assert(res.body.data[0]).to.have.property("description")
-            assert(res.body.data[0]).to.have.property("is_active")
-            assert(res.body.data[0]).to.have.property("ord_position")
-            assert(res.body.data[0]).to.have.property("payment_option_id")
-            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("id").exist
+            assert(res.body.data[0]).to.have.property("display_name").exist
+            assert(res.body.data[0]).to.have.property("description").exist
+            assert(res.body.data[0]).to.have.property("is_active").exist
+            assert(res.body.data[0]).to.have.property("ord_position").exist
+            assert(res.body.data[0]).to.have.property("payment_option_id").exist
+            assert(res.body.data[0]).to.have.property("service_group_id").exist
         });
         it(`${TC_getdetail_ppo.negative.wrongid}`, async () => {
             const res = await getDetail_PPO.getdetailProductPaymentOption(global.access_Tokens1, datas.productpaymentOption.wrongID)
@@ -321,13 +321,13 @@ describe('Payment Api Service', () => {
                 console.log("failed : "+res.text);
             }
             assert(res.status).to.equal(200)
-            assert(res.body.data[0]).to.have.property("id")
-            assert(res.body.data[0]).to.have.property("display_name")
-            assert(res.body.data[0]).to.have.property("description")
-            assert(res.body.data[0]).to.have.property("is_active")
-            assert(res.body.data[0]).to.have.property("ord_position")
-            assert(res.body.data[0]).to.have.property("payment_option_id")
-            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("id").exist
+            assert(res.body.data[0]).to.have.property("display_name").exist
+            assert(res.body.data[0]).to.have.property("description").exist
+            assert(res.body.data[0]).to.have.property("is_active").exist
+            assert(res.body.data[0]).to.have.property("ord_position").exist
+            assert(res.body.data[0]).to.have.property("payment_option_id").exist
+            assert(res.body.data[0]).to.have.property("service_group_id").exist
         });
         it(`${TC_update_ppo.negative.wrong_PPOID}`, async () => {
             const res = await update_PPO.updateProductPaymentProvider(global.access_Tokens1, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.false, datas.productpaymentOption.oder_opt, idpo3, idsgforppo, datas.productpaymentOption.wrongID)
