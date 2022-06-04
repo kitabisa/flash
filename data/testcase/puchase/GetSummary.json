@@ -1,0 +1,8 @@
+{
+    "positive" : {
+        "valid_data" : "when user get data api get summary using valid purchase id, then user got response 200/ok"
+    },
+    "negative" : {
+        "wrong_purchaseID" : "when user get data api get summary using invalid purchase id, then user got response error"
+    }
+}

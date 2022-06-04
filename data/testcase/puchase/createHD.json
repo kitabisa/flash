@@ -1,0 +1,10 @@
+{
+    "positive" : {
+        "valid_data" : "when user input data api create HD using valid data, then user got response 200/ok"
+    },
+    "negative" : {
+        "AgeFalse" : "when user input data api create HD with value age = false, then user got response error",
+        "JobFalse" : "when user input data api create HD  with value job = false, then user got response error",
+        "MedicalFalse" : "when user input data api create HD  with value medical = false, then user got response error"
+    }
+}

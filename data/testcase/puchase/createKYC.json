@@ -1,0 +1,11 @@
+{
+    "positive" : {
+        "valid_data" : "when user input data api create kyc using valid data, then user got response 200/ok"
+    },
+    "negative" : {
+        "maxDob" : "when user input data api create kyc using max dob(55th 181hr), then user got response error",
+        "minDob" : "when user input data api create kyc using min dob(17th 180hr), then user got response error",
+        "maxKtp" : "when user input data api create kyc using max dob(more than 16 digit), then user got response error",
+        "minKtp" : "when user input data api create kyc using min dob(less than 16 digit), then user got response error"
+    }
+}

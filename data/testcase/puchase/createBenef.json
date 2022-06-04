@@ -1,0 +1,5 @@
+{
+    "positive" : {
+        "valid_data" : "when user input data api create beneficiary using valid data, then user got response 200/ok"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "positive" : {
+        "donationTrue" : "when user input data api create payment using donation true, then user got response 200/ok"
+    },
+    "negative" : {
+        "donationFalse" : "when user input data api create payment using donation False, then user got response error"
+    }
+}

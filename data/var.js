@@ -98,10 +98,12 @@ module.exports = {
 
     },
     "KYC" : {
-        "min_dob" : "2004-12-02",
+        "min_dob" : "2005-12-03",
         "max_dob" : "1966-12-01",
         "dob" : "2004-12-01",
         "ktp" : "3223121807750090",
+        "max_ktp" : "32231218077500902",
+        "min_ktp" : "32231218077500",
         "phone" : "081283712812",
         "fullname" : "qa testing api automation"
 
