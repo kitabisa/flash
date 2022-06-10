@@ -45,7 +45,6 @@ describe('Exchange Token API', () => {
             
             
         }
-        //console.log(res.body);
     });
 
     it(`${ACC_ExchangeToken.negative.wrong_token}`, async() => {

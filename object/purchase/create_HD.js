@@ -3,7 +3,7 @@ const env = require('dotenv').config();
 
 const request = supertest(process.env.purchase_URL)
 
-const createHD = (access_Tokens, contri_id, ages, jobs, medicals, sgID, types, user_id)  => request.post('/private/v1/health-declaration')
+const createHD = (access_Tokens, contri_id, ages, jobs, medicals, sgID, types)  => request.post('/private/v1/health-declaration')
 .set('Content-Type', 'application/json')
 .set('Authorization', `Bearer ${access_Tokens}`)
 .send(
@@ -15,8 +15,7 @@ const createHD = (access_Tokens, contri_id, ages, jobs, medicals, sgID, types, u
           "medical": medicals
         },
         "service_group_id": sgID,
-        "type": types,
-        "user_id": user_id
+        "type": types
       }
 )
 

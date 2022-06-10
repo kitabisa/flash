@@ -15,6 +15,7 @@ const getAll_PPOsgid = require('../object/productPaymentOption/getall_POsgid')
 const getDetail_PPO = require('../object/productPaymentOption/getdetail_PO')
 const update_PPO = require('../object/productPaymentOption/update_PO')
 const delete_PPO = require('../object/productPaymentOption/delete_PO')
+const getaPage = require('../object/paymentOption/getall_OptionPage')
 const TC_create_provider = require ('../data/testcase/PaymentProvider/createProvider.json')
 const TC_getall_provider = require('../data/testcase/PaymentProvider/getalldataProvider.json')
 const TC_getdetail_provider = require('../data/testcase/PaymentProvider/getdetailProvider.json')
@@ -62,7 +63,7 @@ describe('Payment Api Service', () => {
             assert(res.body.data[0]).to.have.property("callback_url").exist
             ids = res.body.data[0].id
             id1 = res.body.data[1].id
-            console.log(ids);
+            
         });
     });
     describe('Get detail payment provider', () => {
@@ -124,7 +125,7 @@ describe('Payment Api Service', () => {
         it(`${TC_create_option.positive.valid_data}`, async () => {
             const category =  ["VA", "BANK_TRANSFER", "EWALLET", "CREDITCARD"]
             for (let x in category) {
-            const res = await create_Option.createPaymentOption(global.access_Tokens1, category[x], datas.Deductible.description, datas.paymentOption.fixfee, datas.paymentOption.name ,datas.paymentOption.persenfee, id1)
+            const res = await create_Option.createPaymentOption(global.access_Tokens1, category[x], datas.Deductible.description, datas.paymentOption.fixfee, datas.paymentOption.name , 0 , id1)
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id").exist
             assert(res.body.data[0]).to.have.property("name").exist
@@ -132,16 +133,30 @@ describe('Payment Api Service', () => {
             assert(res.body.data[0]).to.have.property("provider_id").exist
             assert(res.body.data[0]).to.have.property("percentage_fee").exist
             assert(res.body.data[0]).to.have.property("fixed_fee").exist
-            assert(res.body.data[0]).to.have.property("category").to.equal(category[x])         
+            assert(res.body.data[0]).to.have.property("category").to.equal(category[x])
+            }
+        });
+        it(`${TC_create_option.positive.valid_data}`, async () => {
+            const category =  ["VA", "BANK_TRANSFER", "EWALLET", "CREDITCARD"]
+            for (let x in category) {
+            const res = await create_Option.createPaymentOption(global.access_Tokens1, category[x], datas.Deductible.description, 0 , datas.paymentOption.name , datas.paymentOption.persenfee , id1)
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id").exist
+            assert(res.body.data[0]).to.have.property("name").exist
+            assert(res.body.data[0]).to.have.property("description").exist
+            assert(res.body.data[0]).to.have.property("provider_id").exist
+            assert(res.body.data[0]).to.have.property("percentage_fee").exist
+            assert(res.body.data[0]).to.have.property("fixed_fee").exist
+            assert(res.body.data[0]).to.have.property("category").to.equal(category[x])
             }
         });
         it(`${TC_create_option.negative.wrong_category}`, async () => {
-            const res = await create_Option.createPaymentOption(global.access_Tokens1, datas.paymentOption.wrong_category, datas.Deductible.description, datas.paymentOption.fixfee, datas.paymentOption.name ,datas.paymentOption.persenfee, id1)
+            const res = await create_Option.createPaymentOption(global.access_Tokens1, datas.paymentOption.wrong_category, datas.Deductible.description, datas.paymentOption.fixfee, datas.paymentOption.name ,0 , id1)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("kategori tidak valid")
         });
         it(`${TC_create_option.negative.invalid_providerid}`, async () => {
-            const res = await create_Option.createPaymentOption(global.access_Tokens1, "VA", datas.Deductible.description, datas.paymentOption.fixfee, datas.paymentOption.name ,datas.paymentOption.persenfee, datas.paymentOption.wrongID)
+            const res = await create_Option.createPaymentOption(global.access_Tokens1, "VA", datas.Deductible.description, 0 , datas.paymentOption.name ,datas.paymentOption.persenfee, datas.paymentOption.wrongID)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("id payment provider tidak ada")
         });
@@ -173,6 +188,14 @@ describe('Payment Api Service', () => {
             idpo3 = res.body.data[3].id
         });
     });
+
+    describe('Get Payment Option Page', () => {
+        it('', async() => {
+            const res = await getaPage.getPaymentOptionPage(global.access_Tokens1, global.idsgforppo)
+            assert(res.status).to.equal(200)
+
+        });
+    });
     describe('Get Detail payment option', () => {
         it(`${TC_getdetail_option.positive.Getall}`, async () => {
             const res = await getDetail_Option.getdetailPaymentOption(global.access_Tokens1, idpo)
@@ -192,11 +215,15 @@ describe('Payment Api Service', () => {
     });
     describe('Update Payment Option', () => {
         it(`${TC_update_option.positive.valid_data}`, async () => {
-            const res = await update_Option.updatePaymentOption(global.access_Tokens1, "EWALLET", datas.Deductible.description, datas.paymentOption.fixfee, datas.paymentOption.name ,datas.paymentOption.persenfee, id1, idpo)
+            const res = await update_Option.updatePaymentOption(global.access_Tokens1, "EWALLET", datas.Deductible.description, 0 , datas.paymentOption.name ,datas.paymentOption.persenfee, id1, idpo)
+            assert(res.status).to.equal(200)
+        });
+        it(`${TC_update_option.positive.valid_data}`, async () => {
+            const res = await update_Option.updatePaymentOption(global.access_Tokens1, "BANK_TRANSFER", datas.Deductible.description, datas.paymentOption.fixfee , datas.paymentOption.name , 0 , id1, idpo)
             assert(res.status).to.equal(200)
         });
         it(`${TC_update_option.negative.wrong_PPID}`, async () => {
-            const res = await update_Option.updatePaymentOption(global.access_Tokens1, "VA", datas.Deductible.description, datas.paymentOption.fixfee, datas.paymentOption.name ,datas.paymentOption.persenfee, datas.paymentOption.wrongID, idpo)
+            const res = await update_Option.updatePaymentOption(global.access_Tokens1, "VA", datas.Deductible.description, 0 , datas.paymentOption.name ,datas.paymentOption.persenfee, datas.paymentOption.wrongID, idpo)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("id payment provider tidak ada")
         });
@@ -211,7 +238,7 @@ describe('Payment Api Service', () => {
             assert(res.body.response_desc).to.have.property("id").to.equal("invalid/incomplete request payload")
         });
         it(`${TC_update_option.negative.wrong_POid}`, async () => {
-            const res = await update_Option.updatePaymentOption(global.access_Tokens1, "VA", datas.Deductible.description, datas.paymentOption.fixfee, datas.paymentOption.name ,datas.paymentOption.persenfee, id1, datas.paymentOption.wrongID)
+            const res = await update_Option.updatePaymentOption(global.access_Tokens1, "VA", datas.Deductible.description, datas.paymentOption.fixfee, datas.paymentOption.name , 0 , id1, datas.paymentOption.wrongID)
             assert(res.status).to.equal(404)
             assert(res.body.response_desc).to.have.property("id").to.equal("data tidak ditemukan")
         });
@@ -246,7 +273,7 @@ describe('Payment Api Service', () => {
             assert(res.body.data[0]).to.have.property("ord_position").exist
             assert(res.body.data[0]).to.have.property("payment_option_id").exist
             assert(res.body.data[0]).to.have.property("service_group_id").exist
-            console.log(idpo3);
+            
         });
         //cos backend cant cross validation, so not any validation for service group
         it(`${TC_create_ppo.negative.invalid_SGid}`, async () => {
@@ -362,4 +389,5 @@ describe('Payment Api Service', () => {
             assert(res.status).to.equal(400)
         });
     });
+    
 });

@@ -98,6 +98,7 @@ describe('API Service Group', () => {
             global.names1 = res.body.data[1].name
             global.desc1 = res.body.data[1].description
             global.codes1 = res.body.data[1].code
+            
         });
     }); 
     describe('Get All Public Service Group ', () => {
