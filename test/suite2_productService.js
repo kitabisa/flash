@@ -54,7 +54,7 @@ const contri_Update = require('../object/productContribution/update_Contribution
 describe('API Service Group', () => {
     describe('Create Service Product', () => {
         it(`${TC_create.positive.valid_data}`, async() => {
-            const res = await create.createServiceGroup(global.access_Tokens1, datas.service_Group.code, datas.service_Group.name, datas.service_Group.description)   
+            const res = await create.createServiceGroup(global.access_Tokens1, datas.service_Group.code, datas.service_Group.name, datas.service_Group.description, datas.service_Group.ujrah)   
             if(res.status !==200){
                 console.log("create data : "+res.status+"||" +res.text)
             }         
@@ -70,12 +70,12 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_create.negative.existing_data}`, async() => {
-            const res = await create.createServiceGroup(global.access_Tokens1, 'TEST66', 'Alda', 'this is triger from automation tools')
+            const res = await create.createServiceGroup(global.access_Tokens1, 'TEST66', 'Alda', 'this is triger from automation tools', datas.service_Group.ujrah)
             assert(res.status).to.equal(400)
 
         });
         it(`${TC_create.negative.same_datacode}`, async() => {
-            const res = await create.createServiceGroup(global.access_Tokens1, 'TEST66', datas.service_Group.name, datas.service_Group.description)
+            const res = await create.createServiceGroup(global.access_Tokens1, 'TEST66', datas.service_Group.name, datas.service_Group.description, datas.service_Group.ujrah)
             assert(res.status).to.equal(400)
         });
     });
@@ -157,7 +157,7 @@ describe('API Service Group', () => {
     });
     describe('Update Service Product', () => {
         it(`${TC_update.positive.valid_data}`, async() => {
-            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, datas.service_Group.code, datas.service_Group.name, datas.service_Group.description)   
+            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, datas.service_Group.code, datas.service_Group.name, datas.service_Group.description, datas.service_Group.ujrah)   
             if(res.status !==200){
                 console.log("update data : "+res.status+"||" +res.text)
             }
@@ -169,7 +169,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_update.positive.different_code}`, async() => {
-            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, datas.service_Group.code, global.names, global.desc)   
+            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, datas.service_Group.code, global.names, global.desc, datas.service_Group.ujrah)   
             if(res.status !==200){
                 console.log("update data : "+res.status+"||" +res.text)
             }
@@ -181,7 +181,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_update.positive.different_name}`, async() => {
-            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, global.codes, datas.service_Group.name, global.desc)   
+            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, global.codes, datas.service_Group.name, global.desc, datas.service_Group.ujrah)   
             if(res.status !==200){
                 console.log("update data : "+res.status+"||" +res.text)
             }
@@ -193,7 +193,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_update.positive.different_desc}`, async() => {
-            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, global.codes, global.names, datas.service_Group.description)   
+            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, global.codes, global.names, datas.service_Group.description, datas.service_Group.ujrah)   
             if(res.status !==200){
                 console.log("update data : "+res.status+"||" +res.text)
             }
@@ -205,11 +205,11 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_update.negative.same_data}`, async() => {
-            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, global.codes1, global.names1, global.desc1)   
+            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, global.codes1, global.names1, global.desc1, datas.service_Group.ujrah)   
             assert(res.status).to.equal(500)
         });
         it(`${TC_update.negative.same_datacode}`, async() => {
-            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids1, global.codes, datas.service_Group.name, datas.service_Group.description)   
+            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids1, global.codes, datas.service_Group.name, datas.service_Group.description, datas.service_Group.ujrah)   
             assert(res.status).to.equal(500)
             
         });

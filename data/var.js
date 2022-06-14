@@ -16,7 +16,8 @@ module.exports = {
         "code" : final_Code,
         "name" : firstName,
         "description" : "this is triger from automation tools",
-        "wrongid" : "3c85c823-6656-4ecd-9506-c944db53ecb1"
+        "wrongid" : "3c85c823-6656-4ecd-9506-c944db53ecb1",
+        "ujrah" : 99
     },
     "Extension_clause":
     {
@@ -53,8 +54,8 @@ module.exports = {
 
     },
     "paymentOption" : {
-        "fixfee" : 1000,
-        "persenfee" : 20,
+        "fixfee" : 10000,
+        "persenfee" : 50,
         "name" : firstName,
         "wrong_category" : "kartukredit",
         "wrongfixfee" : "1000",
@@ -114,6 +115,9 @@ module.exports = {
             "true" : true,
             "false" : false
          }
+    },
+    "calcu" : {
+        "contributeFee" : 15000
     }
 
 

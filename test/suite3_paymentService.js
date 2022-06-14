@@ -106,7 +106,6 @@ describe('Payment Api Service', () => {
             if(res.status !== 200){
             console.log("failed : "+res.text);
             }
-            console.log(ids);
             assert(res.status).to.equal(200)            
         });
         it(`${TC_delete_provider.negative.wrongid}`, async () => {
@@ -245,11 +244,11 @@ describe('Payment Api Service', () => {
     });
     describe('Delete Payment Option', () => {
         it(`${TC_delete_option.positive.soft_delete}`, async () => {
-            const res = await delete_Option.deletePaymentOption(global.access_Tokens1, idpo, "soft_delete")
+            const res = await delete_Option.deletePaymentOption(global.access_Tokens1, idpo1, "soft_delete")
             assert(res.status).to.equal(200)
         });
         it(`${TC_delete_option.positive.hard_delete}`, async () => {
-            const res = await delete_Option.deletePaymentOption(global.access_Tokens1, idpo1, "hard_delete")
+            const res = await delete_Option.deletePaymentOption(global.access_Tokens1, idpo3, "hard_delete")
             assert(res.status).to.equal(200)
         });
         it(`${TC_delete_option.negative.wrongid}`, async () => {
@@ -264,7 +263,7 @@ describe('Payment Api Service', () => {
     });
     describe('Create Product Payment Option', () => {
         it(`${TC_create_ppo.positive.valid_data}`, async () => {
-            const res = await create_PPO.createProductPaymentOption(global.access_Tokens1, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.productpaymentOption.oder_opt, idpo3, global.idsgforppo)
+            const res = await create_PPO.createProductPaymentOption(global.access_Tokens1, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.productpaymentOption.oder_opt, idpo, global.idsgforppo)
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id").exist
             assert(res.body.data[0]).to.have.property("display_name").exist
@@ -273,11 +272,11 @@ describe('Payment Api Service', () => {
             assert(res.body.data[0]).to.have.property("ord_position").exist
             assert(res.body.data[0]).to.have.property("payment_option_id").exist
             assert(res.body.data[0]).to.have.property("service_group_id").exist
-            
+            global.ppoid = res.body.data[0].id
         });
         //cos backend cant cross validation, so not any validation for service group
         it(`${TC_create_ppo.negative.invalid_SGid}`, async () => {
-            const res = await create_PPO.createProductPaymentOption(global.access_Tokens1, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.productpaymentOption.oder_opt, idpo3, datas.productpaymentOption.wrongID)
+            const res = await create_PPO.createProductPaymentOption(global.access_Tokens1, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.productpaymentOption.oder_opt, idpo, datas.productpaymentOption.wrongID)
             assert(res.status).to.equal(200)
             
         });
@@ -299,7 +298,9 @@ describe('Payment Api Service', () => {
             assert(res.body.data[0]).to.have.property("ord_position").exist
             assert(res.body.data[0]).to.have.property("payment_option_id").exist
             assert(res.body.data[0]).to.have.property("service_group_id").exist
-
+            idppo0 = res.body.data[0].id
+            idppo1 = res.body.data[1].id
+            idppo2 = res.body.data[2].id
         });
     });
     describe('Get all Product Payment Option with Service Group Id', () => {
@@ -314,7 +315,6 @@ describe('Payment Api Service', () => {
             assert(res.body.data[0]).to.have.property("payment_option_id").exist
             assert(res.body.data[0]).to.have.property("service_group_id").exist
             idppo = res.body.data[0].id
-            //console.log(idppo);
         });
         it(`${TC_getall_pposgid.negative.invalid_sgid}`, async () => {
             const res = await getAll_PPOsgid.getProductPaymentOptionsgid(global.access_Tokens1, datas.productpaymentOption.wrongID)
@@ -343,7 +343,7 @@ describe('Payment Api Service', () => {
     });
     describe('Update Product Payment Option', () => {
         it(`${TC_update_ppo.positive.valid_data}`, async () => {
-            const res = await update_PPO.updateProductPaymentProvider(global.access_Tokens1, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.false, datas.productpaymentOption.oder_opt, idpo3, idsgforppo, idppo)
+            const res = await update_PPO.updateProductPaymentProvider(global.access_Tokens1, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.false, datas.productpaymentOption.oder_opt, idpo, idsgforppo, idppo)
             if (res.status !== 200){
                 console.log("failed : "+res.text);
             }
@@ -357,13 +357,13 @@ describe('Payment Api Service', () => {
             assert(res.body.data[0]).to.have.property("service_group_id").exist
         });
         it(`${TC_update_ppo.negative.wrong_PPOID}`, async () => {
-            const res = await update_PPO.updateProductPaymentProvider(global.access_Tokens1, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.false, datas.productpaymentOption.oder_opt, idpo3, idsgforppo, datas.productpaymentOption.wrongID)
+            const res = await update_PPO.updateProductPaymentProvider(global.access_Tokens1, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.false, datas.productpaymentOption.oder_opt, idpo, idsgforppo, datas.productpaymentOption.wrongID)
             assert(res.status).to.equal(404)
             assert(res.body.response_desc).to.have.property("id").to.equal("data tidak ditemukan")
         })
         //this case why i give status 200, cos this API will be return array
         it(`${TC_update_ppo.negative.wrong_SGid}`, async () => {
-            const res = await update_PPO.updateProductPaymentProvider(global.access_Tokens1, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.false, datas.productpaymentOption.oder_opt, idpo3, datas.service_Group.wrongid, idppo)
+            const res = await update_PPO.updateProductPaymentProvider(global.access_Tokens1, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.false, datas.productpaymentOption.oder_opt, idpo, datas.service_Group.wrongid, idppo)
             assert(res.status).to.equal(200)
         })
         it(`${TC_update_ppo.negative.wrong_POid}`, async () => {
@@ -373,11 +373,11 @@ describe('Payment Api Service', () => {
     });
     describe('Delete Product Payment Option', () => {
         it(`${TC_delete_ppo.positive.soft_delete}`, async () => {
-            const res = await delete_PPO.deleteProductPaymentOption(global.access_Tokens1, idppo, "soft_delete")
+            const res = await delete_PPO.deleteProductPaymentOption(global.access_Tokens1, idppo1, "soft_delete")
             assert(res.status).to.equal(200)
         });
         it(`${TC_delete_ppo.positive.hard_delete}`, async () => {
-            const res = await delete_PPO.deleteProductPaymentOption(global.access_Tokens1, idppo, "hard_delete")
+            const res = await delete_PPO.deleteProductPaymentOption(global.access_Tokens1, idppo2, "hard_delete")
             assert(res.status).to.equal(200)
         });
         it(`${TC_delete_ppo.negative.wrongid}`, async () => {

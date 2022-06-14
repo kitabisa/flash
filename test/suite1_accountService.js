@@ -43,8 +43,8 @@ describe('Exchange Token API', () => {
             assert(res.body.data[0]).to.have.property('refresh_token')
             assert(res.body.data[0]).to.have.property('expires_in')
             
-            
         }
+        //console.log(global.access_Tokens1);
     });
 
     it(`${ACC_ExchangeToken.negative.wrong_token}`, async() => {

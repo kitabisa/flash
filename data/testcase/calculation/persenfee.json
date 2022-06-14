@@ -1,0 +1,5 @@
+{
+    "positive" : {
+        "persentagefee": "when user hit api calculate then user can make sure totalfee = contri fee * persenfee and got response 200/ok"
+    }
+}

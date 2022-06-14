@@ -1,0 +1,5 @@
+{
+    "positive" : {
+        "fixfee": "when user hit api calculate then user can make sure totalfee = fixfee and got response 200/ok"
+    }
+}

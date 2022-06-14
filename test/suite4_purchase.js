@@ -9,10 +9,7 @@ const TC_cretaeHD = require('../data/testcase/puchase/createHD.json')
 const TC_cretaeBenef = require('../data/testcase/puchase/createBenef.json')
 const TC_cretaePay = require('../data/testcase/puchase/createpayment.json')
 const TC_getSummary = require('../data/testcase/puchase/GetSummary.json')
-
 const datas = require('../data/var')
-
-
 describe('Purchase Service API', () => {
     describe('Create Health Declaration', () => {
         it(`${TC_cretaeHD.positive.valid_data}`, async () => {
