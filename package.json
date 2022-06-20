@@ -27,6 +27,7 @@
     "@types/faker": "^5.5.3",
     "@types/supertest": "^2.0.12",
     "chai": "^4.3.6",
+    "chai-sorted": "^0.2.0",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.0",
     "faker": "^5.5.3",

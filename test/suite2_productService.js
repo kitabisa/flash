@@ -59,7 +59,7 @@ describe('API Service Group', () => {
                 console.log("create data : "+res.status+"||" +res.text)
             }         
             assert(res.status).to.equal(200)
-            global.ids = res.body.data[0].id
+            global.serviceids = res.body.data[0].id
             global.names = res.body.data[0].name
             global.desc = res.body.data[0].description
             global.codes = res.body.data[0].code
@@ -68,6 +68,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("name")
             assert(res.body.data[0]).to.have.property("description")
             assert(res.body.data[0]).to.have.property("is_active")
+            //console.log("ini id sg : "+global.serviceids);
         });
         it(`${TC_create.negative.existing_data}`, async() => {
             const res = await create.createServiceGroup(global.access_Tokens1, 'TEST66', 'Alda', 'this is triger from automation tools', datas.service_Group.ujrah)
@@ -117,7 +118,7 @@ describe('API Service Group', () => {
     });   
     describe('Get Detail Public Service Group', () => {
         it(`${TC_getdetailPublic.positive.Getall}`, async() => {
-            const res = await getdetailpublic.getdetailpublicServiceGroup(global.access_Tokens1, global.ids)
+            const res = await getdetailpublic.getdetailpublicServiceGroup(global.access_Tokens1, global.serviceids)
             if(res.status !==200){
                 console.log("getdetailpublic data : "+res.status+"||" +res.text)
             }
@@ -137,7 +138,7 @@ describe('API Service Group', () => {
     });
     describe('Get Detail Service Group', () => {
         it(`${TC_getdetail.positive.Getall}`, async() => {
-            const res = await getdetail.getdetailServiceGroup(global.access_Tokens1, global.ids)
+            const res = await getdetail.getdetailServiceGroup(global.access_Tokens1, global.serviceids)
             if(res.status !==200){
                 console.log("getdetail data : "+res.status+"||" +res.text)
             }
@@ -157,7 +158,7 @@ describe('API Service Group', () => {
     });
     describe('Update Service Product', () => {
         it(`${TC_update.positive.valid_data}`, async() => {
-            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, datas.service_Group.code, datas.service_Group.name, datas.service_Group.description, datas.service_Group.ujrah)   
+            const res = await update.updateServiceGroup(global.access_Tokens1, global.serviceids, datas.service_Group.code, datas.service_Group.name, datas.service_Group.description, datas.service_Group.ujrah)   
             if(res.status !==200){
                 console.log("update data : "+res.status+"||" +res.text)
             }
@@ -169,7 +170,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_update.positive.different_code}`, async() => {
-            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, datas.service_Group.code, global.names, global.desc, datas.service_Group.ujrah)   
+            const res = await update.updateServiceGroup(global.access_Tokens1, global.serviceids, datas.service_Group.code, global.names, global.desc, datas.service_Group.ujrah)   
             if(res.status !==200){
                 console.log("update data : "+res.status+"||" +res.text)
             }
@@ -181,7 +182,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_update.positive.different_name}`, async() => {
-            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, global.codes, datas.service_Group.name, global.desc, datas.service_Group.ujrah)   
+            const res = await update.updateServiceGroup(global.access_Tokens1, global.serviceids, global.codes, datas.service_Group.name, global.desc, datas.service_Group.ujrah)   
             if(res.status !==200){
                 console.log("update data : "+res.status+"||" +res.text)
             }
@@ -193,7 +194,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_update.positive.different_desc}`, async() => {
-            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, global.codes, global.names, datas.service_Group.description, datas.service_Group.ujrah)   
+            const res = await update.updateServiceGroup(global.access_Tokens1, global.serviceids, global.codes, global.names, datas.service_Group.description, datas.service_Group.ujrah)   
             if(res.status !==200){
                 console.log("update data : "+res.status+"||" +res.text)
             }
@@ -205,7 +206,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
         });
         it(`${TC_update.negative.same_data}`, async() => {
-            const res = await update.updateServiceGroup(global.access_Tokens1, global.ids, global.codes1, global.names1, global.desc1, datas.service_Group.ujrah)   
+            const res = await update.updateServiceGroup(global.access_Tokens1, global.serviceids, global.codes1, global.names1, global.desc1, datas.service_Group.ujrah)   
             assert(res.status).to.equal(500)
         });
         it(`${TC_update.negative.same_datacode}`, async() => {
@@ -216,7 +217,7 @@ describe('API Service Group', () => {
 
     });
 
-    describe('Delete data Service Group', () => {
+    describe.skip('Delete data Service Group', () => {
         it(`${TC_delete.positive.delete}`, async () => {
             const res = await deleted.deleteServiceGroup(global.access_Tokens1, global.ids)
             assert(res.status).to.equal(200)
@@ -235,7 +236,7 @@ describe('API Extension Clause', () => {
             const res = await EC_create.createExtensionClause(global.access_Tokens1, datas.Extension_clause.code, datas.service_Group.name, datas.service_Group.description, global.codes)
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id")
-            assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.ids)
+            assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.serviceids)
             assert(res.body.data[0]).to.have.property("service_group_code").to.equal(global.codes)
             assert(res.body.data[0]).to.have.property("code")
             assert(res.body.data[0]).to.have.property("name")
@@ -265,7 +266,7 @@ describe('API Extension Clause', () => {
             global.desc2 = res.body.data[0].description
         });
     });
-    describe('Delete data Extension Clause', () => {
+    describe.skip('Delete data Extension Clause', () => {
         it(`${TC_Delete_EC.positive.delete}`, async () => {
             const res = await EC_Delete.deleteExtensionClause(global.access_Tokens1, global.ECids)
             assert(res.status).to.equal(200)
@@ -281,7 +282,7 @@ describe('API Extension Clause', () => {
             const res = await EC_Getdetail.getdetailExtensionClause(global.access_Tokens1, global.ECids)
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("id").to.equal(global.ECids)
-            assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.ids)
+            assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.serviceids)
             assert(res.body.data[0]).to.have.property("service_group_code").to.equal(global.codes)
             assert(res.body.data[0]).to.have.property("code")
             assert(res.body.data[0]).to.have.property("name")
@@ -348,7 +349,7 @@ describe('API Extension Clause', () => {
             assert(res.body.data[0]).to.have.property("calculation_method").to.equal("percentage")
             assert(res.body.data[0]).to.have.property("calculation_value").to.equal("400000.00")
             assert(res.body.data[0]).to.have.property("is_active")
-            global.ids = res.body.data[0].id
+            global.deducids = res.body.data[0].id
         });
         it(`${TC_create_DC.negative.wrong_service_group}`, async () => {
             const res = await DC_create.createDeductible(global.access_Tokens1, global.code2, global.name2, global.desc2, datas.Deductible.service_code, datas.Deductible.calcu_method, datas.Deductible.calcu_value)
@@ -384,7 +385,7 @@ describe('API Extension Clause', () => {
     });
     describe('Get Detail Deduction', () => {
         it(`${TC_Getdetail_DC.positive.Getall}`, async () => {
-            const res = await DC_Getdetail.getdetailDeductible(global.ids, global.access_Tokens1)
+            const res = await DC_Getdetail.getdetailDeductible(global.deducids, global.access_Tokens1)
             if(res.status !== 200){
                 console.log("failed :"+ res.text);
             }
@@ -406,7 +407,7 @@ describe('API Extension Clause', () => {
     });
     describe('Update Deduction Api', () => {
         it(`${TC_Update_DC.positive.valid_data}`, async () => {
-            const res = await DC_Update.updateDeductible(global.access_Tokens1, global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method1, datas.Deductible.calcu_value)
+            const res = await DC_Update.updateDeductible(global.access_Tokens1, global.deducids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method1, datas.Deductible.calcu_value)
             if(res.status !== 200){
                 console.log("failed :"+res.text);
             }
@@ -427,13 +428,13 @@ describe('API Extension Clause', () => {
 
         });
         it(`${TC_Update_DC.negative.wrong_calcuMethod}`, async () => {
-            const res = await DC_Update.updateDeductible(global.access_Tokens1, global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.wrong_calcu_method, datas.Deductible.calcu_value)
+            const res = await DC_Update.updateDeductible(global.access_Tokens1, global.deducids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.wrong_calcu_method, datas.Deductible.calcu_value)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("Calculation Method Salah")
 
         });
         it(`${TC_Update_DC.negative.wrong_calcuvale}`, async () => {
-            const res = await DC_Update.updateDeductible(global.access_Tokens1, global.ids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.invalid_calcu_value)
+            const res = await DC_Update.updateDeductible(global.access_Tokens1, global.deducids, datas.Deductible.code, datas.Deductible.name, global.desc2, global.ECserviceCode2, datas.Deductible.calcu_method, datas.Deductible.invalid_calcu_value)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("payload tidak valid")
 
@@ -457,9 +458,9 @@ describe('API Extension Clause', () => {
         });
     });
 
-    describe('Deleted Deduction APi', () => {
+    describe.skip('Deleted Deduction APi', () => {
         it(`${TC_Delete_DC.positive.delete}`, async () => {
-            const res = await DC_Delete.deleteDeductible(global.ids, global.access_Tokens1)
+            const res = await DC_Delete.deleteDeductible(global.deducids, global.access_Tokens1)
             if(res.status !== 200){
                 console.log("failed :"+ res.text);
             }
@@ -474,7 +475,7 @@ describe('API Extension Clause', () => {
 
     describe('Create Product Contribution', () => {
         it(`${TC_create_contri.positive.valid_data}`, async () => {
-            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, datas.contribution.strikeFee)
+            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, global.serviceids, datas.contribution.strikeFee)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
@@ -489,17 +490,19 @@ describe('API Extension Clause', () => {
             assert(res.body.data[0]).to.have.property("ord_position")
             assert(res.body.data[0]).to.have.property("service_group_id")
             assert(res.body.data[0]).to.have.property("strikethrough_contribution_fee")
+            global.idpoc = res.body.data[0].id
+            //console.log("ini poc : "+global.idpoc);
         });
         it(`${TC_create_contri.negative.wrong_contriFee}}`, async () => {
-            const res = await contri_create.createContribution(global.access_Tokens1, 'seratus', datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, datas.contribution.strikeFee)
+            const res = await contri_create.createContribution(global.access_Tokens1, 'seratus', datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, global.serviceids, datas.contribution.strikeFee)
             assert(res.status).to.equal(400)
         });
         it(`${TC_create_contri.negative.wrong_contriMonth}}`, async () => {
-            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, 'datas.contribution.contriMonth', datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, datas.contribution.strikeFee)
+            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, 'datas.contribution.contriMonth', datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, global.serviceids, datas.contribution.strikeFee)
             assert(res.status).to.equal(400)
         });
         it(`${TC_create_contri.negative.invalid_strikeFee}}`, async () => {
-            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, 'datas.contribution.strikeFee')
+            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, global.serviceids, 'datas.contribution.strikeFee')
             assert(res.status).to.equal(400)
         });
     });
@@ -526,7 +529,7 @@ describe('API Extension Clause', () => {
     });
     describe('Get detail Product Contribution', () => {
         it(`${TC_Getdetail_contri.positive.Getall}`, async () => {
-            const res = await contri_Getdetail.getdetailContribution(global.access_Tokens1, ids2)
+            const res = await contri_Getdetail.getdetailContribution(global.access_Tokens1, global.serviceids)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
@@ -550,7 +553,7 @@ describe('API Extension Clause', () => {
     });
     describe('Update data Product Contribution', () => {
         it(`${TC_Update_contri.positive.valid_data}`, async () => {
-            const res = await contri_Update.updateContribution(global.access_Tokens1, datas.contribution.contriFee, datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.false, datas.contribution.isPopular.false, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, datas.contribution.strikeFee, contriId)
+            const res = await contri_Update.updateContribution(global.access_Tokens1, datas.contribution.contriFee, datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.false, datas.contribution.isPopular.false, datas.paymentOption.name, datas.productpaymentOption.oder_opt, global.serviceids, datas.contribution.strikeFee, contriId)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
@@ -568,19 +571,19 @@ describe('API Extension Clause', () => {
             
         });
         it(`${TC_Update_contri.negative.wrong_contriFee}}`, async () => {
-            const res = await contri_create.createContribution(global.access_Tokens1, 'seratus', datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, datas.contribution.strikeFee)
+            const res = await contri_create.createContribution(global.access_Tokens1, 'seratus', datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, global.serviceids, datas.contribution.strikeFee)
             assert(res.status).to.equal(400)
         });
         it(`${TC_Update_contri.negative.wrong_contriMonth}}`, async () => {
-            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, 'datas.contribution.contriMonth', datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, datas.contribution.strikeFee)
+            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, 'datas.contribution.contriMonth', datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, global.serviceids, datas.contribution.strikeFee)
             assert(res.status).to.equal(400)
         });
         it(`${TC_Update_contri.negative.invalid_strikeFee}}`, async () => {
-            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, ids2, 'datas.contribution.strikeFee')
+            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, global.serviceids, 'datas.contribution.strikeFee')
             assert(res.status).to.equal(400)
         });
     });
-    describe('Delete Product Contribution', () => {
+    describe.skip('Delete Product Contribution', () => {
         it(`${TC_Delete_contri.positive.delete}`, async () => {
             const res = await contri_Delete.deleteContribution(global.access_Tokens1, contriId)
             assert(res.status).to.equal(200)

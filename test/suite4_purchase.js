@@ -13,7 +13,7 @@ const datas = require('../data/var')
 describe('Purchase Service API', () => {
     describe('Create Health Declaration', () => {
         it(`${TC_cretaeHD.positive.valid_data}`, async () => {
-            const res = await createHD.createHD(global.access_Tokens1, global.contripurchase, datas.purchase.age.true, datas.purchase.job.true, datas.purchase.medical.true, global.idsgpuchase, datas.purchase.type)
+            const res = await createHD.createHD(global.access_Tokens1, global.contripurchase, datas.purchase.age.true, datas.purchase.job.true, datas.purchase.medical.true, global.serviceids, datas.purchase.type)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
@@ -28,7 +28,8 @@ describe('Purchase Service API', () => {
             assert(res.body.data[0].health_declaration_json).to.have.property('age').exist
             assert(res.body.data[0].health_declaration_json).to.have.property('medical').exist
             assert(res.body.data[0].health_declaration_json).to.have.property('job').exist
-            idpurcahse = res.body.data[0].purchase_id
+            global.idpurcahse = res.body.data[0].purchase_id
+            //console.log("ini purchase id : "+global.idpurcahse
             
         });
         it(`${TC_cretaeHD.negative.AgeFalse}`, async () => {
@@ -46,7 +47,7 @@ describe('Purchase Service API', () => {
     }); 
     describe('Create KYC', () => {
         it(`${TC_cretaeKYC.positive.valid_data}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, idpurcahse)
+            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
@@ -60,30 +61,30 @@ describe('Purchase Service API', () => {
             
         });
         it(`${TC_cretaeKYC.negative.minDob}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.min_dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, idpurcahse)
+            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.min_dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("Kamu harus berusia 18 - 55 tahun untuk jadi anggota")
         });
         it(`${TC_cretaeKYC.negative.maxDob}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.max_dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, idpurcahse)
+            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.max_dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("Kamu harus berusia 18 - 55 tahun untuk jadi anggota")
 
         });
         it(`${TC_cretaeKYC.negative.maxKtp}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.valid_dob, datas.KYC.fullname, datas.KYC.max_ktp, datas.KYC.phone, idpurcahse)
+            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.valid_dob, datas.KYC.fullname, datas.KYC.max_ktp, datas.KYC.phone, global.idpurcahse)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").exist
         });
         it(`${TC_cretaeKYC.negative.minKtp}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.valid_dob, datas.KYC.fullname, datas.KYC.min_ktp, datas.KYC.phone, idpurcahse)
+            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.valid_dob, datas.KYC.fullname, datas.KYC.min_ktp, datas.KYC.phone, global.idpurcahse)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").exist
         });
     }); 
     describe('Create Beneficiary', () => {
         it(`${TC_cretaeBenef.positive.valid_data}`, async () => {
-            const res = await createbenef.createBeneficiary(global.access_Tokens1, datas.KYC.dob, datas.KYC.fullname, datas.benef.inform.true, datas.KYC.ktp, datas.KYC.phone, datas.benef.relation, idpurcahse)
+            const res = await createbenef.createBeneficiary(global.access_Tokens1, datas.KYC.dob, datas.KYC.fullname, datas.benef.inform.true, datas.KYC.ktp, datas.KYC.phone, datas.benef.relation, global.idpurcahse)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
@@ -99,7 +100,7 @@ describe('Purchase Service API', () => {
     });
     describe('Create Payment', () => {
         it(`${TC_cretaePay.positive.donationTrue}`, async () => {
-            const res = await createnewPurchase.createnewpurchase(global.access_Tokens1, true, idpurcahse)
+            const res = await createnewPurchase.createnewpurchase(global.access_Tokens1, true, global.idpurcahse)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
@@ -109,13 +110,13 @@ describe('Purchase Service API', () => {
             assert(res.body.data[0]).to.have.property('donate_excess_contribution').exist
         });
         it(`${TC_cretaePay.negative.donationFalse}`, async () => {
-            const res = await createnewPurchase.createnewpurchase(global.access_Tokens1, false, idpurcahse)
+            const res = await createnewPurchase.createnewpurchase(global.access_Tokens1, false, global.idpurcahse)
             assert(res.status).to.equal(400)
         })
     }); 
     describe('Get Data Summary', () => {
         it(`${TC_getSummary.positive.valid_data}`, async () => {
-            const res = await getSummary.getSummary(global.access_Tokens1, idpurcahse)
+            const res = await getSummary.getSummary(global.access_Tokens1, global.idpurcahse)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }

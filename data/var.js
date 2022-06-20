@@ -17,7 +17,7 @@ module.exports = {
         "name" : firstName,
         "description" : "this is triger from automation tools",
         "wrongid" : "3c85c823-6656-4ecd-9506-c944db53ecb1",
-        "ujrah" : 99
+        "ujrah" : 90
     },
     "Extension_clause":
     {
@@ -74,7 +74,7 @@ module.exports = {
     },
     "contribution" : {
             "contriFee" : 1000,
-            "contriMonth" : 2500,
+            "contriMonth" : 3,
             "isPopular" : {
                 "true" : true,
                 "false" : false
@@ -117,7 +117,11 @@ module.exports = {
          }
     },
     "calcu" : {
-        "contributeFee" : 15000
+        "contributeFee" : 15000,
+        "ppoidpersen" : "efc06168-a88a-4ec2-91da-a15a51ac67f3"
+    },
+    "checkout" : {
+        "idempotensi" : uuids
     }
 
 
