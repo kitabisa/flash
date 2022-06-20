@@ -1,8 +1,10 @@
 const faker = require('faker');
 let firstName = faker.name.firstName();
 let uuids = faker.datatype.uuid();
+let uuids1 = faker.datatype.uuid();
 let code = Math.floor(Math.random() * 90000);
 let final_Code = "SG" +code
+let final_Code1 = "SG1" +code
 let final_Codes = "EC" +code
 let final_Codes1 = "Deduc" +code
 let final_Codes2 = "PP" +code
@@ -14,10 +16,12 @@ module.exports = {
     "service_Group":
     {
         "code" : final_Code,
+        "code1" : final_Code1,
         "name" : firstName,
         "description" : "this is triger from automation tools",
         "wrongid" : "3c85c823-6656-4ecd-9506-c944db53ecb1",
-        "ujrah" : 90
+        "ujrah" : 90,
+        "ujrah1" : 25
     },
     "Extension_clause":
     {
@@ -121,7 +125,9 @@ module.exports = {
         "ppoidpersen" : "efc06168-a88a-4ec2-91da-a15a51ac67f3"
     },
     "checkout" : {
-        "idempotensi" : uuids
+        "idempotensi" : uuids,
+        "idempotensi1" : uuids1
+
     }
 
 

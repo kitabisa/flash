@@ -70,6 +70,20 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("is_active")
             //console.log("ini id sg : "+global.serviceids);
         });
+        it(`${TC_create.positive.valid_data}`, async() => {
+            const res = await create.createServiceGroup(global.access_Tokens1, datas.service_Group.code1, datas.service_Group.name, datas.service_Group.description, datas.service_Group.ujrah1)   
+            if(res.status !==200){
+                console.log("create data : "+res.status+"||" +res.text)
+            }         
+            assert(res.status).to.equal(200)
+            global.serviceids1 = res.body.data[0].id
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("code")
+            assert(res.body.data[0]).to.have.property("name")
+            assert(res.body.data[0]).to.have.property("description")
+            assert(res.body.data[0]).to.have.property("is_active")
+            console.log("ini id sg : "+global.serviceids1);
+        });
         it(`${TC_create.negative.existing_data}`, async() => {
             const res = await create.createServiceGroup(global.access_Tokens1, 'TEST66', 'Alda', 'this is triger from automation tools', datas.service_Group.ujrah)
             assert(res.status).to.equal(400)
@@ -491,6 +505,25 @@ describe('API Extension Clause', () => {
             assert(res.body.data[0]).to.have.property("service_group_id")
             assert(res.body.data[0]).to.have.property("strikethrough_contribution_fee")
             global.idpoc = res.body.data[0].id
+            //console.log("ini poc : "+global.idpoc);
+        });
+        it(`${TC_create_contri.positive.valid_data}`, async () => {
+            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, datas.contribution.contriMonth, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, global.serviceids1, datas.contribution.strikeFee)
+            if(res.status !== 200){
+                console.log("failed : "+res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("id")
+            assert(res.body.data[0]).to.have.property("contribution_fee")
+            assert(res.body.data[0]).to.have.property("contribution_month")
+            assert(res.body.data[0]).to.have.property("display_name")
+            assert(res.body.data[0]).to.have.property("is_active")
+            assert(res.body.data[0]).to.have.property("is_popular")
+            assert(res.body.data[0]).to.have.property("name")
+            assert(res.body.data[0]).to.have.property("ord_position")
+            assert(res.body.data[0]).to.have.property("service_group_id")
+            assert(res.body.data[0]).to.have.property("strikethrough_contribution_fee")
+            global.idpoc1 = res.body.data[0].id
             //console.log("ini poc : "+global.idpoc);
         });
         it(`${TC_create_contri.negative.wrong_contriFee}}`, async () => {

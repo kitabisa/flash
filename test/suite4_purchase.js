@@ -32,6 +32,26 @@ describe('Purchase Service API', () => {
             //console.log("ini purchase id : "+global.idpurcahse
             
         });
+        it(`${TC_cretaeHD.positive.valid_data}`, async () => {
+            const res = await createHD.createHD(global.access_Tokens1, global.contripurchase, datas.purchase.age.true, datas.purchase.job.true, datas.purchase.medical.true, global.serviceids1, datas.purchase.type)
+            if(res.status !== 200){
+                console.log("failed : "+res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property('id').exist
+            assert(res.body.data[0]).to.have.property('purchase_id').exist
+            assert(res.body.data[0]).to.have.property('service_group_id').exist
+            assert(res.body.data[0]).to.have.property('user_id').exist
+            assert(res.body.data[0]).to.have.property('contribution_id').exist
+            assert(res.body.data[0]).to.have.property('type').to.equal('FIRST_TIME')
+            assert(res.body.data[0]).to.have.property('status').to.equal('DRAFT_HEALTH_DECLARATION')
+            assert(res.body.data[0].health_declaration_json).to.have.property('age').exist
+            assert(res.body.data[0].health_declaration_json).to.have.property('medical').exist
+            assert(res.body.data[0].health_declaration_json).to.have.property('job').exist
+            global.idpurcahse1 = res.body.data[0].purchase_id
+            //console.log("ini purchase id : "+global.idpurcahse
+            
+        });
         it(`${TC_cretaeHD.negative.AgeFalse}`, async () => {
             const res = await createHD.createHD(global.access_Tokens1, global.contripurchase, datas.purchase.age.false, datas.purchase.job.true, datas.purchase.medical.true, global.idsgpuchase, datas.purchase.type)
             assert(res.status).to.equal(400)
@@ -48,6 +68,20 @@ describe('Purchase Service API', () => {
     describe('Create KYC', () => {
         it(`${TC_cretaeKYC.positive.valid_data}`, async () => {
             const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
+            if(res.status !== 200){
+                console.log("failed : "+res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property('id').exist
+            assert(res.body.data[0]).to.have.property('dob').exist
+            assert(res.body.data[0]).to.have.property('fullname').exist
+            assert(res.body.data[0]).to.have.property('ktp').exist
+            assert(res.body.data[0]).to.have.property('phone_number').exist
+            assert(res.body.data[0]).to.have.property('purchase_id').exist
+            
+        });
+        it(`${TC_cretaeKYC.positive.valid_data}`, async () => {
+            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse1)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
@@ -97,10 +131,34 @@ describe('Purchase Service API', () => {
             assert(res.body.data[0]).to.have.property('purchase_id').exist
          
         });
+        it(`${TC_cretaeBenef.positive.valid_data}`, async () => {
+            const res = await createbenef.createBeneficiary(global.access_Tokens1, datas.KYC.dob, datas.KYC.fullname, datas.benef.inform.true, datas.KYC.ktp, datas.KYC.phone, datas.benef.relation, global.idpurcahse1)
+            if(res.status !== 200){
+                console.log("failed : "+res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property('id').exist
+            assert(res.body.data[0]).to.have.property('dob').exist
+            assert(res.body.data[0]).to.have.property('fullname').exist
+            assert(res.body.data[0]).to.have.property('ktp').exist
+            assert(res.body.data[0]).to.have.property('phone_number').exist
+            assert(res.body.data[0]).to.have.property('purchase_id').exist
+         
+        });
     });
     describe('Create Payment', () => {
         it(`${TC_cretaePay.positive.donationTrue}`, async () => {
             const res = await createnewPurchase.createnewpurchase(global.access_Tokens1, true, global.idpurcahse)
+            if(res.status !== 200){
+                console.log("failed : "+res.text);
+            }
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property('id').exist
+            assert(res.body.data[0]).to.have.property('status').to.equal('PURCHASED')
+            assert(res.body.data[0]).to.have.property('donate_excess_contribution').exist
+        });
+        it(`${TC_cretaePay.positive.donationTrue}`, async () => {
+            const res = await createnewPurchase.createnewpurchase(global.access_Tokens1, true, global.idpurcahse1)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
