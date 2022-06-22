@@ -77,7 +77,7 @@ module.exports = {
         "wrongID" : "7bf354e6-66ae-4acf-b52b-ab5ac6a14be1"
     },
     "contribution" : {
-            "contriFee" : 1000,
+            "contriFee" : 100000,
             "contriMonth" : 3,
             "isPopular" : {
                 "true" : true,

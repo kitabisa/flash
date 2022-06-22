@@ -3,12 +3,15 @@ const datas = require('../data/var')
 const cekout = require('../object/checkout/checkout')
 const TC_CekoutFixfee = require('../data/testcase/checkout/fixfee.json')
 const TC_Cekoutpersenfee = require('../data/testcase/checkout/persenfee.json')
+const date = require('../object/date')
 
 
 
 
 describe('API Checkout Service', () => {
     describe('Checkout/Capture Purchase', () => {
+        console.log(date.minDobs);
+        console.log(date.maxDobs);
         before(async function calucated() {
             ujrah = datas.service_Group.ujrah / 100
             ujrah1 = datas.service_Group.ujrah1 / 100
@@ -28,7 +31,7 @@ describe('API Checkout Service', () => {
                 console.log("failed : "+res.text);
             }
             assert(res.status).to.equal(200)
-            //console.log(res.text);
+            console.log(res.text);
             assert(res.body.data[0]).to.have.property("id").exist
             assert(res.body.data[0]).to.have.property("idempotency_key").to.equal(datas.checkout.idempotensi)
             assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.serviceids)
@@ -54,12 +57,14 @@ describe('API Checkout Service', () => {
             
         });
         it(`${TC_Cekoutpersenfee.positive.persentagefee}`, async () => {
-            const res = await cekout.checkout(global.access_Tokens1, datas.checkout.idempotensi1, global.idpaoption1, global.idpoc1, global.idpurcahse1, global.serviceids1)
+            after(async function checkouts() {
+                this.timeout(5000); 
+                const res = await cekout.checkout(global.access_Tokens1, datas.checkout.idempotensi1, global.idpaoption1, global.idpoc1, global.idpurcahse1, global.serviceids1)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
             assert(res.status).to.equal(200)
-            //console.log(res.text);
+            console.log(res.text);
             assert(res.body.data[0]).to.have.property("id").exist
             assert(res.body.data[0]).to.have.property("idempotency_key").to.equal(datas.checkout.idempotensi1)
             assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.serviceids1)
@@ -76,12 +81,16 @@ describe('API Checkout Service', () => {
             assert(res.body.data[0]).to.have.property("external_reference_id").exist
             assert(res.body.data[0]).to.have.property("status").exist
             assert(res.body.data[0]).to.have.property("paid_at")
-            assert(res.body.data[0].actions[0]).to.have.property("name")
-            assert(res.body.data[0].actions[0]).to.have.property("method").exist
-            assert(res.body.data[0].actions[0]).to.have.property("url").exist
-            assert(res.body.data[0]).to.have.property("va_numbers")
+            assert(res.body.data[0]).to.have.property("actions")
+            assert(res.body.data[0].va_numbers[0]).to.have.property("bank").to.equal(global.bankname)
+            assert(res.body.data[0].va_numbers[0]).to.have.property("va_number").exist
             assert(res.body.data[0]).to.have.property("expired_at").exist
-
+            
+            
+            
+            
+            });
+            
             
         });
     });

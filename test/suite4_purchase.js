@@ -10,6 +10,7 @@ const TC_cretaeBenef = require('../data/testcase/puchase/createBenef.json')
 const TC_cretaePay = require('../data/testcase/puchase/createpayment.json')
 const TC_getSummary = require('../data/testcase/puchase/GetSummary.json')
 const datas = require('../data/var')
+const date = require('../object/date')
 describe('Purchase Service API', () => {
     describe('Create Health Declaration', () => {
         it(`${TC_cretaeHD.positive.valid_data}`, async () => {
@@ -95,12 +96,12 @@ describe('Purchase Service API', () => {
             
         });
         it(`${TC_cretaeKYC.negative.minDob}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.min_dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
+            const res = await createkyc.createKYC(global.access_Tokens1, date.minDobs, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("Kamu harus berusia 18 - 55 tahun untuk jadi anggota")
         });
         it(`${TC_cretaeKYC.negative.maxDob}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.max_dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
+            const res = await createkyc.createKYC(global.access_Tokens1, date.maxDobs, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("Kamu harus berusia 18 - 55 tahun untuk jadi anggota")
 

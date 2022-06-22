@@ -122,7 +122,7 @@ describe('Payment Api Service', () => {
 
     describe('Create Payment Option API', () => {
         it(`${TC_create_option.positive.valid_data}`, async () => {
-            const bankName =  ["gopay", "qris", "shopeepay"]
+            const bankName =  ["shopeepay", "qris", "gopay"]
             for (let x in bankName) {
             const res = await create_Option.createPaymentOption(global.access_Tokens1, 'EWALLET', datas.Deductible.description, datas.paymentOption.fixfee, bankName[x], 0, providerids)
             assert(res.status).to.equal(200)
@@ -134,13 +134,14 @@ describe('Payment Api Service', () => {
             assert(res.body.data[0]).to.have.property("fixed_fee").exist
             assert(res.body.data[0]).to.have.property("category").exist
             global.idpaoption = res.body.data[0].id
+            idpaoption3 = res.body.data[0].name
+            
             }
-            //console.log("ini id payment option : "+global.idpaoption);
         });
         //idpaoption = res.body.data[0].id
         
         it(`${TC_create_option.positive.valid_data}`, async () => {
-            const bankName =  ["bni", "mandiri", "cimb", "mega", "bca", "maybank", "permata", "bri"]
+            const bankName =  ["mandiri", "cimb", "mega", "bni", "bca", "permata", "bri", "maybank"]
             for (let x in bankName) {
             const res = await create_Option.createPaymentOption(global.access_Tokens1, "BANK_TRANSFER", datas.Deductible.description, 0 , bankName[x] , datas.paymentOption.persenfee , id1)
             assert(res.status).to.equal(200)
@@ -152,8 +153,8 @@ describe('Payment Api Service', () => {
             assert(res.body.data[0]).to.have.property("fixed_fee").exist
             assert(res.body.data[0]).to.have.property("category").exist
             global.idpaoption1 = res.body.data[0].id
+            global.bankname = res.body.data[0].name
             }
-
         });
         it(`${TC_create_option.negative.wrong_category}`, async () => {
             const res = await create_Option.createPaymentOption(global.access_Tokens1, datas.paymentOption.wrong_category, datas.Deductible.description, datas.paymentOption.fixfee, datas.paymentOption.name ,0 , id1)

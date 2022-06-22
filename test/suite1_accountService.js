@@ -21,6 +21,7 @@ describe('Exchange Token API', () => {
                 global.token2 = token2
             }
         }
+        console.log(rd.text);
     });
 
     it(`${ACC_ExchangeToken.positive.valid_token}`, async ()  => {
@@ -45,6 +46,7 @@ describe('Exchange Token API', () => {
             
         }
         console.log(global.access_Tokens1);
+        console.log("failed : "+res1.text);
     });
 
     it(`${ACC_ExchangeToken.negative.wrong_token}`, async() => {
