@@ -28,7 +28,7 @@ function validDOB() {
     var formats = {year: 'numeric', month: 'numeric', day: 'numeric' };
     const validdob = new Date(years-17, mo - 7, --days).toLocaleDateString("id", formats);
     const valid = validdob.split("/").reverse().join("-")
-    return(min)
+    return(valid)
     ////console.log(tglBaru);
 }
 const minDobs = minDOB()
