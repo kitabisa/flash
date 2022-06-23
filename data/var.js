@@ -12,6 +12,12 @@ let final_Codes3 = "PPr" +code
 let wrongCode = "ppw" +code
 let final_Codes4 = "PO" +code
 
+let dates = new Date();
+let years = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(dates);
+let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(dates);
+let days = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(dates);
+
+
 module.exports = {
     "service_Group":
     {
