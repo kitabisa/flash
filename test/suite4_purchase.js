@@ -68,7 +68,7 @@ describe('Purchase Service API', () => {
     }); 
     describe('Create KYC', () => {
         it(`${TC_cretaeKYC.positive.valid_data}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
+            const res = await createkyc.createKYC(global.access_Tokens1, date.validdobs, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
@@ -82,7 +82,7 @@ describe('Purchase Service API', () => {
             
         });
         it(`${TC_cretaeKYC.positive.valid_data}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.dob, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse1)
+            const res = await createkyc.createKYC(global.access_Tokens1, date.validdobs, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse1)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }

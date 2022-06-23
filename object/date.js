@@ -20,9 +20,21 @@ function maxDOB() {
     return(min)
     ////console.log(tglBaru);
 }
+function validDOB() {
+    let dates = new Date();
+    let years = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(dates);
+    let mo = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(dates);
+    let days = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(dates);
+    var formats = {year: 'numeric', month: 'numeric', day: 'numeric' };
+    const validdob = new Date(years-17, mo - 7, --days).toLocaleDateString("id", formats);
+    const valid = validdob.split("/").reverse().join("-")
+    return(min)
+    ////console.log(tglBaru);
+}
 const minDobs = minDOB()
 const maxDobs = maxDOB()
+const validdobs = validDOB()
 
 
 
-module.exports = {minDobs, maxDobs}
+module.exports = {minDobs, maxDobs, validdobs}
