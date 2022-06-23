@@ -16,8 +16,8 @@ function maxDOB() {
     let days = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(dates);
     var formats = {year: 'numeric', month: 'numeric', day: 'numeric' };
     const morethan55 = new Date(years-55, mo - 7, --days).toLocaleDateString("id", formats);
-    const min = morethan55.split("/").reverse().join("-")
-    return(min)
+    const max = morethan55.split("/").reverse().join("-")
+    return(max)
     ////console.log(tglBaru);
 }
 function validDOB() {
