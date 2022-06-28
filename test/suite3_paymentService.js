@@ -198,13 +198,6 @@ describe('Payment Api Service', () => {
         });
     });
 
-    describe('Get Payment Option Page', () => {
-        it('', async() => {
-            const res = await getaPage.getPaymentOptionPage(global.access_Tokens1, global.idsgforppo)
-            assert(res.status).to.equal(200)
-
-        });
-    });
     describe('Get Detail payment option', () => {
         it(`${TC_getdetail_option.positive.Getall}`, async () => {
             const res = await getDetail_Option.getdetailPaymentOption(global.access_Tokens1, idpo)
@@ -416,6 +409,17 @@ describe('Payment Api Service', () => {
             const res = await update_PPO.updateProductPaymentProvider(global.access_Tokens1, datas.Deductible.description, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.false, datas.productpaymentOption.oder_opt, datas.paymentOption.wrongID, idsgforppo, idppo)
             assert(res.status).to.equal(400)
         })
+    });
+    describe('Get Payment Option Page', () => {
+        it('when user hit api get page payment with valid token and service group, then user got response 200/OK', async() => {
+            const res = await getaPage.getPaymentOptionPage(global.access_Tokens1, global.serviceids)
+            console.log(res.text);
+            assert(res.status).to.equal(200)
+            assert(res.body.data[0]).to.have.property("category").exist
+            assert(res.body.data[0].options[0]).to.have.property("payment_option_id").exist
+            assert(res.body.data[0].options[0]).to.have.property("display_name").exist
+            assert(res.body.data[0].options[0]).to.have.property("description").exist
+        });
     });
     describe.skip('Delete Product Payment Option', () => {
         it(`${TC_delete_ppo.positive.soft_delete}`, async () => {

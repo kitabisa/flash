@@ -11,7 +11,10 @@ const updateServiceGroup = (access_Tokens, id, code, name, desc, ujrah)  => requ
         "code" : code,
         "name" : name,
         "description" : desc,
-        "ujrah_percentage_fee" : ujrah
+        "ujrah_percentage_fee" : ujrah,
+        "waiting_period_days" : 60,
+        "grace_period_days" : 15,
+        "total_period_months" : 12
     }
 )
 

@@ -11,7 +11,10 @@ const createServiceGroup = (access_Tokens,code, name, desc, ujrah)  => request.p
         "code" : code,
         "name" : name,
         "description" : desc,
-        "ujrah_percentage_fee" : ujrah
+        "ujrah_percentage_fee" : ujrah,
+        "waiting_period_days" : 60,
+        "grace_period_days" : 30,
+        "total_period_months" :3
     }
 )
 

@@ -4,7 +4,7 @@ function minDOB() {
     let mo = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(dates);
     let days = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(dates);
     var formats = {year: 'numeric', month: 'numeric', day: 'numeric' };
-    const lessthan18 = new Date(years-17, mo - 7, ++days).toLocaleDateString("id", formats);
+    const lessthan18 = new Date(years-17, mo - 7, ++days + 1).toLocaleDateString("id", formats);
     const min = lessthan18.split("/").reverse().join("-")
     return(min)
     ////console.log(tglBaru);

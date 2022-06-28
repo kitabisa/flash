@@ -69,7 +69,7 @@ describe('Purchase Service API', () => {
     }); 
     describe('Create KYC', () => {
         it(`${TC_cretaeKYC.positive.valid_data}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, date.validdobs, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
+            const res = await createkyc.createKYC(global.access_Tokens1, date.validdobs, datas.KYC.email, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
@@ -83,7 +83,7 @@ describe('Purchase Service API', () => {
             
         });
         it(`${TC_cretaeKYC.positive.valid_data}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, date.validdobs, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse1)
+            const res = await createkyc.createKYC(global.access_Tokens1, date.validdobs, datas.KYC.email, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse1)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
@@ -97,23 +97,23 @@ describe('Purchase Service API', () => {
             
         });
         it(`${TC_cretaeKYC.negative.minDob}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, date.minDobs, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
+            const res = await createkyc.createKYC(global.access_Tokens1, date.minDobs, datas.KYC.email, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("Kamu harus berusia 18 - 55 tahun untuk jadi anggota")
         });
         it(`${TC_cretaeKYC.negative.maxDob}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, date.maxDobs, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
+            const res = await createkyc.createKYC(global.access_Tokens1, date.maxDobs, datas.KYC.email, datas.KYC.fullname, datas.KYC.ktp, datas.KYC.phone, global.idpurcahse)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").to.equal("Kamu harus berusia 18 - 55 tahun untuk jadi anggota")
 
         });
         it(`${TC_cretaeKYC.negative.maxKtp}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.valid_dob, datas.KYC.fullname, datas.KYC.max_ktp, datas.KYC.phone, global.idpurcahse)
+            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.valid_dob, datas.KYC.email, datas.KYC.fullname, datas.KYC.max_ktp, datas.KYC.phone, global.idpurcahse)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").exist
         });
         it(`${TC_cretaeKYC.negative.minKtp}`, async () => {
-            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.valid_dob, datas.KYC.fullname, datas.KYC.min_ktp, datas.KYC.phone, global.idpurcahse)
+            const res = await createkyc.createKYC(global.access_Tokens1, datas.KYC.valid_dob, datas.KYC.email, datas.KYC.fullname, datas.KYC.min_ktp, datas.KYC.phone, global.idpurcahse)
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property("id").exist
         });
