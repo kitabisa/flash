@@ -301,7 +301,7 @@ describe('API Extension Clause', () => {
             assert(res.body.data[0]).to.have.property("code")
             assert(res.body.data[0]).to.have.property("name")
             assert(res.body.data[0]).to.have.property("description")
-            assert(res.body.data[0]).to.have.property("is_active").to.equal(false)
+            assert(res.body.data[0]).to.have.property("is_active").to.equal(true)
         });
         it(`${TC_Getdetail_EC.negative.wrongid}`, async () => {
             const res = await EC_Getdetail.getdetailExtensionClause(global.access_Tokens1, datas.Extension_clause.wrongid)
@@ -334,18 +334,20 @@ describe('API Extension Clause', () => {
         });
         it(`${TC_Search_EC.negative.wrong_serviceGroup}`, async () => {
             const res =  await EC_Search.searchExtensionClause(global.access_Tokens1, datas.Extension_clause.invalid_service_group_code, global.code1, global.name1)
+            console.log(res.text);
             assert(res.status).to.equal(400)
-            assert(res.body.response_desc).to.have.property('id').to.equal('Product Search Extension Clause Data Tidak Ditemukan')
+            assert(res.body.response_desc).to.have.property('id').to.equal('Search Extension Clause Data Tidak Ditemukan')
         });
         it(`${TC_Search_EC.negative.different_code}`, async () => {
             const res =  await EC_Search.searchExtensionClause(global.access_Tokens1, global.ECserviceCode1, global.code2, global.name1)
+            console.log(res.text);
             assert(res.status).to.equal(400)
-            assert(res.body.response_desc).to.have.property('id').to.equal('Product Search Extension Clause Data Tidak Ditemukan')
+            assert(res.body.response_desc).to.have.property('id').to.equal('Search Extension Clause Data Tidak Ditemukan')
         });
         it(`${TC_Search_EC.negative.different_name}`, async () => {
             const res =  await EC_Search.searchExtensionClause(global.access_Tokens1, global.ECserviceCode1, global.code1, global.name2)
             assert(res.status).to.equal(400)
-            assert(res.body.response_desc).to.have.property('id').to.equal('Product Search Extension Clause Data Tidak Ditemukan')
+            assert(res.body.response_desc).to.have.property('id').to.equal('Search Extension Clause Data Tidak Ditemukan')
         });
     });
     describe('Create Deductible API', () => {
