@@ -138,7 +138,8 @@ module.exports = {
 
     },
     "status" : {
-        "ppid_expired" : '0422a091-5320-4477-946d-2e03be1674bc'
+        "ppid_expired" : '0422a091-5320-4477-946d-2e03be1674bc',
+        "ppid_paid" : 'a940d233-2a6b-4042-804f-7bd753d0f0ca'
     }
 
 

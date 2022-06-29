@@ -10,7 +10,6 @@ describe('API Calculation Service', () => {
     describe('Get Calculate Payment', () => {
         before(async function calucated() {
             persenfee = datas.paymentOption.persenfee / 100
-            console.log("persenfee :"+persenfee);
             fixfee = datas.paymentOption.fixfee
             totalFeepersen = datas.calcu.contributeFee  * persenfee
             totalFeefixfee = fixfee

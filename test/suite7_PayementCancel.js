@@ -8,7 +8,7 @@ describe('API Product Payment', () => {
         it('when user hit api payment cancel, then status on table product payment will be cancel.', async () => {
             const res = await cancel.canceled(global.access_Tokens1, global.ppids)
             assert(res.status).to.equal(200)
-            console.log(res.text);
+            //console.log(res.text);
             assert(res.body.data[0]).to.have.property("id").exist
             assert(res.body.data[0]).to.have.property("idempotency_key").to.equal(datas.checkout.idempotensi)
             assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.serviceids)
@@ -28,13 +28,17 @@ describe('API Product Payment', () => {
             const res = await cancel.canceled(global.access_Tokens1, datas.status.ppid_expired)
             assert(res.status).to.equal(400)
         });
+        it('when user hit api payment cancel using status paid, then got response error', async () => {
+            const res = await cancel.canceled(global.access_Tokens1, datas.status.ppid_paid)
+            assert(res.status).to.equal(400)
+        });
     });
     describe('Payment Status', () => {
         it('when user hit api payment status, then user will be see sumarry payment', async() => {
             after(async function statuspayment()  {
                 const res = await status.statuss(global.access_Tokens1, global.ppids)
                 assert(res.status).to.equal(200)
-                console.log(res.text);
+                //console.log(res.text);
                 assert(res.body.data[0]).to.have.property("id").exist
                 assert(res.body.data[0]).to.have.property("display_name").exist
                 assert(res.body.data[0]).to.have.property("total_fee").exist

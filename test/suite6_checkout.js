@@ -32,7 +32,7 @@ describe('API Checkout Service', () => {
             }
             assert(res.status).to.equal(200)
             global.ppids = res.body.data[0].id
-            console.log(res.text);
+            //console.log(res.text);
             assert(res.body.data[0]).to.have.property("id").exist
             assert(res.body.data[0]).to.have.property("idempotency_key").to.equal(datas.checkout.idempotensi)
             assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.serviceids)
@@ -65,7 +65,7 @@ describe('API Checkout Service', () => {
                 console.log("failed : "+res.text);
             }
             assert(res.status).to.equal(200)
-            console.log(res.text);
+            //console.log(res.text);
             assert(res.body.data[0]).to.have.property("id").exist
             assert(res.body.data[0]).to.have.property("idempotency_key").to.equal(datas.checkout.idempotensi1)
             assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.serviceids1)

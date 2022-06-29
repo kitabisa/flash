@@ -413,7 +413,6 @@ describe('Payment Api Service', () => {
     describe('Get Payment Option Page', () => {
         it('when user hit api get page payment with valid token and service group, then user got response 200/OK', async() => {
             const res = await getaPage.getPaymentOptionPage(global.access_Tokens1, global.serviceids)
-            console.log(res.text);
             assert(res.status).to.equal(200)
             assert(res.body.data[0]).to.have.property("category").exist
             assert(res.body.data[0].options[0]).to.have.property("payment_option_id").exist
