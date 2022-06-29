@@ -334,13 +334,11 @@ describe('API Extension Clause', () => {
         });
         it(`${TC_Search_EC.negative.wrong_serviceGroup}`, async () => {
             const res =  await EC_Search.searchExtensionClause(global.access_Tokens1, datas.Extension_clause.invalid_service_group_code, global.code1, global.name1)
-            console.log(res.text);
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property('id').to.equal('Search Extension Clause Data Tidak Ditemukan')
         });
         it(`${TC_Search_EC.negative.different_code}`, async () => {
             const res =  await EC_Search.searchExtensionClause(global.access_Tokens1, global.ECserviceCode1, global.code2, global.name1)
-            console.log(res.text);
             assert(res.status).to.equal(400)
             assert(res.body.response_desc).to.have.property('id').to.equal('Search Extension Clause Data Tidak Ditemukan')
         });
