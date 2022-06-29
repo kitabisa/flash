@@ -136,6 +136,9 @@ module.exports = {
         "idempotensi" : uuids,
         "idempotensi1" : uuids1
 
+    },
+    "status" : {
+        "ppid_expired" : '0422a091-5320-4477-946d-2e03be1674bc'
     }
 
 

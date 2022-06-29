@@ -31,6 +31,7 @@ describe('API Checkout Service', () => {
                 console.log("failed : "+res.text);
             }
             assert(res.status).to.equal(200)
+            global.ppids = res.body.data[0].id
             console.log(res.text);
             assert(res.body.data[0]).to.have.property("id").exist
             assert(res.body.data[0]).to.have.property("idempotency_key").to.equal(datas.checkout.idempotensi)
@@ -82,7 +83,7 @@ describe('API Checkout Service', () => {
             assert(res.body.data[0]).to.have.property("status").exist
             assert(res.body.data[0]).to.have.property("paid_at")
             assert(res.body.data[0]).to.have.property("actions")
-            assert(res.body.data[0].va_numbers[0]).to.have.property("bank").to.equal(global.bankname)
+            assert(res.body.data[0].va_numbers[0]).to.have.property("bank").to.equal("permata")
             assert(res.body.data[0].va_numbers[0]).to.have.property("va_number").exist
             assert(res.body.data[0]).to.have.property("expired_at").exist
             
