@@ -82,7 +82,7 @@ describe('API Service Group', () => {
             assert(res.body.data[0]).to.have.property("name")
             assert(res.body.data[0]).to.have.property("description")
             assert(res.body.data[0]).to.have.property("is_active")
-            console.log("ini id sg : "+global.serviceids1);
+            //console.log("ini id sg : "+global.serviceids1);
         });
         it(`${TC_create.negative.existing_data}`, async() => {
             const res = await create.createServiceGroup(global.access_Tokens1, 'TEST66', 'Alda', 'this is triger from automation tools', datas.service_Group.ujrah)

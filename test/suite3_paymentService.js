@@ -418,6 +418,9 @@ describe('Payment Api Service', () => {
             assert(res.body.data[0].options[0]).to.have.property("payment_option_id").exist
             assert(res.body.data[0].options[0]).to.have.property("display_name").exist
             assert(res.body.data[0].options[0]).to.have.property("description").exist
+            assert(res.body.data[0].options[0]).to.have.property("image_url").exist
+            assert(res.body.data[0].options[0]).to.have.property("fixed_fee").exist
+            assert(res.body.data[0].options[0]).to.have.property("percentage_fee").exist
         });
     });
     describe.skip('Delete Product Payment Option', () => {
