@@ -3,7 +3,7 @@ function minDOB() {
     let years = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(dates);
     let mo = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(dates);
     let days = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(dates);
-    var formats = {year: 'numeric', month: 'numeric', day: 'numeric' };
+    var formats = {year: 'numeric', month: '2-digit', day: '2-digit' };
     const lessthan18 = new Date(years-17, mo - 7, ++days + 1).toLocaleDateString("id", formats);
     const min = lessthan18.split("/").reverse().join("-")
     return(min)
@@ -14,7 +14,7 @@ function maxDOB() {
     let years = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(dates);
     let mo = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(dates);
     let days = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(dates);
-    var formats = {year: 'numeric', month: 'numeric', day: 'numeric' };
+    var formats = {year: 'numeric', month: '2-digit', day: '2-digit' };
     const morethan55 = new Date(years-55, mo - 7, --days).toLocaleDateString("id", formats);
     const max = morethan55.split("/").reverse().join("-")
     return(max)
@@ -25,7 +25,7 @@ function validDOB() {
     let years = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(dates);
     let mo = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(dates);
     let days = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(dates);
-    var formats = {year: 'numeric', month: 'numeric', day: 'numeric' };
+    var formats = {year: 'numeric', month: '2-digit', day: '2-digit' };
     const validdob = new Date(years-17, mo - 7, --days).toLocaleDateString("id", formats);
     const valid = validdob.split("/").reverse().join("-")
     return(valid)
