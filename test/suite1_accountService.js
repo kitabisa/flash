@@ -5,13 +5,13 @@ const wong = require('../object/Account/wong_Account');
 const ACC_ExchangeToken = require('../data/testcase/Account/exchangeTokenAccount')
 describe('Exchange Token API', () => {
     before(async function pre_request() {
-        username = ['ario16@gmail.com', 'ario10@gmail.com']
+        username = ['raphaelle.cole@yahoo.com', 'raquel.hintz@gmail.com']
         token1 = []
         token2 = []
         for (const user in username) {
             const rd = await wong.wongAccount(username[user])
             console.log('Status Code wong :', rd.status);
-            if (username[user] == `ario16@gmail.com`) {
+            if (username[user] == `raphaelle.cole@yahoo.com`) {
                 const res = rd.body.data[0].token
                 token1.push(res)
                 global.token1 = token1

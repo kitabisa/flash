@@ -26,7 +26,7 @@ function validDOB() {
     let mo = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(dates);
     let days = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(dates);
     var formats = {year: 'numeric', month: '2-digit', day: '2-digit' };
-    const validdob = new Date(years-17, mo - 7, --days).toLocaleDateString("id", formats);
+    const validdob = new Date(years-17, mo - 7, ++days).toLocaleDateString("id", formats);
     const valid = validdob.split("/").reverse().join("-")
     return(valid)
     ////console.log(tglBaru);

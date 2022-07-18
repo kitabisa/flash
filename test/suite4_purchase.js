@@ -74,6 +74,7 @@ describe('Purchase Service API', () => {
                 console.log("failed : "+res.text);
             }
             assert(res.status).to.equal(200)
+            console.log(datas.KYC.ktp);
             assert(res.body.data[0]).to.have.property('id').exist
             assert(res.body.data[0]).to.have.property('dob').exist
             assert(res.body.data[0]).to.have.property('fullname').exist
@@ -181,19 +182,40 @@ describe('Purchase Service API', () => {
                 console.log("failed : "+res.text);
             }
             assert(res.status).to.equal(200)
-            assert(res.body.data[0]).to.have.property('id').exist
-            assert(res.body.data[0]).to.have.property('service_group_id').exist
-            assert(res.body.data[0]).to.have.property('user_id').exist
-            assert(res.body.data[0]).to.have.property('contribution_id').exist
-            assert(res.body.data[0]).to.have.property('status').exist
-            assert(res.body.data[0]).to.have.property('type').exist
-            assert(res.body.data[0]).to.have.property('donate_excess_contribution').exist
+            console.log(res.text);
+            assert(res.body.data[0].purchase_data).to.have.property('id').exist
+            assert(res.body.data[0].purchase_data).to.have.property('service_group_id').exist
+            assert(res.body.data[0].purchase_data).to.have.property('user_id').exist
+            assert(res.body.data[0].purchase_data).to.have.property('contribution_id').exist
+            assert(res.body.data[0].purchase_data).to.have.property('status').exist
+            assert(res.body.data[0].purchase_data).to.have.property('type').exist
+            assert(res.body.data[0].purchase_data).to.have.property('donate_excess_contribution').exist
+            assert(res.body.data[0].kyc_data).to.have.property('id').exist
+            assert(res.body.data[0].kyc_data).to.have.property('purchase_id').exist
+            assert(res.body.data[0].kyc_data).to.have.property('user_id').exist
+            assert(res.body.data[0].kyc_data).to.have.property('fullname').exist
+            assert(res.body.data[0].kyc_data).to.have.property('ktp').exist
+            assert(res.body.data[0].kyc_data).to.have.property('dob').exist
+            assert(res.body.data[0].kyc_data).to.have.property('phone_number').exist
+            assert(res.body.data[0].kyc_data).to.have.property('email').exist
+            assert(res.body.data[0].beneficiary_data).to.have.property('id').exist
+            assert(res.body.data[0].beneficiary_data).to.have.property('purchase_id').exist
+            assert(res.body.data[0].beneficiary_data).to.have.property('user_id').exist
+            assert(res.body.data[0].beneficiary_data).to.have.property('fullname').exist
+            assert(res.body.data[0].beneficiary_data).to.have.property('ktp').exist
+            assert(res.body.data[0].beneficiary_data).to.have.property('dob').exist
+            assert(res.body.data[0].beneficiary_data).to.have.property('phone_number').exist
+            assert(res.body.data[0].beneficiary_data).to.have.property('relation').exist
+            assert(res.body.data[0].contribution_data).to.have.property('id').exist
+            assert(res.body.data[0].contribution_data).to.have.property('service_group_id').exist
+            assert(res.body.data[0].contribution_data).to.have.property('contribution_fee').exist
+            assert(res.body.data[0].contribution_data).to.have.property('contribution_month').exist
             
 
         });
         it(`${TC_getSummary.negative.wrong_purchaseID}`, async () => {
             const res = await getSummary.getSummary(global.access_Tokens1, datas.paymentOption.wrongID)
-            assert(res.status).to.equal(400)
+            assert(res.status).to.equal(404)
         });
 
     });

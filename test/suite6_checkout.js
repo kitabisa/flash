@@ -32,7 +32,7 @@ describe('API Checkout Service', () => {
             }
             assert(res.status).to.equal(200)
             global.ppids = res.body.data[0].id
-            //console.log(res.text);
+            console.log(res.text);
             assert(res.body.data[0]).to.have.property("id").exist
             assert(res.body.data[0]).to.have.property("idempotency_key").to.equal(datas.checkout.idempotensi)
             assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.serviceids)
@@ -57,15 +57,13 @@ describe('API Checkout Service', () => {
 
             
         });
-        it(`${TC_Cekoutpersenfee.positive.persentagefee}`, async () => {
-            after(async function checkouts() {
-                this.timeout(5000); 
+        it(`${TC_Cekoutpersenfee.positive.persentagefee}`, async () => { 
                 const res = await cekout.checkout(global.access_Tokens1, datas.checkout.idempotensi1, global.idpaoption1, global.idpoc1, global.idpurcahse1, global.serviceids1)
             if(res.status !== 200){
                 console.log("failed : "+res.text);
             }
             assert(res.status).to.equal(200)
-            //console.log(res.text);
+            console.log(res.text);
             assert(res.body.data[0]).to.have.property("id").exist
             assert(res.body.data[0]).to.have.property("idempotency_key").to.equal(datas.checkout.idempotensi1)
             assert(res.body.data[0]).to.have.property("service_group_id").to.equal(global.serviceids1)
@@ -86,7 +84,8 @@ describe('API Checkout Service', () => {
             assert(res.body.data[0].va_numbers[0]).to.have.property("bank").to.equal("permata")
             assert(res.body.data[0].va_numbers[0]).to.have.property("va_number").exist
             assert(res.body.data[0]).to.have.property("expired_at").exist
-            
+            global.va_num = res.body.data[0].va_numbers[0].va_number
+            global.MserviceId = res.body.data[0].service_group_id
             
             
             
@@ -94,5 +93,5 @@ describe('API Checkout Service', () => {
             
             
         });
+        
     });
-});

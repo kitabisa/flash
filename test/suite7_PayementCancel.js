@@ -49,7 +49,6 @@ describe('API Product Payment', () => {
                 assert(res.body.data[0]).to.have.property("expired_at").exist
 
             });
-        });
-
+        });       
     });
 });

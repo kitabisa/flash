@@ -531,7 +531,7 @@ describe('API Extension Clause', () => {
             assert(res.status).to.equal(400)
         });
         it(`${TC_create_contri.negative.wrong_contriMonth}}`, async () => {
-            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, 'datas.contribution.contriMonth', datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, global.serviceids, datas.contribution.strikeFee)
+            const res = await contri_create.createContribution(global.access_Tokens1, datas.contribution.contriFee, 0, datas.productpaymentOption.displayNme, datas.productpaymentOption.isactive.true, datas.contribution.isPopular.true, datas.paymentOption.name, datas.productpaymentOption.oder_opt, global.serviceids, datas.contribution.strikeFee)
             assert(res.status).to.equal(400)
         });
         it(`${TC_create_contri.negative.invalid_strikeFee}}`, async () => {

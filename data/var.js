@@ -4,6 +4,7 @@ let uuids = faker.datatype.uuid();
 let uuids1 = faker.datatype.uuid();
 let emails = faker.internet.email()
 let code = Math.floor(Math.random() * 90000);
+let KTP = Math.floor(3223121807150510 + Math.random() * 10000).toString();
 let final_Code = "SG" +code
 let final_Code1 = "SG1" +code
 let final_Codes = "EC" +code
@@ -113,8 +114,8 @@ module.exports = {
         "min_dob" : "2005-12-03",
         "max_dob" : "1966-12-01",
         "dob" : "2004-12-01",
-        "ktp" : "3223121807150599",
-        "max_ktp" : "32231218077500902",
+        "ktp" : KTP,
+        "max_ktp" : "32232218077500902",
         "min_ktp" : "32231218077500",
         "phone" : "081283712812",
         "fullname" : "qa testing api automation",

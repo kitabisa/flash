@@ -15,7 +15,7 @@ const wongAccount = (usernames) => request.post('/wong/login')
     .set('X-Ktbs-Signature', 'ed7a82c0e4d0ed5cfb9a9af19286be59226f4b9fe2a75d0e8509a8e181ffe279')
     .send({
             username: usernames,
-            password: 'qwerqwer'
+            password: 'kitabisa'
     })
     
 
