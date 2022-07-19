@@ -5,9 +5,10 @@ const wong = require('../object/Account/wong_Account');
 const ACC_ExchangeToken = require('../data/testcase/Account/exchangeTokenAccount')
 describe('Exchange Token API', () => {
     before(async function pre_request() {
-        username = ['raphaelle.cole@yahoo.com', 'raquel.hintz@gmail.com']
+        username = ['raphaelle.cole@yahoo.com', 'jovanny_oberbrunner@gmail.com', 'raquel.hintz@gmail.com']
         token1 = []
         token2 = []
+        token3 = []
         for (const user in username) {
             const rd = await wong.wongAccount(username[user])
             console.log('Status Code wong :', rd.status);
@@ -15,36 +16,47 @@ describe('Exchange Token API', () => {
                 const res = rd.body.data[0].token
                 token1.push(res)
                 global.token1 = token1
-            } else {
+            } else if (username[user] == `jovanny_oberbrunner@gmail.com`){
                 const res1 = rd.body.data[0].token
                 token2.push(res1)
                 global.token2 = token2
+            } else {
+                const res2 = rd.body.data[0].token
+                token3.push(res2)
+                global.token3 = token3
             }
         }
     });
 
     it(`${ACC_ExchangeToken.positive.valid_token}`, async ()  => {
-        tokens = [global.token1, global.token2]
+        tokens = [global.token1, global.token2, global.token3]
         tokens1 = []
         tokens2 = []
+        tokens3 = []
         for (const x in tokens) {
             res = await exchange_token.exchangeTokenAccount(tokens[x]);
             if (tokens[x] == global.token1) {
                 const res1 = res.body.data[0].access_token
                 tokens1.push(res1)
                 global.access_Tokens1 = tokens1
-            } else {
+            }else if (tokens[x] == global.token2) {
                 const res2 = res.body.data[0].access_token
                 tokens2.push(res2)
                 global.access_Tokens2 = tokens2
+            }else{
+                const res3 = res.body.data[0].access_token
+                tokens3.push(res3)
+                global.access_Tokens3 = tokens3
             }
+            
             assert(res.status).to.equal(200);
             assert(res.body.data[0]).to.have.property('access_token')
             assert(res.body.data[0]).to.have.property('refresh_token')
             assert(res.body.data[0]).to.have.property('expires_in')
             
         }
-        //console.log(global.access_Tokens1);
+        console.log(global.access_Tokens3);
+        console.log(global.access_Tokens1);
     });
 
     it(`${ACC_ExchangeToken.negative.wrong_token}`, async() => {
@@ -60,14 +72,14 @@ describe('Exchange Token API', () => {
 })
 describe('Get user info', () => {
     it('Get Data User Info', async () => {
-        const res = await user_Info.userInfo(global.access_Tokens1)
+        const res = await user_Info.userInfo(global.access_Tokens2)
         if(res.status !== 200){
             console.log("failed : "+res.text);
         }
         assert(res.status).to.equal(200)
     });
     it('Get Data User Info', async () => {
-        const res = await user_Info.userInfo(global.access_Tokens2)
+        const res = await user_Info.userInfo(global.access_Tokens3)
         assert(res.status).to.equal(404)
     });
 });
